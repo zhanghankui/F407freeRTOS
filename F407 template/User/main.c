@@ -112,6 +112,8 @@ static void vTaskTask1(void *pvParameters)
 {
 	uint8_t ucKeyCode;
 	uint8_t pcWriteBuffer[500];
+	uint8_t buf[512];
+	uint32_t sd_size;
 	while(1)
 	{
 		ucKeyCode = bsp_GetKey();
@@ -139,9 +141,17 @@ static void vTaskTask1(void *pvParameters)
 				case KEY_DOWN_K1:
 				{
 					taskENTER_CRITICAL();   /* 进入临界区 */	
-					printf("K1键按下，挂起任务vTask2\r\n");
+					
+					if(SD_ReadDisk(buf,0,1)==0)	//读取0扇区的内容
+					{	
+						printf("SECTOR 0 DATA:\r\n");
+						for(sd_size=0;sd_size<512;sd_size++)printf("%x ",buf[sd_size]);//打印0扇区数据    	   
+						printf("\r\nDATA ENDED\r\n");
+					}		
+					
+//					printf("K1键按下，挂起任务vTask2\r\n");
 					taskEXIT_CRITICAL();  	/* 退出临界区 */
-					vTaskSuspend(xHandleTask2);//挂起任务2
+//					vTaskSuspend(xHandleTask2);//挂起任务2
 				}
 				break;
 
@@ -149,9 +159,14 @@ static void vTaskTask1(void *pvParameters)
 				case KEY_DOWN_KWU:
 				{
 					taskENTER_CRITICAL();   /* 进入临界区 */
-					printf("KWU键按下，将任务vTask2恢复\r\n");
+					for(sd_size=0;sd_size<512;sd_size++)
+					{
+						buf[sd_size] = sd_size;
+					}
+					SD_WriteDisk(buf,0,1);
+//					printf("KWU键按下，将任务vTask2恢复\r\n");
 					taskEXIT_CRITICAL();  	/* 退出临界区 */
-					vTaskResume(xHandleTask2);
+//					vTaskResume(xHandleTask2);
 //					bsp_StartHardTimer(1 ,50000, (void *)TIM_CallBack1);
 			}
 				break;	
@@ -252,7 +267,7 @@ static void vTaskTask2(void *pvParameters)
 	while(1)
 	{
 		taskENTER_CRITICAL();   /* 进入临界区 */
-		printf("任务vTask2正在运行\r\n");
+//		printf("任务vTask2正在运行\r\n");
 		taskEXIT_CRITICAL();  	/* 退出临界区 */
 		LED1=!LED1;
 		vTaskDelay(500);
@@ -273,7 +288,7 @@ static void vTaskTask3(void *pvParameters)
 	while(1)
 	{
 		taskENTER_CRITICAL();   /* 进入临界区 */
-		printf("任务vTask3正在运行\r\n");
+//		printf("任务vTask3正在运行\r\n");
 		taskEXIT_CRITICAL();  	/* 退出临界区 */		
 		LED0=!LED0;
 		vTaskDelay(600);
@@ -401,7 +416,7 @@ static void AppTaskCreate (void)
 {
 	xTaskCreate( vTaskTask1,   	/* 任务函数  */
 							 "vTaskTask1",     	/* 任务名    */
-							 512,               	/* 任务栈大小，单位word，也就是4字节 */
+							 1024,               	/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,              	/* 任务参数  */
 							 1,                 	/* 任务优先级*/
 							 &xHandleTask1 );  /* 任务句柄  */

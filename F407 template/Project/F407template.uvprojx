@@ -784,6 +784,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\src\bsp_key.c</FilePath>
             </File>
+            <File>
+              <FileName>sdio_sdcard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\src\sdio_sdcard.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

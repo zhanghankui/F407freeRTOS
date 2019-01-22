@@ -22,6 +22,16 @@ extern void can_TIM3_Init(void);
 *	返 回 值: 无
 *********************************************************************************************************
 */
+
+//通过串口打印SD卡相关信息
+static void show_sdcard_info(void)
+{
+	printf("Card ManufacturerID:%d\r\n",SDCardInfo.SD_cid.ManufacturerID);	//制造商ID
+ 	printf("Card RCA:%d\r\n",SDCardInfo.RCA);								//卡相对地址
+	printf("Card Capacity:%d MB\r\n",(u32)(SDCardInfo.CardCapacity>>20));	//显示容量
+ 	printf("Card BlockSize:%d\r\n\r\n",SDCardInfo.CardBlockSize);			//显示块大小
+}
+
 void bsp_Init(BSP_Handle handle)
 {
 	/*
@@ -48,6 +58,9 @@ void bsp_Init(BSP_Handle handle)
 //		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
+	SD_Init();//SD卡初始化
+	show_sdcard_info();	//打印SD卡相关信息
+	
 //	bsp_InitHardTimer(); /* 初始化TIM2定时器 */
 //	bsp_SetTIMOutcompPWM(GPIOE,GPIO_Pin_9,GPIOE,GPIO_Pin_8,TIM1,1,5000000,5000);
 
