@@ -416,7 +416,7 @@ static void AppTaskCreate (void)
 {
 	xTaskCreate( vTaskTask1,   	/* 任务函数  */
 							 "vTaskTask1",     	/* 任务名    */
-							 1024,               	/* 任务栈大小，单位word，也就是4字节 */
+							 512,               	/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,              	/* 任务参数  */
 							 1,                 	/* 任务优先级*/
 							 &xHandleTask1 );  /* 任务句柄  */

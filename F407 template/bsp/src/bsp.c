@@ -29,7 +29,8 @@ static void show_sdcard_info(void)
 	printf("Card ManufacturerID:%d\r\n",SDCardInfo.SD_cid.ManufacturerID);	//制造商ID
  	printf("Card RCA:%d\r\n",SDCardInfo.RCA);								//卡相对地址
 	printf("Card Capacity:%d MB\r\n",(u32)(SDCardInfo.CardCapacity>>20));	//显示容量
- 	printf("Card BlockSize:%d\r\n\r\n",SDCardInfo.CardBlockSize);			//显示块大小
+ 	printf("Card BlockSize:%d\r\n",SDCardInfo.CardBlockSize);			//显示块大小
+ 	printf("Card CardType:%d\r\n\r\n",SDCardInfo.CardType);		//显示卡类型
 }
 
 void bsp_Init(BSP_Handle handle)
