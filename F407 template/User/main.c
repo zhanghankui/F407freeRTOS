@@ -443,6 +443,9 @@ static void AppTaskCreate (void)
 							 NULL,           		/* 任务参数  */
 							 4,              		/* 任务优先级*/
 							 &xHandleTask4 );   /* 任务句柄  */
+							 
+	/*init the Canopen thread*/
+	canopen_init();
 }
 
 

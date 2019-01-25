@@ -90,7 +90,7 @@
 
 #define configUSE_PREEMPTION		1//使能抢占式调度器
 #define configUSE_IDLE_HOOK			0
-#define configUSE_TICK_HOOK			0
+#define configUSE_TICK_HOOK			1
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 168000000 )	
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )//系统时钟节拍数
 #define configMAX_PRIORITIES		( 5 )//定义用户可以使用的最大优先级数

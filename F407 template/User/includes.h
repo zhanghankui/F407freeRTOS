@@ -62,6 +62,7 @@
 */
 
 #include  "bsp.h"
+#include "can_thread.h"
 //#include  "TestSlave.h"
 
 /* 在主函数中调用 */

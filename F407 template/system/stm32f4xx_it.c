@@ -31,6 +31,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
 
+
+/* Scheduler includes */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+#include "canfestival.h"
+#include "can_STM32.h"
+
+extern xQueueHandle xQ_CAN_MSG;
+
 /** @addtogroup Template_Project
   * @{
   */
@@ -142,6 +153,64 @@ void DebugMon_Handler(void)
 //void SysTick_Handler(void)
 //{
 //}
+
+/**
+  * @brief  This function handles CAN1 RX0 request.
+  * @param  None
+  * @retval None
+  * *************CAN1 RX0 中断********************
+  */
+
+
+void CAN1_RX0_IRQHandler(void)
+{  
+  CANOpen_Message CAN1_Rx_m;
+  portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;     //中断中唤醒新任务
+  //printf("G\r\n");
+  taskENTER_CRITICAL();                                 //进入中断
+  CAN_Receive(CAN1, CAN_FIFO0, &(CAN1_Rx_m.m));	        //从CAN1 FIFO0接收数据
+  CAN1_Rx_m.CANx = 1;
+  if(NULL != xQ_CAN_MSG)         // 向队列发送数据包
+  {
+		xQueueSendFromISR( xQ_CAN_MSG, &CAN1_Rx_m, &xHigherPriorityTaskWoken );
+  }
+  taskEXIT_CRITICAL();                                 //退出临界区
+  if( xHigherPriorityTaskWoken != pdFALSE )
+  {
+    portEND_SWITCHING_ISR( xHigherPriorityTaskWoken );
+  }
+}
+/**
+  * @}
+  */ 
+/**
+  * @brief  This function handles CAN2 RX0 request.
+  * @param  None
+  * @retval None
+  */
+
+ /*
+   在数据量不大的情况下，中断函数中处理数据没问题，若数据量
+   较大，则需要建立缓冲区，防止数据被覆盖
+   */
+void CAN2_RX0_IRQHandler(void)
+{
+	  CANOpen_Message CAN2_Rx_m;
+	  portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;     //中断中唤醒新任务
+	  taskENTER_CRITICAL();                                  //进入中断
+	  CAN_Receive(CAN2, CAN_FIFO0, &(CAN2_Rx_m.m));	    //从CAN2 FIFO0接收数据
+	  CAN2_Rx_m.CANx = 1;
+	  if(NULL != xQ_CAN_MSG)         // 向队列发送数据包
+	  {
+			xQueueSendFromISR( xQ_CAN_MSG, &CAN2_Rx_m, &xHigherPriorityTaskWoken );
+	  }
+	  taskEXIT_CRITICAL();
+	  if( xHigherPriorityTaskWoken != pdFALSE )
+	  {
+	    portEND_SWITCHING_ISR( xHigherPriorityTaskWoken );           //强制上下文切换
+  	  }  
+}
+
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
