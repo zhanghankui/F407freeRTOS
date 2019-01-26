@@ -77,8 +77,8 @@
 ".\objects\sync.o"
 ".\objects\timer.o"
 ".\objects\objdict_can1.o"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
 --library_type=microlib --strict --scatter ".\Objects\F407template.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\F407template.map" -o .\Objects\F407template.axf

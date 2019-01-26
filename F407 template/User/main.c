@@ -446,6 +446,9 @@ static void AppTaskCreate (void)
 							 
 	/*init the Canopen thread*/
 	canopen_init();
+	
+	initTimer();                               //初始化CANopen定时器
+	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
 }
 
 
