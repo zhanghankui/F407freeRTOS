@@ -165,16 +165,17 @@ void DebugMon_Handler(void)
 void CAN1_RX0_IRQHandler(void)
 {  
   CANOpen_Message CAN1_Rx_m;
+	uint32_t uxSavedInterruptStatus;
   portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;     //中断中唤醒新任务
   //printf("G\r\n");
-  taskENTER_CRITICAL();                                 //进入中断
+  uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();                                 //进入中断
   CAN_Receive(CAN1, CAN_FIFO0, &(CAN1_Rx_m.m));	        //从CAN1 FIFO0接收数据
   CAN1_Rx_m.CANx = 1;
   if(NULL != xQ_CAN_MSG)         // 向队列发送数据包
   {
 		xQueueSendFromISR( xQ_CAN_MSG, &CAN1_Rx_m, &xHigherPriorityTaskWoken );
   }
-  taskEXIT_CRITICAL();                                 //退出临界区
+  taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);                                 //退出临界区
   if( xHigherPriorityTaskWoken != pdFALSE )
   {
     portEND_SWITCHING_ISR( xHigherPriorityTaskWoken );

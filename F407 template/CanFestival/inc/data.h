@@ -268,7 +268,7 @@ struct struct_CO_Data {
 	/* structure s_state_communication */\
 	{\
 		0,          /* csBoot_Up */\
-		0,          /* csSDO */\
+		1,          /* csSDO */\
 		0,          /* csEmergency */\
 		0,          /* csSYNC */\
 		0,          /* csHeartbeat */\
