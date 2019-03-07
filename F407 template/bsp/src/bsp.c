@@ -53,10 +53,10 @@ void bsp_Init(BSP_Handle handle)
 
 	
 	//函数初始化	
-	MC_setupUSARTDMA_FIFIO(handle->usartdma_fifohandle);
+	SetupUSARTDMA_FIFIO(handle->usartdma_fifohandle);
 	USARTDMA_Config(115200);
-//	USART_DMA_Receive((uint32_t)handle->usartdma_fifohandle->pbuf,
-//		handle->usartdma_fifohandle->buffersize);	
+	USART_DMA_Receive((uint32_t)handle->usartdma_fifohandle->pbuf,
+		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
 	SD_Init();//SD卡初始化
@@ -66,8 +66,6 @@ void bsp_Init(BSP_Handle handle)
 //	bsp_SetTIMOutcompPWM(GPIOE,GPIO_Pin_9,GPIOE,GPIO_Pin_8,TIM1,1,5000000,5000);
 
 	
-//	can_TIM3_Init();
-//	bsp_InitCan(CAN1,CAN_BAUD_1M);
 }
 
 /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

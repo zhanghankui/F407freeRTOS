@@ -798,6 +798,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\src\can_thread.c</FilePath>
             </File>
+            <File>
+              <FileName>usart_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\src\usart_thread.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -935,9 +940,9 @@
           <GroupName>Objdict</GroupName>
           <Files>
             <File>
-              <FileName>ObjDict_CAN1.c</FileName>
+              <FileName>ObjectDictionary_EPOS2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\CanFestival\objdict\ObjDict_CAN1.c</FilePath>
+              <FilePath>..\CanFestival\objdict\ObjectDictionary_EPOS2.c</FilePath>
             </File>
           </Files>
         </Group>

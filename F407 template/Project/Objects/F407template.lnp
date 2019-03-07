@@ -62,6 +62,7 @@
 ".\objects\bsp_key.o"
 ".\objects\sdio_sdcard.o"
 ".\objects\can_thread.o"
+".\objects\usart_thread.o"
 ".\objects\can_stm32.o"
 ".\objects\timer_stm32.o"
 ".\objects\dcf.o"
@@ -76,7 +77,7 @@
 ".\objects\states.o"
 ".\objects\sync.o"
 ".\objects\timer.o"
-".\objects\objdict_can1.o"
+".\objects\objectdictionary_epos2.o"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
 --library_type=microlib --strict --scatter ".\Objects\F407template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

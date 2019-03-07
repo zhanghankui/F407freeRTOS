@@ -142,8 +142,8 @@ extern "C" {
 
 
 
-#define RxFIFObufsize 120
-#define RxFIFOframesize 10
+#define RxFIFObufsize 1024
+#define RxFIFOframesize 32
 
 
 // **************************************************************************
@@ -179,7 +179,7 @@ extern USARTDMA_FIFO_Handle USARTDMA_FIFOhandle_intr;
 // **************************************************************************
 // the function prototypes	
 USARTDMA_FIFO_Handle USARTDMA_FIFO_init(void const*pMemory,const size_t numBytes);
-void MC_setupUSARTDMA_FIFIO(USARTDMA_FIFO_Handle handle);
+void SetupUSARTDMA_FIFIO(USARTDMA_FIFO_Handle handle);
 void USARTDMA_Config(uint32_t bound);
 uint16_t ReadOVERSTOCK(USARTDMA_FIFO_Handle handle);
 void USART_SendString(USART_TypeDef* USARTx,const char *str);

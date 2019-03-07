@@ -16,6 +16,7 @@
 // **************************************************************************	
 // the includes
 #include "usartdma.h"
+#include "FreeRTOS.h"
 // **************************************************************************
 // the defines
 
@@ -26,6 +27,7 @@
 
 // **************************************************************************
 //declaration static function prototypes
+
 
 static bool Is_DMA_USART_TX_busy = false;
 //static bool Is_DMA_USART_RX_busy = false;
@@ -125,7 +127,7 @@ USARTDMA_FIFO_Handle USARTDMA_FIFO_init(void const*pMemory,const size_t numBytes
   return(USARTDMA_FIFOHandle);
 } // end of USARTDMA_FIFO_init() function
 
-void MC_setupUSARTDMA_FIFIO(USARTDMA_FIFO_Handle handle)
+void SetupUSARTDMA_FIFIO(USARTDMA_FIFO_Handle handle)
 {
 	USARTDMA_FIFO_Obj *obj = (USARTDMA_FIFO_Obj *)handle;
 	obj->buffersize     = RxFIFObufsize;
@@ -207,8 +209,8 @@ void USARTDMA_Config(uint32_t bound)
   //Usart NVIC configuration
   NVIC_InitTypeDef   NVIC_InitStructure;        
   NVIC_InitStructure.NVIC_IRQChannel = USART_IRQ_CHANNEL;//USARTx interrupt channel
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5; 
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2; 
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;//IRQ channel enable
   NVIC_Init(&NVIC_InitStructure);//initialize
 	
@@ -242,8 +244,10 @@ void USARTDMA_Config(uint32_t bound)
   USART_ITConfig(COMM_USART, USART_IT_IDLE, ENABLE);//enable receive idle interrupt
   /* USART enable */
   USART_Cmd(COMM_USART, ENABLE); 
-  USART_ClearITPendingBit(COMM_USART,USART_IT_IDLE);  
-
+//  USART_ClearITPendingBit(COMM_USART,USART_IT_IDLE);
+//不同与F3，F4清除USART_IT_IDLE需要先读状态标志位，然后读取接收字节从而清除
+	USART_GetITStatus(COMM_USART, USART_IT_IDLE);
+	USART_ReceiveData(COMM_USART);
 #if DMA_USART_RX
    /* Enable USARTx DMA Rxrequest */  
   USART_DMACmd(COMM_USART, USART_DMAReq_Rx, ENABLE);
@@ -530,13 +534,15 @@ void USART_DMA_Receive(u32 cmar,uint16_t cndtr)
 
 void USART_IRQHandler(void)
 {
-#if	EN_USART_RX
-  if(USART_GetITStatus(COMM_USART, USART_IT_RXNE) != RESET)
-  {
-    /* Read one byte from the receive data register */
-    //= USART_ReceiveData(COMM_USART);
-  }  
-#endif   
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();  /* 进入临界区 */
+	#if	EN_USART_RX
+	if(USART_GetITStatus(COMM_USART, USART_IT_RXNE) != RESET)
+	{
+	/* Read one byte from the receive data register */
+	//= USART_ReceiveData(COMM_USART);
+	}  
+	#endif   
 	//总线空闲中断是在检测到接收数据后，数据总线上一个字节的时间内，没有再接到数据发生。也就是RXNE位被置位后，才开始检测，只被置位一次，除非再次检测到到RXNE被置位，然后才开始检测下一次的总线空闲
 	//principle：
 	//while(1)
@@ -553,15 +559,21 @@ void USART_IRQHandler(void)
    if(USART_GetITStatus(COMM_USART, USART_IT_IDLE) != RESET) //Receive data register not empty flag, detect bus idle
 	 {
 		 
-		 #ifdef DMA_USART_RX
-     Handle_FIFO();
-		 #endif
-     USART_ClearITPendingBit(COMM_USART,USART_IT_IDLE);
+		#ifdef DMA_USART_RX
+     	Handle_FIFO();
+		#endif
+//     	USART_ClearITPendingBit(COMM_USART,USART_IT_IDLE);
+		 //不同与F3，F4清除USART_IT_IDLE需要先读状态标志位，然后读取接收字节从而清除
+			USART_ReceiveData(COMM_USART);		 
 	 } 
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus); /* 退出临界区 */
 }
 
 void USART_TX_DMA_IRQHandler(void)
 {
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();  /* 进入临界区 */
+
 	if(DMA_GetITStatus(USART_TX_DMA_Stream,USART_TX_DMA_IT_TC)!=RESET)//channel transfer complished
 	{
 		while((USART_GetFlagStatus(COMM_USART,USART_FLAG_TC))==RESET){};//usart tx send complished
@@ -571,16 +583,21 @@ void USART_TX_DMA_IRQHandler(void)
 		half_duplex_Read();
 #endif	
 		Is_DMA_USART_TX_busy = false;
-	}	
+	}
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus ); /* 退出临界区 */	
 }
 
 void USART_RX_DMA_IRQHandler(void)
 {
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();  /* 进入临界区 */
+
  	if(DMA_GetITStatus(USART_RX_DMA_Stream,USART_RX_DMA_IT_TC)!=RESET)//channel transfer complished
 	{
 		DMA_ClearITPendingBit(USART_RX_DMA_Stream,USART_RX_DMA_IT_TC);//clear channel transfer complish flag
 //		Is_DMA_USART_RX_busy = false;
-	} 	
+	}
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus ); /* 退出临界区 */		
 }
 
 

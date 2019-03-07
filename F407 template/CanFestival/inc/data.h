@@ -264,16 +264,16 @@ struct struct_CO_Data {
 	},\
 	\
 	/* State machine*/\
-	Unknown_state,      /* nodeState */\
+	Operational/*Unknown_state*/,      /* nodeState */\
 	/* structure s_state_communication */\
 	{\
-		0,          /* csBoot_Up */\
+		1,          /* csBoot_Up */\
 		1,          /* csSDO */\
 		0,          /* csEmergency */\
-		0,          /* csSYNC */\
+		1,          /* csSYNC */\
 		0,          /* csHeartbeat */\
-		0,           /* csPDO */\
-		0           /* csLSS */\
+		1,           /* csPDO */\
+		1           /* csLSS */\
 	},\
 	_initialisation,     /* initialisation */\
 	_preOperational,     /* preOperational */\

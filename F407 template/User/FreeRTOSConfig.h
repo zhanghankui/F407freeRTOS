@@ -93,11 +93,11 @@
 #define configUSE_TICK_HOOK			1
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 168000000 )	
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )//系统时钟节拍数
-#define configMAX_PRIORITIES		( 5 )//定义用户可以使用的最大优先级数
+#define configMAX_PRIORITIES		( 6 )//定义用户可以使用的最大优先级数
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 128 )
 #define configTOTAL_HEAP_SIZE		( ( size_t ) ( 30 * 1024 ) )
 #define configMAX_TASK_NAME_LEN		( 16 )
-#define configUSE_TRACE_FACILITY	1//使能磁配置将添加额外的结构体成员和函数，以此来协助可视化和跟踪
+#define configUSE_TRACE_FACILITY	1//使能此配置将添加额外的结构体成员和函数，以此来协助可视化和跟踪
 #define configUSE_16_BIT_TICKS		0
 #define configIDLE_SHOULD_YIELD		1
 
@@ -131,6 +131,16 @@ to exclude the API function. */
 #define INCLUDE_vTaskSuspend			1
 #define INCLUDE_vTaskDelayUntil			1
 #define INCLUDE_vTaskDelay				1
+#define INCLUDE_xEventGroupSetBitFromISR 1
+#define INCLUDE_xTimerPendFunctionCall   1
+
+/*Software timer definitions.*/
+#define configUSE_TIMERS       1
+#define configTIMER_TASK_PRIORITY   (5)
+#define configTIMER_QUEUE_LENGTH     20
+#define configTIMER_TASK_STACK_DEPTH (configMINIMAL_STACK_SIZE*2)
+
+
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
