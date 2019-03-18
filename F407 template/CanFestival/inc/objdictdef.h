@@ -107,12 +107,12 @@ struct td_indextable
 };
 
 typedef struct s_quick_index{
-	UNS16 SDO_SVR;
-	UNS16 SDO_CLT;
-	UNS16 PDO_RCV;
-	UNS16 PDO_RCV_MAP;
-	UNS16 PDO_TRS;
-	UNS16 PDO_TRS_MAP;
+	UNS16 SDO_SVR;/* SDO_SVR server*/
+	UNS16 SDO_CLT;/* SDO_CLT client*/
+	UNS16 PDO_RCV;/* PDO_RCV receive*/
+	UNS16 PDO_RCV_MAP;/* PDO_RCV_MAP receive mapping*/
+	UNS16 PDO_TRS;/* PDO_TRS transmit*/
+	UNS16 PDO_TRS_MAP;/* PDO_TRS_MAP transmit mapping*/
 }quick_index;
 
 

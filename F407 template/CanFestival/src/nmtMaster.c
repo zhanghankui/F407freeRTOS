@@ -69,6 +69,7 @@ UNS8 masterSendNMTstateChange(CO_Data* d, UNS8 nodeId, UNS8 cs)
 ** @return
 **/
 UNS8 masterSendNMTnodeguard(CO_Data* d, UNS8 nodeId)
+/*to ask for a node its state, the master sends 700+nodeID rtr=1*/
 {
   Message m;
 

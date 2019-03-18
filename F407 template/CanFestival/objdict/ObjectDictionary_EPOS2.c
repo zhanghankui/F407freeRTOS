@@ -2063,12 +2063,12 @@ const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
 s_PDO_status _PDO_status[4] = {s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer};
 
 const quick_index _firstIndex = {
-  16, /* SDO_SVR */
-  0, /* SDO_CLT */
-  17, /* PDO_RCV */
-  21, /* PDO_RCV_MAP */
-  25, /* PDO_TRS */
-  29 /* PDO_TRS_MAP */
+  16, /* SDO_SVR server*/
+  0, /* SDO_CLT client*/
+  17, /* PDO_RCV receive*/
+  21, /* PDO_RCV_MAP receive mapping*/
+  25, /* PDO_TRS transmit*/
+  29 /* PDO_TRS_MAP transmit mapping*/
 };
 
 const quick_index _lastIndex = {

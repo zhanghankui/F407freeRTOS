@@ -862,7 +862,7 @@ UNS8 proceedSDO (CO_Data* d, Message *m)
 	switch (cs) {
 
 		case 0:
-			/* I am SERVER */
+			/* I am SERVER 从机收到主机的DOWNLOAD_SEGMENT_REQUEST*/
 			if (whoami == SDO_SERVER) {
 				/* Receiving a download segment data : an SDO transfer should have been yet initiated. */
 				if (!err)
@@ -916,7 +916,7 @@ UNS8 proceedSDO (CO_Data* d, Message *m)
 				}
 			} /* end if SERVER */
 			else { /* if CLIENT */
-				/* I am CLIENT */
+				/* I am CLIENT 主机收到从机的UPLOAD_SEGMENT_RESPONSE*/
 				/* It is a request for a previous upload segment. We should find a line opened for this.*/
 				if (!err)
 					err = (UNS8)(d->transfers[line].state != SDO_UPLOAD_IN_PROGRESS);
@@ -967,7 +967,7 @@ UNS8 proceedSDO (CO_Data* d, Message *m)
 			break;
 
 		case 1:
-			/* I am SERVER */
+			/* I am SERVER 从机收到主机的INITIATE_DOWNLOAD_REQUEST*/
 			/* Receive of an initiate download */
 			if (whoami == SDO_SERVER) {
 				index = (UNS16)getSDOindex(m->data[1],m->data[2]);

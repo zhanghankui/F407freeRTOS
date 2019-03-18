@@ -83,7 +83,7 @@ void proceedNODE_GUARD(CO_Data* d, Message* m )
 {
   UNS8 nodeId = (UNS8) GET_NODE_ID((*m));
 
-  if((m->rtr == 1) )
+  if((m->rtr == 1) )//远程帧 用来询问节点状态
     /*!
     ** Notice that only the master can have sent this
     ** node guarding request
@@ -126,7 +126,7 @@ void proceedNODE_GUARD(CO_Data* d, Message* m )
       */
       d->nodeGuardStatus[nodeId] = *d->LifeTimeFactor;
 
-      if (d->NMTable[nodeId] != newNodeState)
+      if (d->NMTable[nodeId] != newNodeState)//存储收到的NMT状态
       {
         (*d->post_SlaveStateChange)(d, nodeId, newNodeState);
         /* the slave's state receievd is stored in the NMTable */

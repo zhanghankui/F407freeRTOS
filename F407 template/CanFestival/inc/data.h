@@ -60,8 +60,8 @@ struct struct_CO_Data {
 	s_PDO_status *PDO_status;
 	TIMER_HANDLE *RxPDO_EventTimers;
 	void (*RxPDO_EventTimers_Handler)(CO_Data*, UNS32);
-	const quick_index *firstIndex;
-	const quick_index *lastIndex;
+	const quick_index *firstIndex;//用于快速指示相应对象字典在indextable表中的起始排序，减少查找时间
+	const quick_index *lastIndex;//用于快速指示相应对象字典在indextable表中的结束排序，减少查找时间
 	const UNS16 *ObjdictSize;
 	const UNS8 *iam_a_slave;
 	valueRangeTest_t valueRangeTest;
@@ -264,16 +264,16 @@ struct struct_CO_Data {
 	},\
 	\
 	/* State machine*/\
-	Operational/*Unknown_state*/,      /* nodeState */\
+	Unknown_state,      /* nodeState */\
 	/* structure s_state_communication */\
 	{\
-		1,          /* csBoot_Up */\
-		1,          /* csSDO */\
+		0,          /* csBoot_Up */\
+		0,          /* csSDO */\
 		0,          /* csEmergency */\
-		1,          /* csSYNC */\
+		0,          /* csSYNC */\
 		0,          /* csHeartbeat */\
-		1,           /* csPDO */\
-		1           /* csLSS */\
+		0,           /* csPDO */\
+		0           /* csLSS */\
 	},\
 	_initialisation,     /* initialisation */\
 	_preOperational,     /* preOperational */\
