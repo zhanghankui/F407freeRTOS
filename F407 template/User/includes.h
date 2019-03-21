@@ -44,7 +44,8 @@
 #include "task.h"
 #include "queue.h"
 #include "croutine.h"
-
+#include "semphr.h"
+#include "event_groups.h"
 
 /*
 *********************************************************************************************************
@@ -63,6 +64,7 @@
 
 #include  "bsp.h"
 #include "can_thread.h"
+#include "epos2_thread.h"
 //#include  "TestSlave.h"
 
 /* 在主函数中调用 */

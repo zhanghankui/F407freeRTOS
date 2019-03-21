@@ -279,7 +279,7 @@ UNS32 _valueRangeTest (UNS8 typeValue, void * value)
 /* The node id                                                            */
 /**************************************************************************/
 /* node_id default value.*/
-UNS8 _bDeviceNodeId = 0x01;
+UNS8 _bDeviceNodeId = 0x00;//Ö÷»úID
 
 /**************************************************************************/
 /* Array of message processing information */
@@ -466,6 +466,26 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RO, uint32, sizeof (UNS32), (void*)&_obj1200_COB_ID_Server_to_Client_Transmit_SDO, NULL }
                      };
 
+/* index 0x1280 :   Client SDO Parameter. */
+                    UNS8 _highestSubIndex_obj1280 = 3; /* number of subindex - 1*/
+                    UNS32 _obj1280_COB_ID_Client_to_Server_Transmit_SDO = 0x601;	/* 1537 */
+                    UNS32 _obj1280_COB_ID_Server_to_Client_Receive_SDO = 0x581;	/* 1409 */
+                    UNS8 _obj1280_Node_ID_of_the_SDO_Server = 0x01;	/* 1 */
+                    ODCallback_t ObjDict_Index1280_callbacks[] = 
+                     {
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                     };
+                    subindex _Index1280[] = 
+                     {
+                       { RO, uint8, sizeof (UNS8), (void*)&_highestSubIndex_obj1280 },
+                       { RW, uint32, sizeof (UNS32), (void*)&_obj1280_COB_ID_Client_to_Server_Transmit_SDO },
+                       { RW, uint32, sizeof (UNS32), (void*)&_obj1280_COB_ID_Server_to_Client_Receive_SDO },
+                       { RW, uint8, sizeof (UNS8), (void*)&_obj1280_Node_ID_of_the_SDO_Server }
+                     };										 
+										 
 /* index 0x1400 :   Receive PDO 1 Parameter. */
                     UNS8 _highestSubIndex_obj1400 = 2; /* number of subindex - 1*/
                     UNS32 _obj1400_COB_ID_used_by_PDO = 0x201;	/* 512 */
@@ -1884,6 +1904,7 @@ const indextable _objdict[] =
   { (subindex*)_Index6402,sizeof(_Index6402)/sizeof(_Index6402[0]), 0x6402},
   { (subindex*)_Index6410,sizeof(_Index6410)/sizeof(_Index6410[0]), 0x6410},
   { (subindex*)_Index6502,sizeof(_Index6502)/sizeof(_Index6502[0]), 0x6502},
+  { (subindex*)_Index1280,sizeof(_Index1280)/sizeof(_Index1280[0]), 0x1280},		
 };
 
 const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
@@ -2047,6 +2068,7 @@ const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
 		case 0x6402: i = 153;break;
 		case 0x6410: i = 154;break;
 		case 0x6502: i = 155;break;
+		case 0x1280: i = 156;break;		
 		default:
 			*errorCode = OD_NO_SUCH_OBJECT;
 			return NULL;
@@ -2064,7 +2086,7 @@ s_PDO_status _PDO_status[4] = {s_PDO_status_Initializer,s_PDO_status_Initializer
 
 const quick_index _firstIndex = {
   16, /* SDO_SVR server*/
-  0, /* SDO_CLT client*/
+  156, /* SDO_CLT client*/
   17, /* PDO_RCV receive*/
   21, /* PDO_RCV_MAP receive mapping*/
   25, /* PDO_TRS transmit*/
@@ -2073,7 +2095,7 @@ const quick_index _firstIndex = {
 
 const quick_index _lastIndex = {
   16, /* SDO_SVR */
-  0, /* SDO_CLT */
+  156, /* SDO_CLT */
   20, /* PDO_RCV */
   24, /* PDO_RCV_MAP */
   28, /* PDO_TRS */

@@ -222,7 +222,7 @@ OUTPUT	1 if  hardware -> CAN frame
 	}
     ret = CAN_Transmit(CANx, &TxMessage);
 	if(ret == CAN_TxStatus_NoMailBox)
-		return 0;			   //·¢ËÍÊ§°Ü£¬·¢ËÍÓÊÏäÂú
+		return 0xFF;			   //·¢ËÍÊ§°Ü£¬·¢ËÍÓÊÏäÂú
 	else 
-	    return 1;              //·¢ËÍ³É¹¦
+	    return 0;              //·¢ËÍ³É¹¦
 }

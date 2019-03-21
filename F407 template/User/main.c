@@ -29,6 +29,7 @@ static void vTaskTask2(void *pvParameters);
 static void vTaskTask3(void *pvParameters);
 static void vTaskTask4(void *pvParameters);
 static void AppTaskCreate(void);
+static void AppObjCreate (void);
 
 static void TIM_CallBack1(void);
 static void StackOverflowTest(void);
@@ -46,7 +47,7 @@ static TaskHandle_t xHandleTask4 = NULL;
 BSP_Obj     BSPobj;
 BSP_Handle  BSPHandle;
 
-
+EventGroupHandle_t xCreatedEventGroup = NULL;
 
 
 
@@ -85,6 +86,9 @@ int main(void)
 	
 	/* 创建任务 */
 	AppTaskCreate();
+	
+	/* 创建任务通信机制 */
+	AppObjCreate();
 	
 	/* 启动调度，开始执行任务 */
 	vTaskStartScheduler();
@@ -447,6 +451,7 @@ static void AppTaskCreate (void)
 	/*init the Canopen thread*/
 	canopen_init();
 	
+	//
 	initTimer();  //初始化CANopen定时器                             //初始化CANopen定时器
 	
 	CO_D.CO_CAN1 = &_Data;
@@ -456,8 +461,27 @@ static void AppTaskCreate (void)
 	setState(CO_D.CO_CAN1,Operational);
 	
 	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
+	EPOS2_init();
 }
 
+/*
+*********************************************************************************************************
+*	函 数 名: AppObjCreate
+*	功能说明: 创建任务通信机制
+*	形    参: 无
+*	返 回 值: 无
+*********************************************************************************************************
+*/
+static void AppObjCreate (void)
+{
+	/* 创建事件标志组 */
+	xCreatedEventGroup = xEventGroupCreate();
+	
+	if(xCreatedEventGroup == NULL)
+    {
+        /* 没有创建成功，用户可以在这里加入创建失败的处理机制 */
+    }
+}
 
 
 
