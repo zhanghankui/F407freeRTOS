@@ -323,10 +323,10 @@ BaseType_t xTimeoutOccurred = pdFALSE;
 
 EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToWaitFor, const BaseType_t xClearOnExit, const BaseType_t xWaitForAllBits, TickType_t xTicksToWait )
 {
-EventGroup_t *pxEventBits = ( EventGroup_t * ) xEventGroup;
-EventBits_t uxReturn, uxControlBits = 0;
-BaseType_t xWaitConditionMet, xAlreadyYielded;
-BaseType_t xTimeoutOccurred = pdFALSE;
+	EventGroup_t *pxEventBits = ( EventGroup_t * ) xEventGroup;
+	EventBits_t uxReturn, uxControlBits = 0;
+	BaseType_t xWaitConditionMet, xAlreadyYielded;
+	BaseType_t xTimeoutOccurred = pdFALSE;
 
 	/* Check the user is not attempting to wait on the bits used by the kernel
 	itself, and that at least one bit is being requested. */

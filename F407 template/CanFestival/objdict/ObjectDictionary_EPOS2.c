@@ -488,7 +488,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 										 
 /* index 0x1400 :   Receive PDO 1 Parameter. */
                     UNS8 _highestSubIndex_obj1400 = 2; /* number of subindex - 1*/
-                    UNS32 _obj1400_COB_ID_used_by_PDO = 0x201;	/* 512 */
+                    UNS32 _obj1400_COB_ID_used_by_PDO = 0x201;	
                     UNS8 _obj1400_Transmission_Type = 0xFF;	/* 255 */
                     subindex _Index1400[] = 
                      {
@@ -636,7 +636,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 /* index 0x1800 :   Transmit PDO 1 Parameter. */
                     UNS8 _highestSubIndex_obj1800 = 3; /* number of subindex - 1*/
-                    UNS32 _obj1800_COB_ID_used_by_PDO = 0x40000180;	/* 1073742208 */
+                    UNS32 _obj1800_COB_ID_used_by_PDO = 0xC0000181;	/* 1073742208 */
                     UNS8 _obj1800_Transmission_Type = 0xFF;	/* 255 */
                     UNS16 _obj1800_Inhibit_Time = 0xA;	/* 10 */
                     subindex _Index1800[] = 

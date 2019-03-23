@@ -81,7 +81,7 @@
 //#include "bsp_can.h"
 //#include "bsp_msg.h"
 
-//#include "bsp_tim_pwm.h"
+#include "bsp_tim_pwm.h"
 
 //#include "bsp_cpu_flash.h"
 //#include "bsp_sdio_sd.h"

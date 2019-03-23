@@ -82,7 +82,7 @@ int main(void)
 		  目中不要使用，因为这个功能比较影响系统实时性。
 	   2. 为了正确获取FreeRTOS的调试信息，可以考虑将上面的关闭中断指令__set_PRIMASK(1); 注释掉。 
 	*/
-//	vSetupSysInfoTest();	//系统测试函数
+	vSetupSysInfoTest();	//系统测试函数
 	
 	/* 创建任务 */
 	AppTaskCreate();
@@ -422,7 +422,7 @@ static void AppTaskCreate (void)
 							 "vTaskTask1",     	/* 任务名    */
 							 512,               	/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,              	/* 任务参数  */
-							 1,                 	/* 任务优先级*/
+							 2,                 	/* 任务优先级*/
 							 &xHandleTask1 );  /* 任务句柄  */
 
 
@@ -430,14 +430,14 @@ static void AppTaskCreate (void)
 							 "vTaskTask2",  		/* 任务名    */
 							 512,         		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,        		/* 任务参数  */
-							 2,           		/* 任务优先级*/
+							 3,           		/* 任务优先级*/
 							 &xHandleTask2 ); /* 任务句柄  */
 
 	xTaskCreate( vTaskTask3,     		/* 任务函数  */
 							 "vTaskTask3",   		/* 任务名    */
 							 512,             		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,           		/* 任务参数  */
-							 3,               		/* 任务优先级*/
+							 4,               		/* 任务优先级*/
 							 &xHandleTask3 );  /* 任务句柄  */
 
 
@@ -445,7 +445,7 @@ static void AppTaskCreate (void)
 							 "vTaskTask4",   		/* 任务名    */
 							 512,            		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,           		/* 任务参数  */
-							 4,              		/* 任务优先级*/
+							 5,              		/* 任务优先级*/
 							 &xHandleTask4 );   /* 任务句柄  */
 							 
 	/*init the Canopen thread*/
@@ -476,11 +476,12 @@ static void AppObjCreate (void)
 {
 	/* 创建事件标志组 */
 	xCreatedEventGroup = xEventGroupCreate();
-	
+
 	if(xCreatedEventGroup == NULL)
-    {
-        /* 没有创建成功，用户可以在这里加入创建失败的处理机制 */
-    }
+	{
+		/* 没有创建成功，用户可以在这里加入创建失败的处理机制 */
+	}
+	systimerforovertimeCreate();				
 }
 
 

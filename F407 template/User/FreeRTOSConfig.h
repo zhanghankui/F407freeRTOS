@@ -93,7 +93,7 @@
 #define configUSE_TICK_HOOK			1
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 168000000 )	
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )//系统时钟节拍数
-#define configMAX_PRIORITIES		( 6 )//定义用户可以使用的最大优先级数
+#define configMAX_PRIORITIES		( 16)//定义用户可以使用的最大优先级数
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 128 )
 #define configTOTAL_HEAP_SIZE		( ( size_t ) ( 30 * 1024 ) )
 #define configMAX_TASK_NAME_LEN		( 16 )
@@ -136,7 +136,7 @@ to exclude the API function. */
 
 /*Software timer definitions.*/
 #define configUSE_TIMERS       1
-#define configTIMER_TASK_PRIORITY   (5)
+#define configTIMER_TASK_PRIORITY   (configMAX_PRIORITIES-2)//软件定时器任务优先级
 #define configTIMER_QUEUE_LENGTH     20
 #define configTIMER_TASK_STACK_DEPTH (configMINIMAL_STACK_SIZE*2)
 

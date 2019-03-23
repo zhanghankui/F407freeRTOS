@@ -5,7 +5,7 @@
 
 #define CANOpen_THREAD_STACK        512
 
-extern EventGroupHandle_t xCreatedEventGroup;
+
 
 xQueueHandle xQ_CAN_MSG = NULL;                //存放CAN接收到的数据
 xTaskHandle  xH_CANOpen = NULL;
@@ -44,9 +44,7 @@ static void canopen_dataprocess_thread(void *arg)
 			}
 			if((NULL != CO_D.CO_CAN1) && (1 == CAN_Rx_m.CANx))          //接受的的是CAN1端口数据
 			{
-				canDispatch(CO_D.CO_CAN1, &RxMSG);                        // 处理收到的CAN数据
-					/* 设置事件标志组的bit0 */
-					xEventGroupSetBits(xCreatedEventGroup, BIT_0_CAN1Dispatched);				
+				canDispatch(CO_D.CO_CAN1, &RxMSG);                        // 处理收到的CAN数据		
 			}
 			else if((NULL != CO_D.CO_CAN2) && (2 == CAN_Rx_m.CANx))     //接收到的是CAN2端口数据
 			{

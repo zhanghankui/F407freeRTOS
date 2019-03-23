@@ -442,6 +442,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\src\sdio_sdcard.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_tim_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\src\bsp_tim_pwm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -461,6 +466,11 @@
               <FileName>epos2_thread.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\tasks\src\epos2_thread.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\tasks\src\sys_timer.c</FilePath>
             </File>
           </Files>
         </Group>

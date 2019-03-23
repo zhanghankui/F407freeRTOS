@@ -224,7 +224,7 @@ UNS32 _setODentry( CO_Data* d,
         accessDictionaryError(wIndex, bSubindex, szData, *pExpectedSize, errorCode);
         return errorCode;
       }
-      memcpy(ptrTable->pSubindex[bSubindex].pObject,pSourceData, *pExpectedSize);
+      memcpy(ptrTable->pSubindex[bSubindex].pObject,pSourceData, *pExpectedSize);			
      /* TODO : CONFORM TO DS-301 : 
       *  - stop using NULL terminated strings
       *  - store string size in td_subindex 

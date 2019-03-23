@@ -8,7 +8,7 @@
 #include "canfestival.h"
 #include "data.h"
 
-#define BIT_0_CAN1Dispatched	(1 << 0)
+//#define BIT_0_CAN1Dispatched	(1 << 0)
 
 
 typedef struct _struct_co_data_2_can{

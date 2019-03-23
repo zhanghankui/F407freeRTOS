@@ -65,6 +65,7 @@
 #include  "bsp.h"
 #include "can_thread.h"
 #include "epos2_thread.h"
+#include "systimer.h"
 //#include  "TestSlave.h"
 
 /* 在主函数中调用 */

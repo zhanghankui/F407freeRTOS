@@ -2387,7 +2387,7 @@ UNS8 getReadResultNetworkDict (CO_Data* d, UNS8 nodeId, void* data, UNS32 *size,
 # endif
 	}
 #endif //SDO_DYNAMIC_BUFFER_ALLOCATION
-    resetSDOline(d, line);
+  resetSDOline(d, line);
 	return SDO_FINISHED;
 }
 
