@@ -458,7 +458,7 @@ static void AppTaskCreate (void)
 	CO_D.CO_CAN1->canHandle = CAN1;	
 	//NMT state machine
 	setState(CO_D.CO_CAN1,Initialisation);
-	setState(CO_D.CO_CAN1,Operational);
+//	setState(CO_D.CO_CAN1,Operational);
 	
 	canInit(CAN1,CAN_BAUD_1M);             //≥ı ºªØCAN1
 	EPOS2_init();
