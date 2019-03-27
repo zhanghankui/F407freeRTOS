@@ -534,7 +534,41 @@ sendOnePDOevent (CO_Data * d, UNS8 pdoNum)
                pdoNum);
       return 0;
     }
+    
 
+		TIMEVAL EventTimerDuration;
+		TIMEVAL InhibitTimerDuration;
+
+		MSG_WAR (0x306A, "Changes TPDO number : ", pdoNum);
+		/* Changes detected -> transmit message */
+		EventTimerDuration =
+			*(UNS16 *) d->objdict[offsetObjdict].pSubindex[5].
+			pObject;
+		InhibitTimerDuration =
+			*(UNS16 *) d->objdict[offsetObjdict].pSubindex[3].
+			pObject;
+
+		/* Start both event_timer and inhibit_timer */
+		if (EventTimerDuration)
+			{
+				DelAlarm (d->PDO_status[pdoNum].event_timer);
+				d->PDO_status[pdoNum].event_timer =
+					SetAlarm (d, pdoNum, &PDOEventTimerAlarm,
+										MS_TO_TIMEVAL (EventTimerDuration), 0);
+			}
+
+		if (InhibitTimerDuration)
+			{
+				DelAlarm (d->PDO_status[pdoNum].inhibit_timer);
+				d->PDO_status[pdoNum].inhibit_timer =
+					SetAlarm (d, pdoNum, &PDOInhibitTimerAlarm,
+										US_TO_TIMEVAL (InhibitTimerDuration *
+																	 100), 0);
+				/* and inhibit TPDO */
+				d->PDO_status[pdoNum].transmit_type_parameter |=
+					PDO_INHIBITED;
+			}
+    
   /*Compare new and old PDO */
   if (d->PDO_status[pdoNum].last_message.cob_id == pdo.cob_id
       && d->PDO_status[pdoNum].last_message.len == pdo.len
@@ -545,44 +579,8 @@ sendOnePDOevent (CO_Data * d, UNS8 pdoNum)
       /* No changes -> go to next pdo */
       return 0;
     }
-  else
-    {
-
-      TIMEVAL EventTimerDuration;
-      TIMEVAL InhibitTimerDuration;
-
-      MSG_WAR (0x306A, "Changes TPDO number : ", pdoNum);
-      /* Changes detected -> transmit message */
-      EventTimerDuration =
-        *(UNS16 *) d->objdict[offsetObjdict].pSubindex[5].
-        pObject;
-      InhibitTimerDuration =
-        *(UNS16 *) d->objdict[offsetObjdict].pSubindex[3].
-        pObject;
-
-      /* Start both event_timer and inhibit_timer */
-      if (EventTimerDuration)
-        {
-          DelAlarm (d->PDO_status[pdoNum].event_timer);
-          d->PDO_status[pdoNum].event_timer =
-            SetAlarm (d, pdoNum, &PDOEventTimerAlarm,
-                      MS_TO_TIMEVAL (EventTimerDuration), 0);
-        }
-
-      if (InhibitTimerDuration)
-        {
-          DelAlarm (d->PDO_status[pdoNum].inhibit_timer);
-          d->PDO_status[pdoNum].inhibit_timer =
-            SetAlarm (d, pdoNum, &PDOInhibitTimerAlarm,
-                      US_TO_TIMEVAL (InhibitTimerDuration *
-                                     100), 0);
-          /* and inhibit TPDO */
-          d->PDO_status[pdoNum].transmit_type_parameter |=
-            PDO_INHIBITED;
-        }
-
-      sendPdo(d, pdoNum, &pdo);
-    }
+    sendPdo(d, pdoNum, &pdo);
+		
     return 1;
 }
 

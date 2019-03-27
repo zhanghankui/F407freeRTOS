@@ -232,7 +232,7 @@ static void EPOS2init_thread(void *pvParameters)
 			RW);  /* UNS8 checkAccess */
 
 	ExpectedSize= sizeof(UNS16);
-	inhibittime = 0;
+	inhibittime = 10;
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1800, /*UNS16 index*/
 			0x03, /*UNS8 subind*/ 
@@ -240,7 +240,7 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */	
 
-	highestSubIndex = 1;
+	highestSubIndex = 2;
 	ExpectedSize = sizeof(UNS8);
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1600, /*UNS16 index*/
@@ -257,6 +257,15 @@ static void EPOS2init_thread(void *pvParameters)
 			&_obj, /*void * pSourceData,*/ 
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
+			
+	_obj = 0x20F40010;
+	ExpectedSize = sizeof(UNS32);
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1600, /*UNS16 index*/
+			0x02, /*UNS8 subind*/ 
+			&_obj, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */			
 
 	highestSubIndex = 1;
 	ExpectedSize = sizeof(UNS8);
@@ -291,7 +300,7 @@ static void EPOS2init_thread(void *pvParameters)
 	highestSubIndex = 1;
 	WriteSDO(d,nodeId,0x1600,0x00,&highestSubIndex,0);//设置RPDO1	
 	
-	//每10ms传送一次位置速度变化
+	//每10ms传送一次位置及位置跟随误差变化
 	COBID = 0x40000180+nodeId;
 	inhibittime = 100;
 	WriteSDO(d,nodeId,0x1800,0x01,&COBID,0);//设置TPDO1
@@ -311,7 +320,7 @@ static void EPOS2init_thread(void *pvParameters)
 	_obj = 0x60640020;	
 	WriteSDO(d,nodeId,0x1A00,0x00,&highestSubIndex,0);//设置TPDO1
 	WriteSDO(d,nodeId,0x1A00,0x01,&_obj,0);//设置TPDO1
-	_obj = 0x606C0020;		
+	_obj = 0x20F40010;		
 	WriteSDO(d,nodeId,0x1A00,0x02,&_obj,0);//设置TPDO1
 	highestSubIndex = 2;
 	WriteSDO(d,nodeId,0x1A00,0x00,&highestSubIndex,0);//设置TPDO1		
@@ -319,7 +328,8 @@ static void EPOS2init_thread(void *pvParameters)
 
 	setState(d,Operational);
 	vTaskDelay(1);	
-	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);	
+	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);
+	vTaskDelay(1);		
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\F407template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\F407template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Mar 27 01:38:32 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Mar 27 22:27:05 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1256 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -873,13 +873,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[84]"></a>OnCOB_ID_SyncUpdate</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, sync.o(i.OnCOB_ID_SyncUpdate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = OnCOB_ID_SyncUpdate &rArr; startSYNC &rArr; stopSYNC &rArr; RegisterSetODentryCallBack
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = OnCOB_ID_SyncUpdate &rArr; startSYNC &rArr; stopSYNC &rArr; RegisterSetODentryCallBack
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSYNC
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> sync.o(i.startSYNC)
 </UL>
-<P><STRONG><a name="[7c]"></a>OnHeartbeatProducerUpdate</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, lifegrd.o(i.OnHeartbeatProducerUpdate))
+<P><STRONG><a name="[7c]"></a>OnHeartbeatProducerUpdate</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, lifegrd.o(i.OnHeartbeatProducerUpdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = OnHeartbeatProducerUpdate &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetAlarm
@@ -901,7 +901,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> emcy.o(i.emergencyInit)
 </UL>
 <P><STRONG><a name="[82]"></a>PDOEventTimerAlarm</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, pdo.o(i.PDOEventTimerAlarm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendOnePDOevent
 </UL>
@@ -911,14 +911,14 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> pdo.o(i.sendOnePDOevent)
 </UL>
 <P><STRONG><a name="[83]"></a>PDOInhibitTimerAlarm</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, pdo.o(i.PDOInhibitTimerAlarm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = PDOInhibitTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = PDOInhibitTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendOnePDOevent
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> pdo.o(i.sendOnePDOevent)
 </UL>
 <P><STRONG><a name="[cf]"></a>PDOInit</STRONG> (Thumb, 82 bytes, Stack size 32 bytes, pdo.o(i.PDOInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 268<LI>Call Chain = PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sendPDOevent
 </UL>
@@ -1322,7 +1322,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[85]"></a>SyncAlarm</STRONG> (Thumb, 14 bytes, Stack size 16 bytes, sync.o(i.SyncAlarm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 284<LI>Call Chain = SyncAlarm &rArr; sendSYNC &rArr; proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 292<LI>Call Chain = SyncAlarm &rArr; sendSYNC &rArr; proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendSYNC
 </UL>
@@ -1377,7 +1377,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[74]"></a>TPDO_Communication_Parameter_Callback</STRONG> (Thumb, 148 bytes, Stack size 24 bytes, pdo.o(i.TPDO_Communication_Parameter_Callback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = TPDO_Communication_Parameter_Callback &rArr; PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = TPDO_Communication_Parameter_Callback &rArr; PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PDOEventTimerAlarm
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelAlarm
@@ -1594,7 +1594,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> objectdictionary_epos2.o(.data)
 </UL>
 <P><STRONG><a name="[d0]"></a>_sendPDOevent</STRONG> (Thumb, 408 bytes, Stack size 48 bytes, pdo.o(i._sendPDOevent))
-<BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 244<LI>Call Chain = _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendOnePDOevent
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buildPDO
@@ -1716,7 +1716,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[130]"></a>canDispatch</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, states.o(i.canDispatch))
-<BR><BR>[Stack]<UL><LI>Max Depth = 340<LI>Call Chain = canDispatch &rArr; proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 348<LI>Call Chain = canDispatch &rArr; proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;proceedEMCY
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;proceedSYNC
@@ -1883,7 +1883,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
 </UL>
 
-<P><STRONG><a name="[144]"></a>heartbeatInit</STRONG> (Thumb, 134 bytes, Stack size 24 bytes, lifegrd.o(i.heartbeatInit))
+<P><STRONG><a name="[144]"></a>heartbeatInit</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, lifegrd.o(i.heartbeatInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = heartbeatInit &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RegisterSetODentryCallBack
@@ -1900,7 +1900,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lifeGuardStop
 </UL>
 
-<P><STRONG><a name="[118]"></a>initSDOline</STRONG> (Thumb, 444 bytes, Stack size 32 bytes, sdo.o(i.initSDOline))
+<P><STRONG><a name="[118]"></a>initSDOline</STRONG> (Thumb, 446 bytes, Stack size 32 bytes, sdo.o(i.initSDOline))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetAlarm
@@ -1941,7 +1941,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6b]"></a>main</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324<LI>Call Chain = main &rArr; AppTaskCreate &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 332<LI>Call Chain = main &rArr; AppTaskCreate &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vSetupSysInfoTest
@@ -1968,7 +1968,7 @@ Global Symbols
 <LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_preOperational
 </UL>
 
-<P><STRONG><a name="[cd]"></a>nodeguardInit</STRONG> (Thumb, 132 bytes, Stack size 24 bytes, lifegrd.o(i.nodeguardInit))
+<P><STRONG><a name="[cd]"></a>nodeguardInit</STRONG> (Thumb, 118 bytes, Stack size 24 bytes, lifegrd.o(i.nodeguardInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = nodeguardInit &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RegisterSetODentryCallBack
@@ -2002,7 +2002,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[136]"></a>proceedNMTstateChange</STRONG> (Thumb, 224 bytes, Stack size 16 bytes, nmtslave.o(i.proceedNMTstateChange))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324<LI>Call Chain = proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 332<LI>Call Chain = proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setState
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setNodeId
@@ -2011,7 +2011,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canDispatch
 </UL>
 
-<P><STRONG><a name="[135]"></a>proceedNODE_GUARD</STRONG> (Thumb, 276 bytes, Stack size 48 bytes, lifegrd.o(i.proceedNODE_GUARD))
+<P><STRONG><a name="[135]"></a>proceedNODE_GUARD</STRONG> (Thumb, 270 bytes, Stack size 48 bytes, lifegrd.o(i.proceedNODE_GUARD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = proceedNODE_GUARD &rArr; canSend &rArr; CAN_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSend
@@ -2021,8 +2021,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canDispatch
 </UL>
 
-<P><STRONG><a name="[133]"></a>proceedPDO</STRONG> (Thumb, 732 bytes, Stack size 88 bytes, pdo.o(i.proceedPDO))
-<BR><BR>[Stack]<UL><LI>Max Depth = 292<LI>Call Chain = proceedPDO &rArr; PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<P><STRONG><a name="[133]"></a>proceedPDO</STRONG> (Thumb, 724 bytes, Stack size 88 bytes, pdo.o(i.proceedPDO))
+<BR><BR>[Stack]<UL><LI>Max Depth = 300<LI>Call Chain = proceedPDO &rArr; PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSend
@@ -2035,7 +2035,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canDispatch
 </UL>
 
-<P><STRONG><a name="[134]"></a>proceedSDO</STRONG> (Thumb, 11072 bytes, Stack size 112 bytes, sdo.o(i.proceedSDO))
+<P><STRONG><a name="[134]"></a>proceedSDO</STRONG> (Thumb, 11066 bytes, Stack size 112 bytes, sdo.o(i.proceedSDO))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288<LI>Call Chain = proceedSDO &rArr; failedSDO &rArr; sendSDOabort &rArr; sendSDO &rArr; canSend &rArr; CAN_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setSDOlineRestBytes
@@ -2057,7 +2057,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[131]"></a>proceedSYNC</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, sync.o(i.proceedSYNC))
-<BR><BR>[Stack]<UL><LI>Max Depth = 252<LI>Call Chain = proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 260<LI>Call Chain = proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sendPDOevent
 </UL>
@@ -2126,8 +2126,8 @@ Global Symbols
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDOTimeoutAlarm
 </UL>
 
-<P><STRONG><a name="[ce]"></a>sendOnePDOevent</STRONG> (Thumb, 332 bytes, Stack size 40 bytes, pdo.o(i.sendOnePDOevent))
-<BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<P><STRONG><a name="[ce]"></a>sendOnePDOevent</STRONG> (Thumb, 332 bytes, Stack size 48 bytes, pdo.o(i.sendOnePDOevent))
+<BR><BR>[Stack]<UL><LI>Max Depth = 196<LI>Call Chain = sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buildPDO
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendPdo
@@ -2161,7 +2161,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[fb]"></a>sendSYNC</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, sync.o(i.sendSYNC))
-<BR><BR>[Stack]<UL><LI>Max Depth = 268<LI>Call Chain = sendSYNC &rArr; proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = sendSYNC &rArr; proceedSYNC &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendSYNCMessage
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;proceedSYNC
@@ -2190,7 +2190,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[9a]"></a>setState</STRONG> (Thumb, 200 bytes, Stack size 24 bytes, states.o(i.setState))
-<BR><BR>[Stack]<UL><LI>Max Depth = 308<LI>Call Chain = setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 316<LI>Call Chain = setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switchCommunicationState
 </UL>
@@ -2212,8 +2212,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switchCommunicationState
 </UL>
 
-<P><STRONG><a name="[ca]"></a>startSYNC</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, sync.o(i.startSYNC))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = startSYNC &rArr; stopSYNC &rArr; RegisterSetODentryCallBack
+<P><STRONG><a name="[ca]"></a>startSYNC</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, sync.o(i.startSYNC))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = startSYNC &rArr; stopSYNC &rArr; RegisterSetODentryCallBack
 </UL>
 <BR>[Calls]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RegisterSetODentryCallBack
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopSYNC
@@ -2234,7 +2234,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[17f]"></a>switchCommunicationState</STRONG> (Thumb, 284 bytes, Stack size 16 bytes, states.o(i.switchCommunicationState))
-<BR><BR>[Stack]<UL><LI>Max Depth = 284<LI>Call Chain = switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 292<LI>Call Chain = switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;emergencyStop
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;emergencyInit
@@ -2778,7 +2778,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[96]"></a>AppTaskCreate</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, main.o(i.AppTaskCreate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 324<LI>Call Chain = AppTaskCreate &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 332<LI>Call Chain = AppTaskCreate &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setState
@@ -2901,7 +2901,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[7a]"></a>canopen_dataprocess_thread</STRONG> (Thumb, 174 bytes, Stack size 40 bytes, can_thread.o(i.canopen_dataprocess_thread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 380<LI>Call Chain = canopen_dataprocess_thread &rArr; canDispatch &rArr; proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+<BR><BR>[Stack]<UL><LI>Max Depth = 388<LI>Call Chain = canopen_dataprocess_thread &rArr; canDispatch &rArr; proceedNMTstateChange &rArr; setState &rArr; switchCommunicationState &rArr; PDOInit &rArr; _sendPDOevent &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
@@ -2911,7 +2911,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> can_thread.o(i.canopen_init)
 </UL>
-<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 912 bytes, Stack size 64 bytes, epos2_thread.o(i.EPOS2init_thread))
+<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 954 bytes, Stack size 64 bytes, epos2_thread.o(i.EPOS2init_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = EPOS2init_thread &rArr; WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay

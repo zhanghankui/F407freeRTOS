@@ -59,7 +59,7 @@ INPUT	value TIMEVAL (unsigned long)
 OUTPUT	void
 ******************************************************************************/
 {
-  TimerAlarm_CAN += value;	// Add the desired time to timer interrupt time
+  TimerAlarm_CAN = TimerCounter_CAN+value;	// Add the desired time to timer interrupt time
 }
 
 TIMEVAL getElapsedTime(void)
