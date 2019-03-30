@@ -13,6 +13,7 @@
 ".\objects\usart_thread.o"
 ".\objects\epos2_thread.o"
 ".\objects\sys_timer.o"
+".\objects\appdata.o"
 ".\objects\objectdictionary_epos2.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\system_stm32f4xx.o"

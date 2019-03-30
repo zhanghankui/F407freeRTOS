@@ -472,6 +472,11 @@
               <FileType>1</FileType>
               <FilePath>..\tasks\src\sys_timer.c</FilePath>
             </File>
+            <File>
+              <FileName>appdata.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\tasks\src\appdata.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
