@@ -20,6 +20,7 @@
 #include "globalstruct.h"
 #include "can_thread.h"
 #include "event_groups.h"
+#include "appdata.h"
 
 #include "systimer.h"
 // **************************************************************************
@@ -146,11 +147,12 @@ static void EPOS2init_thread(void *pvParameters)
 	UNS8 Transmission_Type;
 	UNS32 COBID;
 	UNS32 ExpectedSize;	
-	UNS8 highestSubIndex;
+	UNS8 highestSubIndex;	
 	UNS16 inhibittime;
 	UNS32 _obj;
 	UNS8 nodeId = 1;
 	uint16_t Statusword,Controlword;
+	UNS8 temp;
 	d = (CO_Data *)pvParameters;//传递的形参	
 
 	while(1)//一直检测，直到设备在线
@@ -329,7 +331,26 @@ static void EPOS2init_thread(void *pvParameters)
 	setState(d,Operational);
 	vTaskDelay(1);	
 	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);
-	vTaskDelay(1);		
+	vTaskDelay(1);	
+
+	temp = 0;
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Clear FIFO
+	temp = 1;	
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Enable access to the input buffer
+	
+	for(uint8_t i=0; i<appdatanum;i++)
+	{
+		Interpolation_Data_Record = ((uint64_t)tab_time[i]<<56)+(((uint64_t)tab_velocity[i]&0x00FFFFFF)<<32)+(uint64_t)tab_position[i];
+		vTaskDelay(1);			
+	}
+
+	//验证是否写入
+	ReadSDO(d,nodeId,0x60C4,0x04,&temp,0);
+	if(temp == appdatanum)
+	{
+		printf("write fifo success\r\n");
+	}
+
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;

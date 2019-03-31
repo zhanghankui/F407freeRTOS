@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\F407template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\F407template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Mar 30 02:06:25 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Mar 31 22:55:15 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1256 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1506,6 +1506,7 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPOS2_init
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vApplicationStackOverflowHook
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskTask1
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPOS2init_thread
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canopen_dataprocess_thread
 </UL>
 
@@ -2911,8 +2912,8 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> can_thread.o(i.canopen_init)
 </UL>
-<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 954 bytes, Stack size 64 bytes, epos2_thread.o(i.EPOS2init_thread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = EPOS2init_thread &rArr; WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
+<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 1098 bytes, Stack size 72 bytes, epos2_thread.o(i.EPOS2init_thread))
+<BR><BR>[Stack]<UL><LI>Max Depth = 392<LI>Call Chain = EPOS2init_thread &rArr; WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setState
@@ -2922,6 +2923,7 @@ Local Symbols
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> epos2_thread.o(i.EPOS2_init)
 </UL>
