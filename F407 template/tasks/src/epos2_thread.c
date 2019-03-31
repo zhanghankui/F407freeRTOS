@@ -183,6 +183,30 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
 	
+	COBID = 0x280+nodeId;//主站 Receive = 从站 Transmit
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1401, /*UNS16 index*/
+			0x01, /*UNS8 subind*/ 
+			&COBID, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */	
+	
+	COBID = 0x380+nodeId;//主站 Receive = 从站 Transmit
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1402, /*UNS16 index*/
+			0x01, /*UNS8 subind*/ 
+			&COBID, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */	
+			
+	COBID = 0x480+nodeId;//主站 Receive = 从站 Transmit
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1403, /*UNS16 index*/
+			0x01, /*UNS8 subind*/ 
+			&COBID, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */			
+	
 	COBID = 0x40000200+nodeId;//主站 Transmit = 从站 Receive	
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1800, /*UNS16 index*/
@@ -224,6 +248,14 @@ static void EPOS2init_thread(void *pvParameters)
 			&Transmission_Type, /*void * pSourceData,*/ 
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */	
+			
+	Transmission_Type = TRANS_EVENT_PROFILE;
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1401, /*UNS16 index*/
+			0x02, /*UNS8 subind*/ 
+			&Transmission_Type, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */				
 			
 	Transmission_Type = TRANS_EVENT_PROFILE;//asynchronous
 	writeLocalDict( d, /*CO_Data* d*/
@@ -272,6 +304,25 @@ static void EPOS2init_thread(void *pvParameters)
 	highestSubIndex = 1;
 	ExpectedSize = sizeof(UNS8);
 	writeLocalDict( d, /*CO_Data* d*/
+			0x1601, /*UNS16 index*/
+			0x00, /*UNS8 subind*/ 
+			&highestSubIndex, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */
+
+	_obj = 0x60410010;
+	ExpectedSize = sizeof(UNS32);
+	writeLocalDict( d, /*CO_Data* d*/
+			0x1601, /*UNS16 index*/
+			0x01, /*UNS8 subind*/ 
+			&_obj, /*void * pSourceData,*/ 
+			&ExpectedSize, /* UNS8 * pExpectedSize*/
+			RW);  /* UNS8 checkAccess */
+			
+
+	highestSubIndex = 1;
+	ExpectedSize = sizeof(UNS8);
+	writeLocalDict( d, /*CO_Data* d*/
 			0x1A00, /*UNS16 index*/
 			0x00, /*UNS8 subind*/ 
 			&highestSubIndex, /*void * pSourceData,*/ 
@@ -309,9 +360,12 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x1800,0x02,&Transmission_Type,0);//设置TPDO1传输类型为非同步循环模式
 	WriteSDO(d,nodeId,0x1800,0x03,&inhibittime,0);//设置inhibit time 10ms
 	
-	COBID = 0xC0000280+nodeId;	
+	COBID = 0xC0000280+nodeId;
+	inhibittime = 0;	
 	WriteSDO(d,nodeId,0x1801,0x01,&COBID,0);//设置TPDO2
-	
+	WriteSDO(d,nodeId,0x1801,0x02,&Transmission_Type,0);//设置TPDO1传输类型为非同步循环模式
+	WriteSDO(d,nodeId,0x1801,0x03,&inhibittime,0);//禁止inhibit time
+
 	COBID = 0xC0000380+nodeId;	
 	WriteSDO(d,nodeId,0x1802,0x01,&COBID,0);//设置TPDO3	
 
@@ -326,6 +380,13 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x1A00,0x02,&_obj,0);//设置TPDO1
 	highestSubIndex = 2;
 	WriteSDO(d,nodeId,0x1A00,0x00,&highestSubIndex,0);//设置TPDO1		
+
+	highestSubIndex = 0;
+	_obj = 0x60410010;	
+	WriteSDO(d,nodeId,0x1A01,0x00,&highestSubIndex,0);//设置TPDO2
+	WriteSDO(d,nodeId,0x1A01,0x01,&_obj,0);//设置TPDO2
+	highestSubIndex = 1;
+	WriteSDO(d,nodeId,0x1A01,0x00,&highestSubIndex,0);//设置TPDO2		
 
 
 	setState(d,Operational);

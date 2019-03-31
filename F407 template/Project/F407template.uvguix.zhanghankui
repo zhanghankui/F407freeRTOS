@@ -3627,9 +3627,9 @@
       </Doc>
       <Doc>
         <Name>..\tasks\src\epos2_thread.c</Name>
-        <ColumnNumber>0</ColumnNumber>
-        <TopLine>328</TopLine>
-        <CurrentLine>346</CurrentLine>
+        <ColumnNumber>60</ColumnNumber>
+        <TopLine>367</TopLine>
+        <CurrentLine>389</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
