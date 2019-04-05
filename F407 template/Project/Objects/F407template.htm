@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\F407template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\F407template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Mar 31 23:21:50 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Apr 05 19:12:08 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1256 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -460,7 +460,7 @@ Global Symbols
 <P><STRONG><a name="[f2]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SD_WriteDisk
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SD_ReadDisk
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 <LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataToQueue
 <LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataFromQueue
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_getODentry
@@ -815,7 +815,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getWriteResultNetworkDict
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getReadResultNetworkDict
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_writeNetworkDict
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_readNetworkDict
 </UL>
@@ -1090,7 +1090,7 @@ Global Symbols
 <P><STRONG><a name="[da]"></a>SDOlineToObjdict</STRONG> (Thumb, 172 bytes, Stack size 40 bytes, sdo.o(i.SDOlineToObjdict))
 <BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = SDOlineToObjdict &rArr; _setODentry &rArr; accessDictionaryError
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 </UL>
 <BR>[Called By]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;proceedSDO
 </UL>
@@ -1317,8 +1317,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerGenericCommand
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGetTickCount
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 </UL>
 
 <P><STRONG><a name="[85]"></a>SyncAlarm</STRONG> (Thumb, 14 bytes, Stack size 16 bytes, sync.o(i.SyncAlarm))
@@ -1605,7 +1605,7 @@ Global Symbols
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PDOInit
 </UL>
 
-<P><STRONG><a name="[bd]"></a>_setODentry</STRONG> (Thumb, 298 bytes, Stack size 64 bytes, objacces.o(i._setODentry))
+<P><STRONG><a name="[ba]"></a>_setODentry</STRONG> (Thumb, 298 bytes, Stack size 64 bytes, objacces.o(i._setODentry))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = _setODentry &rArr; accessDictionaryError
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accessDictionaryError
@@ -1641,7 +1641,7 @@ Global Symbols
 <P><STRONG><a name="[113]"></a>accessDictionaryError</STRONG> (Thumb, 10 bytes, Stack size 12 bytes, objacces.o(i.accessDictionaryError))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = accessDictionaryError
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_getODentry
 </UL>
 
@@ -1729,7 +1729,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canopen_dataprocess_thread
 </UL>
 
-<P><STRONG><a name="[9b]"></a>canInit</STRONG> (Thumb, 394 bytes, Stack size 24 bytes, can_stm32.o(i.canInit))
+<P><STRONG><a name="[9b]"></a>canInit</STRONG> (Thumb, 398 bytes, Stack size 24 bytes, can_stm32.o(i.canInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = canInit &rArr; GPIO_PinAFConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
@@ -1772,7 +1772,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AppTaskCreate
 </UL>
 
-<P><STRONG><a name="[bb]"></a>closeSDOtransfer</STRONG> (Thumb, 64 bytes, Stack size 32 bytes, sdo.o(i.closeSDOtransfer))
+<P><STRONG><a name="[bc]"></a>closeSDOtransfer</STRONG> (Thumb, 64 bytes, Stack size 32 bytes, sdo.o(i.closeSDOtransfer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = closeSDOtransfer &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSDOline
@@ -1840,7 +1840,7 @@ Global Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getSDOlineOnUse
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSDOClientFromNodeId
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 </UL>
 
 <P><STRONG><a name="[117]"></a>getSDOfreeLine</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, sdo.o(i.getSDOfreeLine))
@@ -1871,7 +1871,7 @@ Global Symbols
 <P><STRONG><a name="[13f]"></a>getSDOlineToClose</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, sdo.o(i.getSDOlineToClose))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = getSDOlineToClose
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
 </UL>
 
 <P><STRONG><a name="[10e]"></a>getWriteResultNetworkDict</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, sdo.o(i.getWriteResultNetworkDict))
@@ -1881,7 +1881,7 @@ Global Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getSDOlineOnUse
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSDOClientFromNodeId
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
 </UL>
 
 <P><STRONG><a name="[144]"></a>heartbeatInit</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, lifegrd.o(i.heartbeatInit))
@@ -2025,7 +2025,7 @@ Global Symbols
 <P><STRONG><a name="[133]"></a>proceedPDO</STRONG> (Thumb, 724 bytes, Stack size 88 bytes, pdo.o(i.proceedPDO))
 <BR><BR>[Stack]<UL><LI>Max Depth = 300<LI>Call Chain = proceedPDO &rArr; PDOEventTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSend
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buildPDO
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PDOEventTimerAlarm
@@ -2100,7 +2100,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_readNetworkDict
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 </UL>
 
 <P><STRONG><a name="[17c]"></a>resetSDO</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, sdo.o(i.resetSDO))
@@ -2118,7 +2118,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getWriteResultNetworkDict
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getReadResultNetworkDict
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
 <LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;resetSDO
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;proceedSDO
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;failedSDO
@@ -2335,8 +2335,8 @@ Global Symbols
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskTask1
 <LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvTimerGetTimerID
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelete
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCheckForTimeOut
 <LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
@@ -2359,8 +2359,8 @@ Global Symbols
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskTask1
 <LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvTimerGetTimerID
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelete
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCheckForTimeOut
 <LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
@@ -2558,7 +2558,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_writeNetworkDict
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
 </UL>
 
 <P><STRONG><a name="[94]"></a>xEventGroupCreate</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, event_groups.o(i.xEventGroupCreate))
@@ -2912,22 +2912,22 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> can_thread.o(i.canopen_init)
 </UL>
-<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 1478 bytes, Stack size 64 bytes, epos2_thread.o(i.EPOS2init_thread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384<LI>Call Chain = EPOS2init_thread &rArr; WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
+<P><STRONG><a name="[72]"></a>EPOS2init_thread</STRONG> (Thumb, 1916 bytes, Stack size 56 bytes, epos2_thread.o(i.EPOS2init_thread))
+<BR><BR>[Stack]<UL><LI>Max Depth = 376<LI>Call Chain = EPOS2init_thread &rArr; WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setState
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelete
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;masterSendNMTstateChange
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSDOtransfer
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_setODentry
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSDO
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadSDO
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> epos2_thread.o(i.EPOS2_init)
 </UL>
-<P><STRONG><a name="[ba]"></a>ReadSDO</STRONG> (Thumb, 146 bytes, Stack size 72 bytes, epos2_thread.o(i.ReadSDO))
+<P><STRONG><a name="[bb]"></a>ReadSDO</STRONG> (Thumb, 146 bytes, Stack size 72 bytes, epos2_thread.o(i.ReadSDO))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = ReadSDO &rArr; readNetworkDict &rArr; _readNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortExitCritical
@@ -2939,7 +2939,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPOS2init_thread
 </UL>
 
-<P><STRONG><a name="[bc]"></a>WriteSDO</STRONG> (Thumb, 148 bytes, Stack size 88 bytes, epos2_thread.o(i.WriteSDO))
+<P><STRONG><a name="[bd]"></a>WriteSDO</STRONG> (Thumb, 148 bytes, Stack size 88 bytes, epos2_thread.o(i.WriteSDO))
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = WriteSDO &rArr; writeNetworkDict &rArr; _writeNetworkDict &rArr; resetSDOline &rArr; initSDOline &rArr; SetAlarm
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortExitCritical

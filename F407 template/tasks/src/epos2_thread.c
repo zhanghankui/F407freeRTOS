@@ -151,26 +151,9 @@ static void EPOS2init_thread(void *pvParameters)
 	UNS16 inhibittime;
 	UNS32 _obj;
 	UNS8 nodeId = 1;
-	uint16_t Statusword,Controlword;
+//	uint16_t Statusword,Controlword;
 	UNS8 temp;
 	d = (CO_Data *)pvParameters;//传递的形参	
-
-	while(1)//一直检测，直到设备在线
-	{
-		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) != 0xEE)//无应答
-		{
-//			printf("get Statusword\r\n");
-			break;
-		}
-		closeSDOtransfer(d,nodeId,SDO_CLIENT);
-//		vTaskDelay(10);
-	}
-//	printf("Statusword: %x\r\n",Statusword);
-	if(Statusword&0x0008)//driver has error
-	{
-		Controlword = 0x0080;
-		WriteSDO(d,nodeId,0x6040,0,&Controlword,0);
-	}
 	
 	//重新配置master PDO
 	ExpectedSize = sizeof (UNS32);
@@ -337,6 +320,24 @@ static void EPOS2init_thread(void *pvParameters)
 			&_obj, /*void * pSourceData,*/ 
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
+
+
+	while(1)//一直检测，直到设备在线
+	{
+		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) != 0xEE)//无应答
+		{
+//			printf("get Statusword\r\n");
+			break;
+		}
+		closeSDOtransfer(d,nodeId,SDO_CLIENT);
+//		vTaskDelay(10);
+	}
+//	printf("Statusword: %x\r\n",Statusword);
+	if(Statusword&0x0008)//driver has error
+	{
+		Controlword = 0x0080;
+		WriteSDO(d,nodeId,0x6040,0,&Controlword,0);
+	}						
 	
 	masterSendNMTstateChange(d,	nodeId,NMT_Enter_PreOperational);
 	vTaskDelay(1);
@@ -360,11 +361,11 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x1800,0x02,&Transmission_Type,0);//设置TPDO1传输类型为非同步循环模式
 	WriteSDO(d,nodeId,0x1800,0x03,&inhibittime,0);//设置inhibit time 10ms
 	
-	COBID = 0xC0000280+nodeId;
+	COBID = 0x40000280+nodeId;
 	inhibittime = 0;	
 	WriteSDO(d,nodeId,0x1801,0x01,&COBID,0);//设置TPDO2
 	WriteSDO(d,nodeId,0x1801,0x02,&Transmission_Type,0);//设置TPDO1传输类型为非同步循环模式
-	WriteSDO(d,nodeId,0x1801,0x03,&inhibittime,0);//禁止inhibit time
+	WriteSDO(d,nodeId,0x1801,0x03,&inhibittime,0);//禁止inhibit time 
 
 	COBID = 0xC0000380+nodeId;	
 	WriteSDO(d,nodeId,0x1802,0x01,&COBID,0);//设置TPDO3	
@@ -389,9 +390,9 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x1A01,0x00,&highestSubIndex,0);//设置TPDO2		
 
 
-	setState(d,Operational);
+	setState(d,Operational);//master进入Operational 
 	vTaskDelay(1);	
-	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);
+	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);//slave进入Operational 
 	vTaskDelay(1);	
 
 	temp = 0;
@@ -411,7 +412,71 @@ static void EPOS2init_thread(void *pvParameters)
 	{
 		printf("write fifo success\r\n");
 	}
+	
+	//PPM
+	//写控制模式
+	Modes_of_Operation = 1;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
 
+	Target_Position = 0;
+	WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);	
+	
+	Profile_Velocity = 1000;
+	WriteSDO(d,nodeId,0x6081,0x00,&Profile_Velocity,0);
+
+	Profile_Acceleration = 5000;
+	WriteSDO(d,nodeId,0x6083,0x00,&Profile_Acceleration,0);	
+	
+	Profile_Deceleration = 5000;
+	WriteSDO(d,nodeId,0x6084,0x00,&Profile_Deceleration,0);		
+	
+	Motion_Profile_Type = 1;
+	WriteSDO(d,nodeId,0x6086,0x00,&Motion_Profile_Type,0);			
+
+//处理设备状态机
+	//switch on Disable
+	Controlword = 0x0000;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
+	vTaskDelay(1);	
+	while((Statusword&0x0140)!=0x0140)
+	{
+	}	
+	//Read to Switch On
+	Controlword = 0x0006;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(1);		
+	while((Statusword&0x0121)!=0x0121)
+	{
+	}	
+
+	//Switch On & Enable Operation
+	Controlword = 0x000F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
+	vTaskDelay(1);		
+	while((Statusword&0x0137)!=0x0137)
+	{
+	}	
+	
+	Controlword = 0x003F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(1);	
+	while((Statusword&0x0400)!=0x0400)
+	{
+	}
+
+	vTaskDelay(100);		
+	
+	//转入插值模式
+	Modes_of_Operation = 7;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
+
+	Controlword = 0x001F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(1);	
+	while((Statusword&0x0400)!=0x0400)
+	{
+	}	
+	
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;

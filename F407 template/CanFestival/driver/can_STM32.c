@@ -77,7 +77,7 @@ OUTPUT
 		
 		  /* CAN cell init */
 		  CAN_InitStructure.CAN_TTCM = DISABLE;     //禁止时间触发通信模式
-		  CAN_InitStructure.CAN_ABOM = DISABLE;     //自动离线管理不使能
+		  CAN_InitStructure.CAN_ABOM = ENABLE;     //自动离线管理不使能
 		  CAN_InitStructure.CAN_AWUM = DISABLE;		//自动唤醒模式不使能
 		  CAN_InitStructure.CAN_NART = DISABLE;		//非自动重传模式不使能，即自动重传直到成功
 		  CAN_InitStructure.CAN_RFLM = DISABLE;		//FIFO锁定模式不使能，溢出时旧报文覆盖新报文

@@ -20,7 +20,7 @@
 // **************************************************************************
 // the defines
 
-
+#define SDOovertimer 50
 // **************************************************************************
 // the typedefs	
 
@@ -55,7 +55,7 @@ void vsysTimerforovertimeCallback(xTimerHandle pxTimer)
 
 void systimerforovertimeCreate(void)
 {
-	const TickType_t  xTimerPer = 10;
+	const TickType_t  xTimerPer = SDOovertimer;//50ms超时
 	
 	/* 
 	  1. 创建定时器，如果在RTOS调度开始前初始化定时器，那么系统启动后才会执行。
