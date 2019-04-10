@@ -63,7 +63,7 @@ I (..\bsp\inc\led.h)(0x5B06C876)
 I (..\User\sys.h)(0x5B9B2DF8)
 I (..\bsp\inc\usartdma.h)(0x5C813D57)
 I (..\bsp\inc\bsp_key.h)(0x5BFABD18)
-I (..\bsp\inc\sdio_sdcard.h)(0x55E56C6C)
+I (..\bsp\inc\sdio_sdcard.h)(0x5CAE4660)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x55BA35A1)
 I (..\tasks\inc\can_thread.h)(0x5C95E093)
 I (..\CanFestival\inc\stm32\can_STM32.h)(0x5C4ACE2E)
@@ -184,9 +184,9 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include\arm_math.h)(0x5B2C6E9A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599EDB3E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599EDB3E)
 I (..\bsp\inc\bsp_key.h)(0x5BFABD18)
-I (..\bsp\inc\sdio_sdcard.h)(0x55E56C6C)
+I (..\bsp\inc\sdio_sdcard.h)(0x5CAE4660)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x55BA35A1)
-F (..\bsp\src\bsp.c)(0x5CAE29B9)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
+F (..\bsp\src\bsp.c)(0x5CAE2B07)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
 I (..\bsp\inc\bsp.h)(0x5C961433)
 I (..\freeRTOS\include\FreeRTOS.h)(0x573F3A16)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
@@ -243,7 +243,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include\arm_math.h)(0x5B2C6E9A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599EDB3E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599EDB3E)
 I (..\bsp\inc\bsp_key.h)(0x5BFABD18)
-I (..\bsp\inc\sdio_sdcard.h)(0x55E56C6C)
+I (..\bsp\inc\sdio_sdcard.h)(0x5CAE4660)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x55BA35A1)
 F (..\bsp\src\led.c)(0x5B06C88C)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
 I (..\bsp\inc\led.h)(0x5B06C876)
@@ -373,8 +373,8 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5821F050)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x581CC67B)
-F (..\bsp\src\sdio_sdcard.c)(0x5C473CBB)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\sdio_sdcard.o --omf_browse .\objects\sdio_sdcard.crf --depend .\objects\sdio_sdcard.d)
-I (..\bsp\inc\sdio_sdcard.h)(0x55E56C6C)
+F (..\bsp\src\sdio_sdcard.c)(0x5CAE4663)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\sdio_sdcard.o --omf_browse .\objects\sdio_sdcard.crf --depend .\objects\sdio_sdcard.d)
+I (..\bsp\inc\sdio_sdcard.h)(0x5CAE4660)
 I (..\system\stm32f4xx.h)(0x582097AB)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm4.h)(0x5B617084)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
@@ -411,7 +411,6 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
-I (..\User\sys.h)(0x5B9B2DF8)
 F (..\bsp\src\bsp_tim_pwm.c)(0x5611C84F)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp_tim_pwm.o --omf_browse .\objects\bsp_tim_pwm.crf --depend .\objects\bsp_tim_pwm.d)
 I (..\bsp\inc\bsp.h)(0x5C961433)
 I (..\freeRTOS\include\FreeRTOS.h)(0x573F3A16)
@@ -469,7 +468,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include\arm_math.h)(0x5B2C6E9A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599EDB3E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599EDB3E)
 I (..\bsp\inc\bsp_key.h)(0x5BFABD18)
-I (..\bsp\inc\sdio_sdcard.h)(0x55E56C6C)
+I (..\bsp\inc\sdio_sdcard.h)(0x5CAE4660)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x55BA35A1)
 F (..\tasks\src\can_thread.c)(0x5C95E093)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc-I.\RTE\_template-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\can_thread.o --omf_browse .\objects\can_thread.crf --depend .\objects\can_thread.d)
 I (..\tasks\inc\can_thread.h)(0x5C95E093)
