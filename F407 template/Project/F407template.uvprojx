@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40XX,ARM_MATH_CM4,__FPU_PRESENT=1,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Project;..\system;..\freeRTOS\include;..\freeRTOS\portable\RVDS\ARM_CM4F;..\bsp\inc;..\CanFestival\inc;..\CanFestival\inc\stm32;..\CanFestival\objdict;..\tasks\inc</IncludePath>
+              <IncludePath>..\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Project;..\system;..\freeRTOS\include;..\freeRTOS\portable\RVDS\ARM_CM4F;..\bsp\inc;..\CanFestival\inc;..\CanFestival\inc\stm32;..\CanFestival\objdict;..\tasks\inc;..\FatFS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -476,6 +476,11 @@
               <FileName>appdata.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\tasks\src\appdata.c</FilePath>
+            </File>
+            <File>
+              <FileName>FatFS_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\tasks\src\FatFS_thread.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -968,6 +973,21 @@
               <FileName>stm32f4xx_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FatFS</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFS\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFS\ff.c</FilePath>
             </File>
           </Files>
         </Group>

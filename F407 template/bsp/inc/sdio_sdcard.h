@@ -37,9 +37,12 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
-	 
+#include "string.h"		 
 	 
 /* 定义检测卡插入的GPIO. 安富莱STM32-V5开发板卡插入信号为 PE2 */
+//#define SD_DETECT 
+
+#ifdef SD_DETECT
 #ifdef STM32_X3
 	#define SD_DETECT_PIN                    GPIO_Pin_0
 	#define SD_DETECT_GPIO_PORT              GPIOE
@@ -48,6 +51,7 @@
 	#define SD_DETECT_PIN                    GPIO_Pin_2
 	#define SD_DETECT_GPIO_PORT              GPIOE
 	#define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOE
+#endif
 #endif
 
 #define SDIO_FIFO_ADDRESS                ((uint32_t)0x40012C80)

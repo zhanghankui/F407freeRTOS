@@ -13,6 +13,7 @@
 *********************************************************************************************************
 */	
 #include "bsp.h"
+#include "FatFS_thread.h"
 extern void can_TIM3_Init(void);
 /*
 *********************************************************************************************************
@@ -59,9 +60,22 @@ void bsp_Init(BSP_Handle handle)
 		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
-	SD_Init();//SD卡初始化
-	show_sdcard_info();	//打印SD卡相关信息
+//	SD_Init();//SD卡初始化
+//	show_sdcard_info();	//打印SD卡相关信息
 	
+	//格式化
+//	uint8_t work[2048];
+//	f_mkfs("0",FM_FAT32,1024,work,2048);
+	/* 挂载文件系统 */
+	result = f_mount(&fs, "1:", 1);	//DEV_MMC 1
+
+	u32 total,free;
+	exf_getfree((u8 *)"1:",&total,&free);
+	
+ 	printf("SD Total Size:%d",total>>10);	
+ 	printf("MB\r\n\r\n");		
+ 	printf("SD Free Size:%d",free>>10);
+ 	printf("MB\r\n\r\n");			
 //	bsp_InitHardTimer(); /* 初始化TIM2定时器 */
 //	bsp_SetTIMOutcompPWM(GPIOE,GPIO_Pin_9,GPIOE,GPIO_Pin_8,TIM1,1,5000000,5000);
 
