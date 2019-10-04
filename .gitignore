@@ -2,3 +2,6 @@
 *.o
 *.d
 *.sisc
+*.lst
+*.axf
+*.htm
