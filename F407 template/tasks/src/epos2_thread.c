@@ -34,14 +34,24 @@
 // **************************************************************************
 //declaration static function prototypes
 
-
+static uint8_t Setzerofinished = 0;//只有完成过设置新零点的才可以执行IPM
 
 // **************************************************************************
 // the globals
+#define NEWZEROPOSITION  5000
 
-#define EPOS2init_THREAD_STACK        512
+#define EPOS2init_THREAD_STACK         512
+#define EPOS2setzero_THREAD_STACK      512
+#define EPOS2ipm_THREAD_STACK          512
+#define EPOS2returnzero_THREAD_STACK   512
+
+
 
 xTaskHandle  xH_EPOS2init = NULL;
+xTaskHandle  xH_EPOS2setzero = NULL;
+xTaskHandle  xH_EPOS2ipm = NULL;
+xTaskHandle  xH_EPOS2returnzero = NULL;
+
 // **************************************************************************
 // the functions	
 
@@ -457,14 +467,83 @@ static void EPOS2init_thread(void *pvParameters)
 	{
 	}	
 	
+	
+	//删除任务
+	vTaskDelete(xH_EPOS2init);
+	xH_EPOS2init = NULL;
+}
+
+static void EPOS2setzero_thread(void *pvParameters)
+{
+	CO_Data *d;
+	UNS8 nodeId = 1;
+	UNS8 temp;
+	d = (CO_Data *)pvParameters;//传递的形参
+
+	//刷入IPM数据
+	temp = 0;
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Clear FIFO
+	temp = 1;	
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Enable access to the input buffer
+	
+	for(uint8_t i=0; i<appdatanum;i++)
+	{
+		Interpolation_Data_Record = ((uint64_t)tab_time[i]<<56)+(((uint64_t)tab_velocity[i]&0x00FFFFFF)<<32)+(uint64_t)tab_position[i];
+		vTaskDelay(1);			
+	}
+	
+	//PPM
+	//写控制模式
+	Modes_of_Operation = 1;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
+
+	Target_Position = NEWZEROPOSITION;
+	WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);	
+	
+	Profile_Velocity = 2000;
+	WriteSDO(d,nodeId,0x6081,0x00,&Profile_Velocity,0);	
+	
 	Controlword = 0x003F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
 	vTaskDelay(1);	
 	while((Statusword&0x0400)!=0x0400)
 	{
-	}
+	}//已运动到指定位置
 
-	vTaskDelay(100);		
+	//
+	Homing_Method = 35;
+	WriteSDO(d,nodeId,0x6098,0x00,&Homing_Method,0);	
+	
+	Home_Position = 0;
+	WriteSDO(d,nodeId,0x2081,0x00,&Home_Position,0);		
+	
+	Home_Offset = 0;
+	WriteSDO(d,nodeId,0x2081,0x00,&Home_Offset,0);
+	
+	Modes_of_Operation = 6;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
+	
+	Controlword = 0x000F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	
+	Controlword = 0x001F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);//当前位置设为0
+	
+	while((Statusword&0x1400)!=0x1400)
+	{
+	}	
+	Setzerofinished = 1;
+	//删除任务
+	vTaskDelete(xH_EPOS2setzero);
+	xH_EPOS2setzero = NULL;	
+}
+
+static void EPOS2ipm_thread(void *pvParameters)
+{
+	CO_Data *d;
+	UNS8 nodeId = 1;
+
+	d = (CO_Data *)pvParameters;//传递的形参	
 	
 	//转入插值模式
 	Modes_of_Operation = 7;
@@ -475,13 +554,50 @@ static void EPOS2init_thread(void *pvParameters)
 	vTaskDelay(1);	
 	while((Statusword&0x0400)!=0x0400)
 	{
-	}	
+	}
 	
-	//删除任务
-	vTaskDelete(xH_EPOS2init);
-	xH_EPOS2init = NULL;
+	vTaskDelete(xH_EPOS2ipm);
+	xH_EPOS2ipm = NULL;		
 }
 
+static void EPOS2returnzero_thread(void *pvParameters)
+{
+	CO_Data *d;
+	UNS8 nodeId = 1;
+	UNS8 temp;
+	d = (CO_Data *)pvParameters;//传递的形参	
+
+	//刷入IPM数据
+	temp = 0;
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Clear FIFO
+	temp = 1;	
+	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Enable access to the input buffer
+	
+	for(uint8_t i=0; i<appdatanum;i++)
+	{
+		Interpolation_Data_Record = ((uint64_t)tab_time[i]<<56)+(((uint64_t)tab_velocity[i]&0x00FFFFFF)<<32)+(uint64_t)tab_position[i];
+		vTaskDelay(1);			
+	}
+	
+	Modes_of_Operation = 1;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
+
+	Target_Position = 0;
+	WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);	
+	
+	Profile_Velocity = 2000;
+	WriteSDO(d,nodeId,0x6081,0x00,&Profile_Velocity,0);	
+	
+	Controlword = 0x003F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(1);	
+	while((Statusword&0x0400)!=0x0400)
+	{
+	}//已运动到指定位置
+	
+	vTaskDelete(xH_EPOS2returnzero);
+	xH_EPOS2returnzero = NULL;		
+}
 
 void EPOS2_init(void)
 {
@@ -491,3 +607,35 @@ void EPOS2_init(void)
 		printf("EPOS2 init thread created failed!\r\n");
 	}
 }
+
+void EPOS2_setzero(void)
+{
+	xTaskCreate(EPOS2setzero_thread, "EPOS2setzero", EPOS2setzero_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2setzero);
+	if(NULL == xH_EPOS2setzero)
+	{
+		printf("EPOS2 setzero thread created failed!\r\n");
+	}
+}
+
+void EPOS2_ipm(void)
+{
+	if(Setzerofinished != 0)//IPM只有在设置完原点后才可以执行
+	{
+		xTaskCreate(EPOS2ipm_thread, "EPOS2ipm", EPOS2ipm_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2ipm);
+		if(NULL == xH_EPOS2ipm)
+		{
+			printf("EPOS2 ipm thread created failed!\r\n");
+		}
+	}
+}
+
+void EPOS2_returnzero(void)
+{
+	xTaskCreate(EPOS2returnzero_thread, "EPOS2returnzero", EPOS2returnzero_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2returnzero);
+	if(NULL == xH_EPOS2returnzero)
+	{
+		printf("EPOS2 returnzero thread created failed!\r\n");
+	}
+}
+
+

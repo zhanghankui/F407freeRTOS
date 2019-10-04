@@ -115,9 +115,9 @@ int main(void)
 static void vTaskTask1(void *pvParameters)
 {
 	uint8_t ucKeyCode;
-	uint8_t pcWriteBuffer[500];
-	uint8_t buf[512];
-	uint32_t sd_size;
+//	uint8_t pcWriteBuffer[500];
+//	uint8_t buf[512];
+//	uint32_t sd_size;
 	while(1)
 	{
 		ucKeyCode = bsp_GetKey();
@@ -125,54 +125,35 @@ static void vTaskTask1(void *pvParameters)
 		{
 			switch (ucKeyCode)
 			{
-				/* K0键按下 打印任务执行情况 */
+				/* K0键按下 运动到指定位置作为0点 */
 				case KEY_DOWN_K0:
 				{
-					taskENTER_CRITICAL();   /* 进入临界区 */			
-					printf("=============================================\r\n");			
-					printf("任务名      任务状态 优先级   剩余栈 任务序号\r\n");					
-					vTaskList((char *)&pcWriteBuffer);
-					printf("%s\r\n", pcWriteBuffer);
-				
-					printf("\r\n任务名       运行计数         使用率\r\n");
-					vTaskGetRunTimeStats((char *)&pcWriteBuffer);
-					printf("%s\r\n", pcWriteBuffer);
-					taskEXIT_CRITICAL();  	/* 退出临界区 */
+					EPOS2_setzero();
+//					taskENTER_CRITICAL();   /* 进入临界区 */			
+//					printf("=============================================\r\n");			
+//					printf("任务名      任务状态 优先级   剩余栈 任务序号\r\n");					
+//					vTaskList((char *)&pcWriteBuffer);
+//					printf("%s\r\n", pcWriteBuffer);
+//				
+//					printf("\r\n任务名       运行计数         使用率\r\n");
+//					vTaskGetRunTimeStats((char *)&pcWriteBuffer);
+//					printf("%s\r\n", pcWriteBuffer);
+//					taskEXIT_CRITICAL();  	/* 退出临界区 */
 				}
 				break;
 
-				/* K1键按下，挂起任务vTask2 */
+				/* K1键按下，回零位 */
 				case KEY_DOWN_K1:
 				{
-					taskENTER_CRITICAL();   /* 进入临界区 */	
-					
-					if(SD_ReadDisk(buf,0,1)==0)	//读取0扇区的内容
-					{	
-						printf("SECTOR 0 DATA:\r\n");
-						for(sd_size=0;sd_size<512;sd_size++)printf("%x ",buf[sd_size]);//打印0扇区数据    	   
-						printf("\r\nDATA ENDED\r\n");
-					}		
-					
-//					printf("K1键按下，挂起任务vTask2\r\n");
-					taskEXIT_CRITICAL();  	/* 退出临界区 */
-//					vTaskSuspend(xHandleTask2);//挂起任务2
+					EPOS2_returnzero();
 				}
 				break;
 
-				/* KWU键按下，启动单次定时器中断，50ms后在定时器中断将任务vTask2恢复 */
+				/* KWU键按下，IPM运动 */
 				case KEY_DOWN_KWU:
 				{
-					taskENTER_CRITICAL();   /* 进入临界区 */
-					for(sd_size=0;sd_size<512;sd_size++)
-					{
-						buf[sd_size] = sd_size;
-					}
-					SD_WriteDisk(buf,0,1);
-//					printf("KWU键按下，将任务vTask2恢复\r\n");
-					taskEXIT_CRITICAL();  	/* 退出临界区 */
-//					vTaskResume(xHandleTask2);
-//					bsp_StartHardTimer(1 ,50000, (void *)TIM_CallBack1);
-			}
+					EPOS2_ipm();
+				}
 				break;	
 
 				
@@ -253,7 +234,7 @@ static void vTaskTask1(void *pvParameters)
 			}
 		}		
 
-		vTaskDelay(20);//unit portTICK_PERIOD_MS
+		vTaskDelay(2);//unit portTICK_PERIOD_MS
 	}
 }
 
@@ -270,9 +251,9 @@ static void vTaskTask2(void *pvParameters)
 {
 	while(1)
 	{
-		taskENTER_CRITICAL();   /* 进入临界区 */
+//		taskENTER_CRITICAL();   /* 进入临界区 */
 //		printf("任务vTask2正在运行\r\n");
-		taskEXIT_CRITICAL();  	/* 退出临界区 */
+//		taskEXIT_CRITICAL();  	/* 退出临界区 */
 		LED1=!LED1;
 		vTaskDelay(500);
 	}
@@ -291,18 +272,18 @@ static void vTaskTask3(void *pvParameters)
 {
 	while(1)
 	{
-		taskENTER_CRITICAL();   /* 进入临界区 */
+//		taskENTER_CRITICAL();   /* 进入临界区 */
 //		printf("任务vTask3正在运行\r\n");
-		taskEXIT_CRITICAL();  	/* 退出临界区 */		
+//		taskEXIT_CRITICAL();  	/* 退出临界区 */		
 		LED0=!LED0;
-		vTaskDelay(600);
+		vTaskDelay(500);
 	}
 }
 
 /*
 *********************************************************************************************************
 *	函 数 名: vTaskTask4
-*	功能说明: 启动任务，也就是最高优先级任务，这里用作LED闪烁
+*	功能说明: 启动任务，也就是最高优先级任务，这里用作扫描按键
 *	形    参: pvParameters 是在创建该任务时传递的形参
 *	返 回 值: 无
 *   优 先 级: 4  
@@ -312,9 +293,9 @@ static void vTaskTask4(void *pvParameters)
 {
 	while(1)
 	{
-		/* LED闪烁 */
+		/* 扫描按键 */
 		bsp_KeyScan();
-		vTaskDelay(10);
+		vTaskDelay(2);
 	}
 }
 
@@ -461,7 +442,7 @@ static void AppTaskCreate (void)
 //	setState(CO_D.CO_CAN1,Operational);
 	
 	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
-	EPOS2_init();
+	EPOS2_init();//驱动器初始化
 }
 
 /*
