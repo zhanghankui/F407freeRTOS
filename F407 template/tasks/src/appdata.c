@@ -33,7 +33,7 @@
 // **************************************************************************
 // the globals
 
-const uint8_t tab_time[]={
+const uint8_t tab_time[appdatanum]={
 1,
 5,
 15,
@@ -52,7 +52,7 @@ const uint8_t tab_time[]={
 0
 };
 
-const int32_t tab_velocity[]={
+const int32_t tab_velocity[appdatanum]={
 0,
 542, 
 723, 
@@ -71,7 +71,7 @@ const int32_t tab_velocity[]={
 0
 };
 
-const int32_t tab_position[]={
+const int32_t tab_position[appdatanum]={
 0, 
 45, 
 362, 

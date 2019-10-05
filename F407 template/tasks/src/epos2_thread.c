@@ -34,7 +34,7 @@
 // **************************************************************************
 //declaration static function prototypes
 
-static uint8_t Setzerofinished = 0;//只有完成过设置新零点的才可以执行IPM
+static uint8_t Atzero = 0;//只有完成过设置新零点的才可以执行IPM
 
 // **************************************************************************
 // the globals
@@ -90,12 +90,16 @@ static uint8_t ReadSDO(CO_Data* d, UNS8 nodeId, UNS16 index, UNS8 subIndex,void*
 //				printf("COMM overtime\r\n");
 				return 0xEE;//无应答超时
 			}
-			if(SDO_Readstate != SDO_UPLOADstate)//收到返回或异常
+			if(SDO_Readstate != SDO_UPLOADstate)//收到返回或异常 SDO_UPLOADstate是正常等待接收信号
 			{
-				if(SDO_Readstate == SDO_ABORTED_RCV)
-				{
-					//处理错误码
-				}	
+//				if(SDO_Readstate == SDO_ABORTED_RCV)
+//				{
+//					//处理错误码
+//				}
+//				else if(SDO_Readstate == SDO_ABORTED_INTERNAL)
+//				{
+//					
+//				}
 				return SDO_Readstate;
 			}
 		}		
@@ -334,14 +338,18 @@ static void EPOS2init_thread(void *pvParameters)
 
 	while(1)//一直检测，直到设备在线
 	{
-		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) != 0xEE)//无应答
+		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) == SDO_FINISHED)
 		{
-//			printf("get Statusword\r\n");
 			break;
 		}
-		closeSDOtransfer(d,nodeId,SDO_CLIENT);
+		else
+		{
+			closeSDOtransfer(d,nodeId,SDO_CLIENT);			
+		}
+
 //		vTaskDelay(10);
 	}
+	
 //	printf("Statusword: %x\r\n",Statusword);
 	if(Statusword&0x0008)//driver has error
 	{
@@ -532,7 +540,7 @@ static void EPOS2setzero_thread(void *pvParameters)
 	while((Statusword&0x1400)!=0x1400)
 	{
 	}	
-	Setzerofinished = 1;
+	Atzero = 1;
 	//删除任务
 	vTaskDelete(xH_EPOS2setzero);
 	xH_EPOS2setzero = NULL;	
@@ -594,7 +602,7 @@ static void EPOS2returnzero_thread(void *pvParameters)
 	while((Statusword&0x0400)!=0x0400)
 	{
 	}//已运动到指定位置
-	
+	Atzero = 1;
 	vTaskDelete(xH_EPOS2returnzero);
 	xH_EPOS2returnzero = NULL;		
 }
@@ -619,8 +627,9 @@ void EPOS2_setzero(void)
 
 void EPOS2_ipm(void)
 {
-	if(Setzerofinished != 0)//IPM只有在设置完原点后才可以执行
+	if(Atzero != 0)//IPM只有在设置完原点后才可以执行
 	{
+		Atzero = 0;
 		xTaskCreate(EPOS2ipm_thread, "EPOS2ipm", EPOS2ipm_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2ipm);
 		if(NULL == xH_EPOS2ipm)
 		{

@@ -45,11 +45,11 @@ extern "C" {
 	
 // **************************************************************************
 // the globals declaration	
-extern const uint8_t tab_time[];
+extern const uint8_t tab_time[appdatanum];
 
-extern const int32_t tab_velocity[];
+extern const int32_t tab_velocity[appdatanum];
 
-extern const int32_t tab_position[];
+extern const int32_t tab_position[appdatanum];
 
 // **************************************************************************
 // the function prototypes	
