@@ -33,15 +33,17 @@
 
 // **************************************************************************
 //declaration static function prototypes
-
+static void Admittance_control_thread(void *pvParameters);
 
 
 // **************************************************************************
 // the globals
 
 #define EPOS2init_THREAD_STACK        512
+#define Admittance_control_THREAD_STACK        512
 
 xTaskHandle  xH_EPOS2init = NULL;
+xTaskHandle  xH_Admittance_control = NULL;
 // **************************************************************************
 // the functions	
 
@@ -82,10 +84,7 @@ static uint8_t ReadSDO(CO_Data* d, UNS8 nodeId, UNS16 index, UNS8 subIndex,void*
 			}
 			if(SDO_Readstate != SDO_UPLOADstate)//收到返回或异常
 			{
-				if(SDO_Readstate == SDO_ABORTED_RCV)
-				{
-					//处理错误码
-				}	
+				
 				return SDO_Readstate;
 			}
 		}		
@@ -152,7 +151,7 @@ static void EPOS2init_thread(void *pvParameters)
 	UNS32 _obj;
 	UNS8 nodeId = 1;
 //	uint16_t Statusword,Controlword;
-	UNS8 temp;
+//	UNS8 temp;
 	d = (CO_Data *)pvParameters;//传递的形参	
 	
 	//重新配置master PDO
@@ -249,7 +248,7 @@ static void EPOS2init_thread(void *pvParameters)
 			RW);  /* UNS8 checkAccess */
 
 	ExpectedSize= sizeof(UNS16);
-	inhibittime = 10;
+	inhibittime = 0;//master发送禁止时间为0
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1800, /*UNS16 index*/
 			0x03, /*UNS8 subind*/ 
@@ -266,7 +265,7 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
 
-	_obj = 0x60640020;
+	_obj = 0x60640020;//实际位置 32位
 	ExpectedSize = sizeof(UNS32);
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1600, /*UNS16 index*/
@@ -275,7 +274,7 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
 			
-	_obj = 0x20F40010;
+	_obj = 0x60780010;//实际电流 16位
 	ExpectedSize = sizeof(UNS32);
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1600, /*UNS16 index*/
@@ -293,7 +292,7 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */
 
-	_obj = 0x60410010;
+	_obj = 0x60410010;// 状态字 16位
 	ExpectedSize = sizeof(UNS32);
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1601, /*UNS16 index*/
@@ -312,7 +311,7 @@ static void EPOS2init_thread(void *pvParameters)
 			&ExpectedSize, /* UNS8 * pExpectedSize*/
 			RW);  /* UNS8 checkAccess */	
 			
-	_obj = 0x20C10040;
+	_obj = 0x20620020;//PM设定值
 	ExpectedSize = sizeof(UNS32);
 	writeLocalDict( d, /*CO_Data* d*/
 			0x1A00, /*UNS16 index*/
@@ -324,12 +323,14 @@ static void EPOS2init_thread(void *pvParameters)
 
 	while(1)//一直检测，直到设备在线
 	{
-		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) != 0xEE)//无应答
+		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) == SDO_FINISHED)
 		{
-//			printf("get Statusword\r\n");
 			break;
 		}
-		closeSDOtransfer(d,nodeId,SDO_CLIENT);
+		else
+		{
+			closeSDOtransfer(d,nodeId,SDO_CLIENT);			
+		}
 //		vTaskDelay(10);
 	}
 //	printf("Statusword: %x\r\n",Statusword);
@@ -340,7 +341,7 @@ static void EPOS2init_thread(void *pvParameters)
 	}						
 	
 	masterSendNMTstateChange(d,	nodeId,NMT_Enter_PreOperational);
-	vTaskDelay(1);
+	vTaskDelay(10);
 	//配置PDO
 	//设置PDO传输类型
 	COBID = 0x200+nodeId;
@@ -348,19 +349,20 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x1400,0x02,&Transmission_Type,0);//设置RPDO1传输类型为非同步循环模式
 	
 	highestSubIndex = 0;
-	_obj = 0x20C10040;	
+	_obj = 0x20620020;	
 	WriteSDO(d,nodeId,0x1600,0x00,&highestSubIndex,0);//设置RPDO1
 	WriteSDO(d,nodeId,0x1600,0x01,&_obj,0);//设置RPDO1	
 	highestSubIndex = 1;
 	WriteSDO(d,nodeId,0x1600,0x00,&highestSubIndex,0);//设置RPDO1	
 	
-	//每10ms传送一次位置及位置跟随误差变化
+	//每2ms传送一次位置及电流
 	COBID = 0x40000180+nodeId;
-	inhibittime = 100;
+	inhibittime = 20;
 	WriteSDO(d,nodeId,0x1800,0x01,&COBID,0);//设置TPDO1
 	WriteSDO(d,nodeId,0x1800,0x02,&Transmission_Type,0);//设置TPDO1传输类型为非同步循环模式
 	WriteSDO(d,nodeId,0x1800,0x03,&inhibittime,0);//设置inhibit time 10ms
 	
+	//实时更新状态字
 	COBID = 0x40000280+nodeId;
 	inhibittime = 0;	
 	WriteSDO(d,nodeId,0x1801,0x01,&COBID,0);//设置TPDO2
@@ -377,7 +379,7 @@ static void EPOS2init_thread(void *pvParameters)
 	_obj = 0x60640020;	
 	WriteSDO(d,nodeId,0x1A00,0x00,&highestSubIndex,0);//设置TPDO1
 	WriteSDO(d,nodeId,0x1A00,0x01,&_obj,0);//设置TPDO1
-	_obj = 0x20F40010;		
+	_obj = 0x60780010;		
 	WriteSDO(d,nodeId,0x1A00,0x02,&_obj,0);//设置TPDO1
 	highestSubIndex = 2;
 	WriteSDO(d,nodeId,0x1A00,0x00,&highestSubIndex,0);//设置TPDO1		
@@ -391,27 +393,10 @@ static void EPOS2init_thread(void *pvParameters)
 
 
 	setState(d,Operational);//master进入Operational 
-	vTaskDelay(1);	
+	vTaskDelay(10);	
 	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);//slave进入Operational 
-	vTaskDelay(1);	
+	vTaskDelay(10);	
 
-	temp = 0;
-	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Clear FIFO
-	temp = 1;	
-	WriteSDO(d,nodeId,0x60C4,0x06,&temp,0);//Enable access to the input buffer
-	
-	for(uint8_t i=0; i<appdatanum;i++)
-	{
-		Interpolation_Data_Record = ((uint64_t)tab_time[i]<<56)+(((uint64_t)tab_velocity[i]&0x00FFFFFF)<<32)+(uint64_t)tab_position[i];
-		vTaskDelay(1);			
-	}
-
-	//验证是否写入
-	ReadSDO(d,nodeId,0x60C4,0x04,&temp,0);
-	if(temp == appdatanum)
-	{
-		printf("write fifo success\r\n");
-	}
 	
 	//PPM
 	//写控制模式
@@ -421,7 +406,7 @@ static void EPOS2init_thread(void *pvParameters)
 	Target_Position = 0;
 	WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);	
 	
-	Profile_Velocity = 1000;
+	Profile_Velocity = 300;
 	WriteSDO(d,nodeId,0x6081,0x00,&Profile_Velocity,0);
 
 	Profile_Acceleration = 5000;
@@ -437,14 +422,14 @@ static void EPOS2init_thread(void *pvParameters)
 	//switch on Disable
 	Controlword = 0x0000;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
-	vTaskDelay(1);	
+	vTaskDelay(10);	
 	while((Statusword&0x0140)!=0x0140)
 	{
 	}	
 	//Read to Switch On
 	Controlword = 0x0006;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
-	vTaskDelay(1);		
+	vTaskDelay(10);		
 	while((Statusword&0x0121)!=0x0121)
 	{
 	}	
@@ -452,34 +437,59 @@ static void EPOS2init_thread(void *pvParameters)
 	//Switch On & Enable Operation
 	Controlword = 0x000F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
-	vTaskDelay(1);		
+	vTaskDelay(10);		
 	while((Statusword&0x0137)!=0x0137)
 	{
 	}	
 	
 	Controlword = 0x003F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
-	vTaskDelay(1);	
+	vTaskDelay(10);	
 	while((Statusword&0x0400)!=0x0400)
 	{
 	}
-
-	vTaskDelay(100);		
 	
-	//转入插值模式
-	Modes_of_Operation = 7;
-	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
-
-	Controlword = 0x001F;
-	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
-	vTaskDelay(1);	
-	while((Statusword&0x0400)!=0x0400)
-	{
-	}	
-	
+	Modes_of_Operation = -1;//PM
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);	
+	vTaskDelay(10);	
+  
+	xTaskCreate(Admittance_control_thread, "Admittance_control", Admittance_control_THREAD_STACK, NULL,EOPS2THREAD_PRIO, &xH_Admittance_control);	
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;
+
+}
+
+static void Admittance_control_thread(void *pvParameters)
+{
+  int32_t last_position=0;
+  int32_t position; 
+  int16_t current;
+  REAL32 Fext;
+  REAL32 velocity;
+  REAL32 M=6000.0f,B=800.0f,K=0.3f;
+  REAL32 xd=0.0f,dxd=0.0f,ddxd=0.0f;
+//	uint16_t Statusword,Controlword;
+//	UNS8 temp;
+	vTaskDelay(10);	
+  while(1)
+  {
+    position = Position_Actual_Value;
+    current = -Current_Actual_Value;//外力与电流方向相反
+    Fext = (current*0.9f+Fext*0.1f)*0.2f;//需改进为butter worth滤波
+//    if(fabsf(Fext)>250.0f)
+//    {
+//      Fext = 0;
+//    }
+    velocity = (position - last_position)/2.0f;//unit: pulse/ms
+    last_position = position;
+
+    ddxd = (Fext-K*position-B*velocity)/M;
+    dxd +=ddxd;
+    xd +=dxd;
+    Position_Mode_Setting_Value = (int32_t)xd;
+  	vTaskDelay(20);	    
+  }
 }
 
 

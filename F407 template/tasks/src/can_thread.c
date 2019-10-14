@@ -24,7 +24,7 @@ static void canopen_dataprocess_thread(void *arg)
 		while(1)
 		{
 			printf("Creat the CANOpen Queue failed! \r\n");
-			vTaskDelay(1000);
+			vTaskDelay(10000);
 		}
 	}
 
@@ -33,7 +33,7 @@ static void canopen_dataprocess_thread(void *arg)
 		//成功接收到CAN总线数据
 		if(xQueueReceive( xQ_CAN_MSG, &(CAN_Rx_m), (portTickType)100))//如果消息队列为空且第三个参数为0，那么此函数会立即返回。
 		{
-			printf("thread get a can packege\r\n");
+//			printf("thread get a can packege\r\n");
 
 			RxMSG.cob_id = (uint16_t)(CAN_Rx_m.m.StdId);
 			RxMSG.rtr = CAN_Rx_m.m.RTR;

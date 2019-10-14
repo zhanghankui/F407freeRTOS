@@ -55,7 +55,7 @@ void bsp_Init(BSP_Handle handle)
 	
 	//函数初始化	
 	SetupUSARTDMA_FIFIO(handle->usartdma_fifohandle);
-	USARTDMA_Config(115200);
+	USARTDMA_Config(512000);
 	USART_DMA_Receive((uint32_t)handle->usartdma_fifohandle->pbuf,
 		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	

@@ -20,7 +20,7 @@
 // **************************************************************************
 // the defines
 
-#define SDOovertimer 50
+#define SDOovertimer 500 //50ms
 // **************************************************************************
 // the typedefs	
 
@@ -80,7 +80,7 @@ void Startsystimerforovertime(void)
 {
 	COMMovertimer = false;
 	/* 启动定时器，系统启动后才开始工作 */
-	if(xTimerStart(xsysTimers, 100) != pdPASS)/*如果原先定时器没有开始，这个函数是开始，如果原先定时器就在运行，那这个函数就相当于xTimerReset函数*/
+	if(xTimerStart(xsysTimers, 1000) != pdPASS)/*如果原先定时器没有开始，这个函数是开始，如果原先定时器就在运行，那这个函数就相当于xTimerReset函数*/
 	{
 	 /* 定时器还没有进入激活状态 */
 	}	

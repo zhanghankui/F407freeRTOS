@@ -557,6 +557,11 @@ sendOnePDOevent (CO_Data * d, UNS8 pdoNum)
 										MS_TO_TIMEVAL (EventTimerDuration), 0);
 			}
 
+    //nhibitTimer=0则及时响应
+    if(InhibitTimerDuration == 0)
+    {
+      InhibitTimerDuration = 1;
+    }
 		if (InhibitTimerDuration)
 			{
 				DelAlarm (d->PDO_status[pdoNum].inhibit_timer);
@@ -568,7 +573,8 @@ sendOnePDOevent (CO_Data * d, UNS8 pdoNum)
 				d->PDO_status[pdoNum].transmit_type_parameter |=
 					PDO_INHIBITED;
 			}
-    
+
+  //EventTimer的last_message.cob_id被强制修改为0，不会进入return 0
   /*Compare new and old PDO */
   if (d->PDO_status[pdoNum].last_message.cob_id == pdo.cob_id
       && d->PDO_status[pdoNum].last_message.len == pdo.len
@@ -590,7 +596,7 @@ PDOEventTimerAlarm (CO_Data * d, UNS32 pdoNum)
   /* This is needed to avoid deletion of re-attribuated timer */
   d->PDO_status[pdoNum].event_timer = TIMER_NONE;
   /* force emission of PDO by artificially changing last emitted */
-  d->PDO_status[pdoNum].last_message.cob_id = 0;
+  d->PDO_status[pdoNum].last_message.cob_id = 0;//强制上一次数据与这次不同，确保事件绝对发送
   sendOnePDOevent (d, (UNS8) pdoNum);
 }
 

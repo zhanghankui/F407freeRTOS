@@ -253,7 +253,7 @@ static void vTaskTask1(void *pvParameters)
 			}
 		}		
 
-		vTaskDelay(20);//unit portTICK_PERIOD_MS
+		vTaskDelay(200);//unit 100us
 	}
 }
 
@@ -270,11 +270,11 @@ static void vTaskTask2(void *pvParameters)
 {
 	while(1)
 	{
-		taskENTER_CRITICAL();   /* 进入临界区 */
+//		taskENTER_CRITICAL();   /* 进入临界区 */
 //		printf("任务vTask2正在运行\r\n");
-		taskEXIT_CRITICAL();  	/* 退出临界区 */
+//		taskEXIT_CRITICAL();  	/* 退出临界区 */
 		LED1=!LED1;
-		vTaskDelay(500);
+		vTaskDelay(5000);
 	}
 }
 
@@ -291,18 +291,18 @@ static void vTaskTask3(void *pvParameters)
 {
 	while(1)
 	{
-		taskENTER_CRITICAL();   /* 进入临界区 */
+//		taskENTER_CRITICAL();   /* 进入临界区 */
 //		printf("任务vTask3正在运行\r\n");
-		taskEXIT_CRITICAL();  	/* 退出临界区 */		
+//		taskEXIT_CRITICAL();  	/* 退出临界区 */		
 		LED0=!LED0;
-		vTaskDelay(600);
+		vTaskDelay(5000);
 	}
 }
 
 /*
 *********************************************************************************************************
 *	函 数 名: vTaskTask4
-*	功能说明: 启动任务，也就是最高优先级任务，这里用作LED闪烁
+*	功能说明: 启动任务，也就是最高优先级任务，这里用来做按键检测
 *	形    参: pvParameters 是在创建该任务时传递的形参
 *	返 回 值: 无
 *   优 先 级: 4  
@@ -312,9 +312,9 @@ static void vTaskTask4(void *pvParameters)
 {
 	while(1)
 	{
-		/* LED闪烁 */
+		/* 按键检测 */
 		bsp_KeyScan();
-		vTaskDelay(10);
+		vTaskDelay(20);//2ms
 	}
 }
 
@@ -390,7 +390,7 @@ static void StackOverflowTest(void)
 	for(i = 2047; i >= 0; i--)
 	{
 		buf[i] = 0x55;
-		vTaskDelay(1);
+		vTaskDelay(10);
 	}
 }
 

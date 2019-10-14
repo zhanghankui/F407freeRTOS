@@ -1,0 +1,45 @@
+---- PDOInhibitTimerAlarm Matches (7 in 4 files) ----
+F407template.htm (Project\Objects) line 88 : 
+ <LI><a href="#[82]">PDOEventTimerAlarm</a> from pdo.o(i.PDOEventTimerAlarm) referenced from pdo.o(i.sendOnePDOevent)
+ <LI><a href="#[83]">PDOInhibitTimerAlarm</a> from pdo.o(i.PDOInhibitTimerAlarm) referenced from pdo.o(i.sendOnePDOevent)
+ <LI><a href="#[1a]">PVD_IRQHandler</a> from startup_stm32f40xx.o(.text) referenced from startup_stm32f40xx.o(RESET)
+ <LI><a href="#[17]">PendSV_Handler</a> from port.o(.emb_text) referenced from startup_stm32f40xx.o(RESET)
+ <LI><a href="#[73]">ProducerHeartbeatAlarm</a> from lifegrd.o(i.ProducerHeartbeatAlarm) referenced from lifegrd.o(i.OnHeartbeatProducerUpdate)
+F407template.htm (Project\Objects) line 825 : 
+</UL>
+<P><STRONG><a name="[83]"></a>PDOInhibitTimerAlarm</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, pdo.o(i.PDOInhibitTimerAlarm))
+<BR><BR>[Stack]<UL><LI>Max Depth = 212<LI>Call Chain = PDOInhibitTimerAlarm &rArr; sendOnePDOevent &rArr; buildPDO &rArr; _getODentry &rArr; accessDictionaryError
+</UL>
+<BR>[Calls]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendOnePDOevent
+</UL>
+F407template.htm (Project\Objects) line 2209 : 
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sendPDOevent
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PDOInhibitTimerAlarm
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PDOEventTimerAlarm
+</UL>
+
+sendOnePDOevent in pdo.c (CanFestival\src) : 
+				d->PDO_status[pdoNum].inhibit_timer =
+					SetAlarm (d, pdoNum, &PDOInhibitTimerAlarm,
+										US_TO_TIMEVAL (InhibitTimerDuration *
+																	 100), 0);
+				/* and inhibit TPDO */
+pdo.c (CanFestival\src) line 597 : 
+void
+PDOInhibitTimerAlarm (CO_Data * d, UNS32 pdoNum)
+{
+  /* This is needed to avoid deletion of re-attribuated timer */
+  d->PDO_status[pdoNum].inhibit_timer = TIMER_NONE;
+pdo.h (CanFestival\inc) line 163 : 
+ */
+void PDOInhibitTimerAlarm(CO_Data* d, UNS32 pdoNum);
+
+/* copy bit per bit in little endian */
+void CopyBits(UNS8 NbBits, UNS8* SrcByteIndex, UNS8 SrcBitIndex, UNS8 SrcBigEndian, UNS8* DestByteIndex, UNS8 DestBitIndex, UNS8 DestBigEndian);
+#endif
+symbols.c (CanFestival\src) line 71 : 
+EXPORT_SYMBOL (PDOEventTimerAlarm);
+EXPORT_SYMBOL (PDOInhibitTimerAlarm);
+EXPORT_SYMBOL (CopyBits);
+
+// sdo.h
