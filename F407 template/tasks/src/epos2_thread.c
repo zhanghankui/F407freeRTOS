@@ -33,17 +33,17 @@
 
 // **************************************************************************
 //declaration static function prototypes
-static void Admittance_control_thread(void *pvParameters);
+static void Linearmotor_thread(void *pvParameters);
 
 
 // **************************************************************************
 // the globals
 
 #define EPOS2init_THREAD_STACK        512
-#define Admittance_control_THREAD_STACK        512
+#define Linearmotor_THREAD_STACK        512
 
 xTaskHandle  xH_EPOS2init = NULL;
-xTaskHandle  xH_Admittance_control = NULL;
+xTaskHandle  xH_Linearmotor_control = NULL;
 // **************************************************************************
 // the functions	
 
@@ -449,46 +449,101 @@ static void EPOS2init_thread(void *pvParameters)
 	{
 	}
 	
-	Modes_of_Operation = -1;//PM
-	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);	
+//	Modes_of_Operation = -1;//PM
+//	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);	
 	vTaskDelay(10);	
   
-	xTaskCreate(Admittance_control_thread, "Admittance_control", Admittance_control_THREAD_STACK, NULL,EOPS2THREAD_PRIO, &xH_Admittance_control);	
+	xTaskCreate(Linearmotor_thread, "Linearmotor_control", Linearmotor_THREAD_STACK,CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_Linearmotor_control);	
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;
 
 }
 
-static void Admittance_control_thread(void *pvParameters)
+static void Linearmotor_thread(void *pvParameters)
 {
-  int32_t last_position=0;
-  int32_t position; 
-  int16_t current;
-  REAL32 Fext;
-  REAL32 velocity;
-  REAL32 M=6000.0f,B=800.0f,K=0.3f;
-  REAL32 xd=0.0f,dxd=0.0f,ddxd=0.0f;
-//	uint16_t Statusword,Controlword;
-//	UNS8 temp;
+	CO_Data *d;
+
+	UNS8 nodeId = 1;
+	d = (CO_Data *)pvParameters;//传递的形参	
+
+	
+	//找原点	
+	Home_Offset = 3000;
+	WriteSDO(d,nodeId,0x607C,0x00,&Home_Offset,0);	
+
+	Homing_Speeds_Speed_for_Switch_Search = 100;
+	WriteSDO(d,nodeId,0x6099,0x01,&Homing_Speeds_Speed_for_Switch_Search,0);		
+	
+	Homing_Speeds_Speed_for_Zero_Search = 100;
+	WriteSDO(d,nodeId,0x6099,0x02,&Homing_Speeds_Speed_for_Zero_Search,0);		
+
+	Homing_Acceleration = 1000;
+	WriteSDO(d,nodeId,0x609A,0x00,&Homing_Acceleration,0);			
+
+	Current_Threshold_for_Homing_Mode = 2000;
+	WriteSDO(d,nodeId,0x2080,0x00,&Current_Threshold_for_Homing_Mode,0);				
+
+	Home_Position = 0;
+	WriteSDO(d,nodeId,0x2081,0x00,&Home_Position,0);		
+	
+	Homing_Method = -4;
+	WriteSDO(d,nodeId,0x6098,0x00,&Homing_Method,0);			
+	
+	Modes_of_Operation = 6;//HM
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);			
+	
+	Controlword = 0x000F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(10);		
+	Controlword = 0x001F;
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);//执行HM
+	
+	while((Statusword&0x1400)!=0x1400)
+	{
+	}		
+	
+	//切到PPM
+	Modes_of_Operation = 1;
+	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);
+	
+	Target_Position = 50000;
+	WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);	
+	
+	Profile_Velocity = 3000;
+	WriteSDO(d,nodeId,0x6081,0x00,&Profile_Velocity,0);	
+	
+	Profile_Acceleration = 30000;
+	WriteSDO(d,nodeId,0x6083,0x00,&Profile_Acceleration,0);		
+
+	Profile_Deceleration = 30000;
+	WriteSDO(d,nodeId,0x6084,0x00,&Profile_Deceleration,0);			
+	
+	QuickStop_Deceleration = 30000;
+	WriteSDO(d,nodeId,0x6085,0x00,&QuickStop_Deceleration,0);			
+	
+	Motion_Profile_Type = 1;
+	WriteSDO(d,nodeId,0x6086,0x00,&Motion_Profile_Type,0);		
+	
 	vTaskDelay(10);	
   while(1)
   {
-    position = Position_Actual_Value;
-    current = -Current_Actual_Value;//外力与电流方向相反
-    Fext = (current*0.9f+Fext*0.1f)*0.2f;//需改进为butter worth滤波
-//    if(fabsf(Fext)>250.0f)
-//    {
-//      Fext = 0;
-//    }
-    velocity = (position - last_position)/2.0f;//unit: pulse/ms
-    last_position = position;
-
-    ddxd = (Fext-K*position-B*velocity)/M;
-    dxd +=ddxd;
-    xd +=dxd;
-    Position_Mode_Setting_Value = (int32_t)xd;
-  	vTaskDelay(20);	    
+		Controlword = 0x003F;
+		WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+		vTaskDelay(10);	
+		while((Statusword&0x0400)!=0x0400)
+		{
+		}//已运动到指定位置	
+		if(Target_Position == 50000)
+		{
+			Target_Position = 0;		
+		}
+		else if(Target_Position == 0)
+		{
+			Target_Position = 50000;			
+		}
+		WriteSDO(d,nodeId,0x607A,0x00,&Target_Position,0);
+//		vTaskDelay(10);			
   }
 }
 
