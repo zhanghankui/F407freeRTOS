@@ -533,7 +533,7 @@ static void EPOS2setzero_thread(void *pvParameters)
 	
 	Controlword = 0x000F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
-	
+	vTaskDelay(1);		
 	Controlword = 0x001F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);//当前位置设为0
 	
