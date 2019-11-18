@@ -11,7 +11,7 @@ UNS32 _valueRangeTest (UNS8 typeValue, void * value);
 const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode);
 
 /* Master node data struct */
-extern CO_Data _Data;
+extern CO_Data NODE1_Data;
 extern UNS8 Node_ID;		/* Mapped at index 0x2000, subindex 0x00*/
 extern UNS16 CAN_Bitrate;		/* Mapped at index 0x2001, subindex 0x00*/
 extern UNS16 RS232_Baudrate;		/* Mapped at index 0x2002, subindex 0x00*/

@@ -453,7 +453,7 @@ static void EPOS2init_thread(void *pvParameters)
 //	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);	
 	vTaskDelay(10);	
   
-	xTaskCreate(Linearmotor_thread, "Linearmotor_control", Linearmotor_THREAD_STACK,CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_Linearmotor_control);	
+	xTaskCreate(Linearmotor_thread, "Linearmotor_control", Linearmotor_THREAD_STACK,CO_D.CO_NODE1,EOPS2THREAD_PRIO, &xH_Linearmotor_control);	
 	//É¾³ýÈÎÎñ
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;
@@ -550,7 +550,7 @@ static void Linearmotor_thread(void *pvParameters)
 
 void EPOS2_init(void)
 {
-	xTaskCreate(EPOS2init_thread, "EPOS2init", EPOS2init_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2init);
+	xTaskCreate(EPOS2init_thread, "EPOS2init", EPOS2init_THREAD_STACK, CO_D.CO_NODE1,EOPS2THREAD_PRIO, &xH_EPOS2init);
 	if(NULL == xH_EPOS2init)
 	{
 		printf("EPOS2 init thread created failed!\r\n");

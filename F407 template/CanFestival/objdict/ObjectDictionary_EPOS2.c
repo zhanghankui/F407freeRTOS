@@ -6,7 +6,7 @@
 /**************************************************************************/
 /* Declaration of mapped variables                                        */
 /**************************************************************************/
-UNS8 Node_ID = 0x0;		/* Mapped at index 0x2000, subindex 0x00 */
+UNS8 Node_ID = 0x01;		/* Mapped at index 0x2000, subindex 0x00 */
 UNS16 CAN_Bitrate = 0x0;		/* Mapped at index 0x2001, subindex 0x00 */
 UNS16 RS232_Baudrate = 0x0;		/* Mapped at index 0x2002, subindex 0x00 */
 UNS16 Version_Software_Version = 0x0;		/* Mapped at index 0x2003, subindex 0x01 */
@@ -265,7 +265,7 @@ UNS32 Supported_Drive_Modes = 0x0;		/* Mapped at index 0x6502, subindex 0x00 */
 /**************************************************************************/
 
 #define valueRange_EMC 0x9F /* Type for index 0x1003 subindex 0x00 (only set of value 0 is possible) */
-UNS32 _valueRangeTest (UNS8 typeValue, void * value)
+UNS32 NODE1_valueRangeTest (UNS8 typeValue, void * value)
 {
   switch (typeValue) {
     case valueRange_EMC:
@@ -279,14 +279,14 @@ UNS32 _valueRangeTest (UNS8 typeValue, void * value)
 /* The node id                                                            */
 /**************************************************************************/
 /* node_id default value.*/
-UNS8 _bDeviceNodeId = 0x00;//主机ID
+UNS8 NODE1_bDeviceNodeId = 0x01;//设备ID
 
 /**************************************************************************/
 /* Array of message processing information */
 
-const UNS8 _iam_a_slave = 0;
+const UNS8 NODE1_iam_a_slave = 0;
 
-TIMER_HANDLE _heartBeatTimers[2] = {TIMER_NONE,TIMER_NONE};
+TIMER_HANDLE NODE1_heartBeatTimers[2] = {TIMER_NONE,TIMER_NONE};
 
 /*
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -304,15 +304,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                      };
 
 /* index 0x1001 :   Error Register. */
-                    UNS8 _obj1001 = 0x0;	/* 0 */
+                    UNS8 NODE1_obj1001 = 0x0;	/* 0 */
                     subindex _Index1001[] = 
                      {
-                       { RO, uint8, sizeof (UNS8), (void*)&_obj1001, NULL }
+                       { RO, uint8, sizeof (UNS8), (void*)&NODE1_obj1001, NULL }
                      };
 
 /* index 0x1003 :   Pre-defined Error Field. */
-                    UNS8 _highestSubIndex_obj1003 = 0; /* number of subindex - 1*/
-                    UNS32 _obj1003[] = 
+                    UNS8 NODE1_highestSubIndex_obj1003 = 0; /* number of subindex - 1*/
+                    UNS32 NODE1_obj1003[] = 
                     {
                       0x0,	/* 0 */
                       0x0,	/* 0 */
@@ -322,23 +322,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     };
                     subindex _Index1003[] = 
                      {
-                       { RW, valueRange_EMC, sizeof (UNS8), (void*)&_highestSubIndex_obj1003, NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&_obj1003[0], NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&_obj1003[1], NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&_obj1003[2], NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&_obj1003[3], NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&_obj1003[4], NULL }
+                       { RW, valueRange_EMC, sizeof (UNS8), (void*)&NODE1_highestSubIndex_obj1003, NULL },
+                       { RO, uint32, sizeof (UNS32), (void*)&NODE1_obj1003[0], NULL },
+                       { RO, uint32, sizeof (UNS32), (void*)&NODE1_obj1003[1], NULL },
+                       { RO, uint32, sizeof (UNS32), (void*)&NODE1_obj1003[2], NULL },
+                       { RO, uint32, sizeof (UNS32), (void*)&NODE1_obj1003[3], NULL },
+                       { RO, uint32, sizeof (UNS32), (void*)&NODE1_obj1003[4], NULL }
                      };
 
 /* index 0x1005 :   SYNC COB ID. */
-                    UNS32 _obj1005 = 0x80;	/* 128 */
+                    UNS32 NODE1_obj1005 = 0x80;	/* 128 */
                     subindex _Index1005[] = 
                      {
-                       { RW, uint32, sizeof (UNS32), (void*)&_obj1005, NULL }
+                       { RW, uint32, sizeof (UNS32), (void*)&NODE1_obj1005, NULL }
                      };
 
 /* index 0x1006 :   Communication / Cycle Period */
-                    UNS32 _obj1006 = 0x0;   /* 0 */
+                    UNS32 NODE1_obj1006 = 0x0;   /* 0 */
 
 /* index 0x1008 :   Manufacturer Device Name. */
                     UNS8 _obj1008[10] = "";
@@ -348,17 +348,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                      };
 
 /* index 0x100C :   Guard Time. */
-                    UNS16 _obj100C = 0x0;	/* 0 */
+                    UNS16 NODE1_obj100C = 0x0;	/* 0 */
                     subindex _Index100C[] = 
                      {
-                       { RW, uint16, sizeof (UNS16), (void*)&_obj100C, NULL }
+                       { RW, uint16, sizeof (UNS16), (void*)&NODE1_obj100C, NULL }
                      };
 
 /* index 0x100D :   Life Time Factor. */
-                    UNS8 _obj100D = 0x0;	/* 0 */
+                    UNS8 NODE1_obj100D = 0x0;	/* 0 */
                     subindex _Index100D[] = 
                      {
-                       { RW, uint8, sizeof (UNS8), (void*)&_obj100D, NULL }
+                       { RW, uint8, sizeof (UNS8), (void*)&NODE1_obj100D, NULL }
                      };
 
 /* index 0x1010 :   Store parameters. */
@@ -402,31 +402,31 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                      };
 
 /* index 0x1014 :   Emergency COB ID. */
-                    UNS32 _obj1014 = 0x80;	/* 128 */
+                    UNS32 NODE1_obj1014 = 0x80;	/* 128 */
                     subindex _Index1014[] = 
                      {
-                       { RW, uint32, sizeof (UNS32), (void*)&_obj1014, NULL }
+                       { RW, uint32, sizeof (UNS32), (void*)&NODE1_obj1014, NULL }
                      };
 
 /* index 0x1016 :   Consumer Heartbeat Time. */
-                    UNS8 _highestSubIndex_obj1016 = 2; /* number of subindex - 1*/
-                    UNS32 _obj1016[] = 
+                    UNS8 NODE1_highestSubIndex_obj1016 = 2; /* number of subindex - 1*/
+                    UNS32 NODE1_obj1016[] = 
                     {
                       0x0,	/* 0 */
                       0x0	/* 0 */
                     };
                     subindex _Index1016[] = 
                      {
-                       { RO, uint8, sizeof (UNS8), (void*)&_highestSubIndex_obj1016, NULL },
-                       { RW, uint32, sizeof (UNS32), (void*)&_obj1016[0], NULL },
-                       { RW, uint32, sizeof (UNS32), (void*)&_obj1016[1], NULL }
+                       { RO, uint8, sizeof (UNS8), (void*)&NODE1_highestSubIndex_obj1016, NULL },
+                       { RW, uint32, sizeof (UNS32), (void*)&NODE1_obj1016[0], NULL },
+                       { RW, uint32, sizeof (UNS32), (void*)&NODE1_obj1016[1], NULL }
                      };
 
 /* index 0x1017 :   Producer Heartbeat Time. */
-                    UNS16 _obj1017 = 0x0;	/* 0 */
+                    UNS16 NODE1_obj1017 = 0x0;	/* 0 */
                     subindex _Index1017[] = 
                      {
-                       { RW, uint16, sizeof (UNS16), (void*)&_obj1017, NULL }
+                       { RW, uint16, sizeof (UNS16), (void*)&NODE1_obj1017, NULL }
                      };
 
 /* index 0x1018 :   Identity. */
@@ -1762,7 +1762,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* Declaration of pointed variables                                       */
 /**************************************************************************/
 
-const indextable _objdict[] = 
+const indextable NODE1_objdict[] = 
 {
   { (subindex*)_Index1000,sizeof(_Index1000)/sizeof(_Index1000[0]), 0x1000},
   { (subindex*)_Index1001,sizeof(_Index1001)/sizeof(_Index1001[0]), 0x1001},
@@ -1923,7 +1923,7 @@ const indextable _objdict[] =
   { (subindex*)_Index1280,sizeof(_Index1280)/sizeof(_Index1280[0]), 0x1280},		
 };
 
-const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
+const indextable * NODE1_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
 {
 	(void)d;
 	int i;
@@ -2090,7 +2090,7 @@ const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
 			return NULL;
 	}
 	*errorCode = OD_SUCCESSFUL;
-	return &_objdict[i];
+	return &NODE1_objdict[i];
 }
 
 /* 
@@ -2098,9 +2098,9 @@ const indextable * _scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * errorCode)
  * Even if no pdoTransmit are defined, at least one entry is computed
  * for compilations issues.
  */
-s_PDO_status _PDO_status[4] = {s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer};
+s_PDO_status NODE1_PDO_status[4] = {s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer};
 
-const quick_index _firstIndex = {
+const quick_index NODE1_firstIndex = {
   16, /* SDO_SVR server*/
   156, /* SDO_CLT client*/
   17, /* PDO_RCV receive*/
@@ -2109,7 +2109,7 @@ const quick_index _firstIndex = {
   29 /* PDO_TRS_MAP transmit mapping*/
 };
 
-const quick_index _lastIndex = {
+const quick_index NODE1_lastIndex = {
   16, /* SDO_SVR */
   156, /* SDO_CLT */
   20, /* PDO_RCV */
@@ -2118,7 +2118,7 @@ const quick_index _lastIndex = {
   32 /* PDO_TRS_MAP */
 };
 
-const UNS16 _ObjdictSize = sizeof(_objdict)/sizeof(_objdict[0]); 
+const UNS16 NODE1_ObjdictSize = sizeof(NODE1_objdict)/sizeof(NODE1_objdict[0]); 
 
-CO_Data _Data = CANOPEN_NODE_DATA_INITIALIZER();
+CO_Data NODE1_Data = CANOPEN_NODE_DATA_INITIALIZER(NODE1);
 

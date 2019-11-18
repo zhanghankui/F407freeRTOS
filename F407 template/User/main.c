@@ -454,11 +454,11 @@ static void AppTaskCreate (void)
 	//
 	initTimer();  //初始化CANopen定时器                             //初始化CANopen定时器
 	
-	CO_D.CO_CAN1 = &_Data;
-	CO_D.CO_CAN1->canHandle = CAN1;	
+	CO_D.CO_NODE1 = &NODE1_Data;
+	CO_D.CO_NODE1->canHandle = CAN1;	
 	//NMT state machine
-	setState(CO_D.CO_CAN1,Initialisation);
-//	setState(CO_D.CO_CAN1,Operational);
+	setState(CO_D.CO_NODE1,Initialisation);
+//	setState(CO_D.CO_NODE1,Operational);
 	
 	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
 	EPOS2_init();
