@@ -14,6 +14,7 @@ CO_DATA_STRUCT  CO_D = {NULL,NULL};
 //canopen数据处理进程
 static void canopen_dataprocess_thread(void *arg)
 {
+	uint8_t id;
 	int i;
 	Message RxMSG = Message_Initializer;
 	CANOpen_Message CAN_Rx_m;
@@ -42,6 +43,54 @@ static void canopen_dataprocess_thread(void *arg)
 			{
 				 RxMSG.data[i] = CAN_Rx_m.m.Data[i];
 			}
+			id = RxMSG.cob_id&0x7F;
+			
+			if(1 == CAN_Rx_m.CANx) //接受的的是CAN1端口数据
+			{
+				switch(id)
+				{
+					case 0://广播或组播消息
+					{
+					}
+					break;
+					//节点
+					case 1:
+					{
+						if(NULL != CO_D.CO_NODE1)
+						{
+							canDispatch(CO_D.CO_NODE1, &RxMSG);                        // 处理收到的CAN数据									
+						}
+					}
+					break;
+					case 2:
+					{
+						if(NULL != CO_D.CO_NODE2)
+						{
+							canDispatch(CO_D.CO_NODE2, &RxMSG);                        // 处理收到的CAN数据									
+						}						
+					}
+					break;
+					case 3:
+					{
+						if(NULL != CO_D.CO_NODE3)
+						{
+							canDispatch(CO_D.CO_NODE3, &RxMSG);                        // 处理收到的CAN数据									
+						}								
+					}
+					break;
+					case 4:
+					{
+						if(NULL != CO_D.CO_NODE4)
+						{
+							canDispatch(CO_D.CO_NODE4, &RxMSG);                        // 处理收到的CAN数据									
+						}								
+					}
+					break;				
+					default:
+						break;
+				}
+			}
+			
 			if((NULL != CO_D.CO_NODE1) && (1 == CAN_Rx_m.CANx))          //接受的的是CAN1端口数据
 			{
 				canDispatch(CO_D.CO_NODE1, &RxMSG);                        // 处理收到的CAN数据		

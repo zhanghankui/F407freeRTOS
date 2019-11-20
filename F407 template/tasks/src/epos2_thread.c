@@ -24,7 +24,7 @@
 
 #include "systimer.h"
 
-#include "ObjectDictionary_EPOS2.h"
+#include "OD_NODE1.h"
 // **************************************************************************
 // the defines
 
@@ -506,7 +506,7 @@ void EPOS2_init(void)
 
 void Init_CO_NODE1(void)
 {
-	CO_D.CO_NODE1 = &_Data;
+	CO_D.CO_NODE1 = &NODE1_Data;
 	CO_D.CO_NODE1->canHandle = CAN1;	
 	//NMT state machine
 	setState(CO_D.CO_NODE1,Initialisation);	

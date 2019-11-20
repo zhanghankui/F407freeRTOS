@@ -15,7 +15,7 @@
 ".\objects\sys_timer.o"
 ".\objects\appdata.o"
 ".\objects\fatfs_thread.o"
-".\objects\objectdictionary_epos2.o"
+".\objects\od_node1.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\system_stm32f4xx.o"
 ".\objects\startup_stm32f40xx.o"

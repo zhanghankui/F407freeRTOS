@@ -488,9 +488,9 @@
           <GroupName>Objdict</GroupName>
           <Files>
             <File>
-              <FileName>ObjectDictionary_EPOS2.c</FileName>
+              <FileName>OD_NODE1.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\CanFestival\objdict\ObjectDictionary_EPOS2.c</FilePath>
+              <FilePath>..\CanFestival\objdict\OD_NODE1.c</FilePath>
             </File>
           </Files>
         </Group>

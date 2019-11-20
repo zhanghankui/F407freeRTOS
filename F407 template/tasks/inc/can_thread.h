@@ -14,6 +14,8 @@
 typedef struct _struct_co_data_2_can{
 	CO_Data *CO_NODE1;
 	CO_Data *CO_NODE2;
+	CO_Data *CO_NODE3;
+	CO_Data *CO_NODE4;	
 } CO_DATA_STRUCT;
 extern CO_DATA_STRUCT  CO_D;
 
