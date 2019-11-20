@@ -75,6 +75,15 @@ void canDispatch(CO_Data* d, Message *m)
 					proceedEMCY(d,m);
 			break;
 		case TIME_STAMP:
+				break;
+				case NMT:
+			if (*(d->iam_a_slave))
+			{
+				proceedNMTstateChange(d,m);
+			}
+				break;
+		
+		
 		case PDO1tx:
 		case PDO1rx:
 		case PDO2tx:
@@ -95,12 +104,6 @@ void canDispatch(CO_Data* d, Message *m)
 			if (d->CurrentCommunicationState.csLifeGuard)
 				proceedNODE_GUARD(d,m);
 			break;
-		case NMT:
-			if (*(d->iam_a_slave))
-			{
-				proceedNMTstateChange(d,m);
-			}
-            break;
 #ifdef CO_ENABLE_LSS
 		case LSS:
 			if (!d->CurrentCommunicationState.csLSS)break;
