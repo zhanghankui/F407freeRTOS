@@ -559,6 +559,8 @@ static void EPOS2ipm_thread(void *pvParameters)
 
 	Controlword = 0x001F;
 	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	vTaskDelay(1);
+	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
 	vTaskDelay(1);	
 	while((Statusword&0x0400)!=0x0400)
 	{
