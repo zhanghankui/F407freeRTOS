@@ -492,6 +492,11 @@
               <FileType>1</FileType>
               <FilePath>..\CanFestival\objdict\OD_NODE1.c</FilePath>
             </File>
+            <File>
+              <FileName>OD_NODE2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CanFestival\objdict\OD_NODE2.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
