@@ -42,13 +42,13 @@ static void canopen_dataprocess_thread(void *arg)
 			{
 				 RxMSG.data[i] = CAN_Rx_m.m.Data[i];
 			}
-			if((NULL != CO_D.CO_CAN1) && (1 == CAN_Rx_m.CANx))          //接受的的是CAN1端口数据
+			if((NULL != CO_D.CO_NODE1) && (1 == CAN_Rx_m.CANx))          //接受的的是CAN1端口数据
 			{
-				canDispatch(CO_D.CO_CAN1, &RxMSG);                        // 处理收到的CAN数据		
+				canDispatch(CO_D.CO_NODE1, &RxMSG);                        // 处理收到的CAN数据		
 			}
-			else if((NULL != CO_D.CO_CAN2) && (2 == CAN_Rx_m.CANx))     //接收到的是CAN2端口数据
+			else if((NULL != CO_D.CO_NODE2) && (2 == CAN_Rx_m.CANx))     //接收到的是CAN2端口数据
 			{
-				 canDispatch(CO_D.CO_CAN2, &RxMSG);                       // 处理收到的CAN数据
+				 canDispatch(CO_D.CO_NODE2, &RxMSG);                       // 处理收到的CAN数据
 			}
 		}
 	}

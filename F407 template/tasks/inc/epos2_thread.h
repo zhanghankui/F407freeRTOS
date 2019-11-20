@@ -56,7 +56,7 @@ extern "C" {
 // **************************************************************************
 // the function prototypes	
 void EPOS2_init(void);	
-	
+void Init_CO_NODE1(void);	
 #ifdef __cplusplus
 }
 #endif // extern "C"

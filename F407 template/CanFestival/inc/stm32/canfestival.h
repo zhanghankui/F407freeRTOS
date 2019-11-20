@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "applicfg.h"
 #include "data.h"
-#include "ObjectDictionary_EPOS2.h"
+
 
 // ---------  to be called by user app ---------
 void initTimer(void);

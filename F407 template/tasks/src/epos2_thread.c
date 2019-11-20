@@ -23,6 +23,8 @@
 #include "appdata.h"
 
 #include "systimer.h"
+
+#include "ObjectDictionary_EPOS2.h"
 // **************************************************************************
 // the defines
 
@@ -495,9 +497,17 @@ static void Admittance_control_thread(void *pvParameters)
 
 void EPOS2_init(void)
 {
-	xTaskCreate(EPOS2init_thread, "EPOS2init", EPOS2init_THREAD_STACK, CO_D.CO_CAN1,EOPS2THREAD_PRIO, &xH_EPOS2init);
+	xTaskCreate(EPOS2init_thread, "EPOS2init", EPOS2init_THREAD_STACK, CO_D.CO_NODE1,EOPS2THREAD_PRIO, &xH_EPOS2init);
 	if(NULL == xH_EPOS2init)
 	{
 		printf("EPOS2 init thread created failed!\r\n");
 	}
+}
+
+void Init_CO_NODE1(void)
+{
+	CO_D.CO_NODE1 = &_Data;
+	CO_D.CO_NODE1->canHandle = CAN1;	
+	//NMT state machine
+	setState(CO_D.CO_NODE1,Initialisation);	
 }
