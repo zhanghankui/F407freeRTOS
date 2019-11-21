@@ -60,6 +60,7 @@ void bsp_Init(BSP_Handle handle)
 		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
+	W25QXX_Init();
 //	SD_Init();//SD卡初始化
 //	show_sdcard_info();	//打印SD卡相关信息
 	

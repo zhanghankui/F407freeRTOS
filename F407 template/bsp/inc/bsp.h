@@ -78,6 +78,7 @@
 //#include "bsp_timer.h"
 #include "bsp_key.h"
 #include "sdio_sdcard.h"
+#include "w25qxx.h"
 //#include "bsp_can.h"
 //#include "bsp_msg.h"
 

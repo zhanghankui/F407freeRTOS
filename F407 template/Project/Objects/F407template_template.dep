@@ -27,7 +27,7 @@ I (..\freeRTOS\include\croutine.h)(0x5D2F3193)
 I (..\freeRTOS\include\semphr.h)(0x5D2F3193)
 I (..\freeRTOS\include\event_groups.h)(0x5D2F3193)
 I (..\freeRTOS\include\timers.h)(0x5D2F3193)
-I (..\bsp\inc\bsp.h)(0x5D2F3193)
+I (..\bsp\inc\bsp.h)(0x5DD635E6)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
@@ -65,6 +65,7 @@ I (..\User\sys.h)(0x5D2F3193)
 I (..\bsp\inc\usartdma.h)(0x5D2F3193)
 I (..\bsp\inc\bsp_key.h)(0x5DA039F6)
 I (..\bsp\inc\sdio_sdcard.h)(0x5DD4B92A)
+I (..\bsp\inc\w25qxx.h)(0x5DD607F5)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x5D2F3193)
 I (..\tasks\inc\can_thread.h)(0x5DD4D4F5)
 I (..\CanFestival\inc\stm32\can_STM32.h)(0x5D2F3193)
@@ -128,7 +129,7 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
 F (..\User\SysInfoTest.c)(0x5D2F3193)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\sysinfotest.o --omf_browse .\objects\sysinfotest.crf --depend .\objects\sysinfotest.d)
-I (..\bsp\inc\bsp.h)(0x5D2F3193)
+I (..\bsp\inc\bsp.h)(0x5DD635E6)
 I (..\freeRTOS\include\FreeRTOS.h)(0x5D2F3193)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -186,9 +187,10 @@ I (C:\Keil_v5\ARM\ARMCC\include\float.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
 I (..\bsp\inc\bsp_key.h)(0x5DA039F6)
 I (..\bsp\inc\sdio_sdcard.h)(0x5DD4B92A)
+I (..\bsp\inc\w25qxx.h)(0x5DD607F5)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x5D2F3193)
-F (..\bsp\src\bsp.c)(0x5DD4B92A)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
-I (..\bsp\inc\bsp.h)(0x5D2F3193)
+F (..\bsp\src\bsp.c)(0x5DD63613)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
+I (..\bsp\inc\bsp.h)(0x5DD635E6)
 I (..\freeRTOS\include\FreeRTOS.h)(0x5D2F3193)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -246,6 +248,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\float.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
 I (..\bsp\inc\bsp_key.h)(0x5DA039F6)
 I (..\bsp\inc\sdio_sdcard.h)(0x5DD4B92A)
+I (..\bsp\inc\w25qxx.h)(0x5DD607F5)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x5D2F3193)
 I (..\tasks\inc\FatFS_thread.h)(0x5DD4B92A)
 I (..\FatFS\ff.h)(0x5DD4B92A)
@@ -418,7 +421,7 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 F (..\bsp\src\bsp_tim_pwm.c)(0x5D2F3193)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\bsp_tim_pwm.o --omf_browse .\objects\bsp_tim_pwm.crf --depend .\objects\bsp_tim_pwm.d)
-I (..\bsp\inc\bsp.h)(0x5D2F3193)
+I (..\bsp\inc\bsp.h)(0x5DD635E6)
 I (..\freeRTOS\include\FreeRTOS.h)(0x5D2F3193)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -476,7 +479,86 @@ I (C:\Keil_v5\ARM\ARMCC\include\float.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
 I (..\bsp\inc\bsp_key.h)(0x5DA039F6)
 I (..\bsp\inc\sdio_sdcard.h)(0x5DD4B92A)
+I (..\bsp\inc\w25qxx.h)(0x5DD607F5)
 I (..\bsp\inc\bsp_tim_pwm.h)(0x5D2F3193)
+F (..\bsp\src\w25qxx.c)(0x5DD635A1)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\w25qxx.o --omf_browse .\objects\w25qxx.crf --depend .\objects\w25qxx.d)
+I (..\bsp\inc\w25qxx.h)(0x5DD607F5)
+I (..\User\sys.h)(0x5D2F3193)
+I (..\system\stm32f4xx.h)(0x5D2F3194)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F4DD4)
+I (..\system\system_stm32f4xx.h)(0x5D2F3194)
+I (..\system\stm32f4xx_conf.h)(0x5D2F3194)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
+I (..\bsp\inc\spi.h)(0x55E55128)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
+F (..\bsp\src\spi.c)(0x5DD62D0A)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
+I (..\bsp\inc\spi.h)(0x55E55128)
+I (..\User\sys.h)(0x5D2F3193)
+I (..\system\stm32f4xx.h)(0x5D2F3194)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
+I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F4DD4)
+I (..\system\system_stm32f4xx.h)(0x5D2F3194)
+I (..\system\stm32f4xx_conf.h)(0x5D2F3194)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
+I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
 F (..\tasks\src\can_thread.c)(0x5DD50149)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O2 -Otime --apcs=interwork --split_sections -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\can_thread.o --omf_browse .\objects\can_thread.crf --depend .\objects\can_thread.d)
 I (..\tasks\inc\can_thread.h)(0x5DD4D4F5)
 I (..\freeRTOS\include\FreeRTOS.h)(0x5D2F3193)

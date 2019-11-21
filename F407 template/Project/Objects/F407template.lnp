@@ -9,6 +9,8 @@
 ".\objects\bsp_key.o"
 ".\objects\sdio_sdcard.o"
 ".\objects\bsp_tim_pwm.o"
+".\objects\w25qxx.o"
+".\objects\spi.o"
 ".\objects\can_thread.o"
 ".\objects\usart_thread.o"
 ".\objects\epos2_thread.o"
