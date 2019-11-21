@@ -152,9 +152,21 @@ static void EPOS2init_thread(void *pvParameters)
 	UNS16 inhibittime;
 	UNS32 _obj;
 	UNS8 nodeId = 1;
-//	uint16_t Statusword,Controlword;
+	
+	const indextable * index;
+	UNS32 errorCode;
+	
+	void * Statusword;
+	void * Controlword;
 //	UNS8 temp;
 	d = (CO_Data *)pvParameters;//传递的形参	
+	
+	index = NODE1_scanIndexOD(d,0x6040,&errorCode);
+	Controlword = index->pSubindex[0].pObject;	
+ 
+	index = NODE1_scanIndexOD(d,0x6041,&errorCode);
+	Statusword = index->pSubindex[0].pObject;	
+	
 	
 	//重新配置master PDO
 	ExpectedSize = sizeof (UNS32);
@@ -325,7 +337,7 @@ static void EPOS2init_thread(void *pvParameters)
 
 	while(1)//一直检测，直到设备在线
 	{
-		if(ReadSDO(d,nodeId,0x6041,0,&Statusword,0) == SDO_FINISHED)
+		if(ReadSDO(d,nodeId,0x6041,0,Statusword,0) == SDO_FINISHED)
 		{
 			break;
 		}
@@ -336,10 +348,10 @@ static void EPOS2init_thread(void *pvParameters)
 //		vTaskDelay(10);
 	}
 //	printf("Statusword: %x\r\n",Statusword);
-	if(Statusword&0x0008)//driver has error
+	if(*(uint16_t*)Statusword&0x0008)//driver has error
 	{
-		Controlword = 0x0080;
-		WriteSDO(d,nodeId,0x6040,0,&Controlword,0);
+		*(uint16_t*)Controlword = 0x0080;
+		WriteSDO(d,nodeId,0x6040,0,Controlword,0);
 	}						
 	
 	masterSendNMTstateChange(d,	nodeId,NMT_Enter_PreOperational);
@@ -399,7 +411,12 @@ static void EPOS2init_thread(void *pvParameters)
 	masterSendNMTstateChange(d,	nodeId,NMT_Start_Node);//slave进入Operational 
 	vTaskDelay(10);	
 
-	
+	int8_t Modes_of_Operation;
+	int32_t Target_Position;
+	uint32_t Profile_Velocity;
+	uint32_t Profile_Acceleration;
+	uint32_t Profile_Deceleration;
+	int16_t Motion_Profile_Type;
 	//PPM
 	//写控制模式
 	Modes_of_Operation = 1;
@@ -422,32 +439,32 @@ static void EPOS2init_thread(void *pvParameters)
 
 //处理设备状态机
 	//switch on Disable
-	Controlword = 0x0000;
-	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
+	*(uint16_t*)Controlword = 0x0000;
+	WriteSDO(d,nodeId,0x6040,0x00,Controlword,0);	
 	vTaskDelay(10);	
-	while((Statusword&0x0140)!=0x0140)
+	while((*(uint16_t*)Statusword&0x0140)!=0x0140)
 	{
 	}	
 	//Read to Switch On
-	Controlword = 0x0006;
-	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	*(uint16_t*)Controlword = 0x0006;
+	WriteSDO(d,nodeId,0x6040,0x00,Controlword,0);
 	vTaskDelay(10);		
-	while((Statusword&0x0121)!=0x0121)
+	while((*(uint16_t*)Statusword&0x0121)!=0x0121)
 	{
 	}	
 
 	//Switch On & Enable Operation
-	Controlword = 0x000F;
-	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);	
+	*(uint16_t*)Controlword = 0x000F;
+	WriteSDO(d,nodeId,0x6040,0x00,Controlword,0);	
 	vTaskDelay(10);		
-	while((Statusword&0x0137)!=0x0137)
+	while((*(uint16_t*)Statusword&0x0137)!=0x0137)
 	{
 	}	
 	
-	Controlword = 0x003F;
-	WriteSDO(d,nodeId,0x6040,0x00,&Controlword,0);
+	*(uint16_t*)Controlword = 0x003F;
+	WriteSDO(d,nodeId,0x6040,0x00,Controlword,0);
 	vTaskDelay(10);	
-	while((Statusword&0x0400)!=0x0400)
+	while((*(uint16_t*)Statusword&0x0400)!=0x0400)
 	{
 	}
 	
@@ -455,7 +472,7 @@ static void EPOS2init_thread(void *pvParameters)
 	WriteSDO(d,nodeId,0x6060,0x00,&Modes_of_Operation,0);	
 	vTaskDelay(10);	
   
-	xTaskCreate(Admittance_control_thread, "Admittance_control", Admittance_control_THREAD_STACK, NULL,EOPS2THREAD_PRIO, &xH_Admittance_control);	
+//	xTaskCreate(Admittance_control_thread, "Admittance_control", Admittance_control_THREAD_STACK, CO_D.CO_NODE1,EOPS2THREAD_PRIO, &xH_Admittance_control);	
 	//删除任务
 	vTaskDelete(xH_EPOS2init);
 	xH_EPOS2init = NULL;
@@ -464,11 +481,30 @@ static void EPOS2init_thread(void *pvParameters)
 
 static void Admittance_control_thread(void *pvParameters)
 {
+	CO_Data *d;
   int32_t last_position=0;
   int32_t position; 
   int16_t current;
   REAL32 Fext;
   REAL32 velocity;
+	
+	const indextable * index;
+	UNS32 errorCode;
+	void * Position_Actual_Value;
+	void * Current_Actual_Value;
+	void * Position_Mode_Setting_Value;	
+//	UNS8 temp;
+	d = (CO_Data *)pvParameters;//传递的形参	
+	
+	index = NODE1_scanIndexOD(d,0x6064,&errorCode);
+	Position_Actual_Value = index->pSubindex[0].pObject;	
+ 
+	index = NODE1_scanIndexOD(d,0x6078,&errorCode);
+	Current_Actual_Value = index->pSubindex[0].pObject;		
+	
+	index = NODE1_scanIndexOD(d,0x2062,&errorCode);
+	Position_Mode_Setting_Value = index->pSubindex[0].pObject;			
+	
   REAL32 M=6000.0f,B=800.0f,K=0.3f;
   REAL32 xd=0.0f,dxd=0.0f,ddxd=0.0f;
 //	uint16_t Statusword,Controlword;
@@ -476,8 +512,8 @@ static void Admittance_control_thread(void *pvParameters)
 	vTaskDelay(10);	
   while(1)
   {
-    position = Position_Actual_Value;
-    current = -Current_Actual_Value;//外力与电流方向相反
+    position = *(int32_t*)Position_Actual_Value;
+    current = -*(int16_t*)Current_Actual_Value;//外力与电流方向相反
     Fext = (current*0.9f+Fext*0.1f)*0.2f;//需改进为butter worth滤波
 //    if(fabsf(Fext)>250.0f)
 //    {
@@ -489,7 +525,7 @@ static void Admittance_control_thread(void *pvParameters)
     ddxd = (Fext-K*position-B*velocity)/M;
     dxd +=ddxd;
     xd +=dxd;
-    Position_Mode_Setting_Value = (int32_t)xd;
+    *(int32_t*)Position_Mode_Setting_Value = (int32_t)xd;
   	vTaskDelay(20);	    
   }
 }
