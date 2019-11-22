@@ -3,7 +3,7 @@
 //#include "lwip/api.h"
 
 #define CANOpen_THREAD_PRIO       (configMAX_PRIORITIES-1)              //CANopen数据处理任务定为最高优先级
-#define EOPS2THREAD_PRIO       (1)                                      //最低用户任务优先级
+#define EOPS2THREAD_PRIO       (2)                                      //最低用户任务优先级
 
 //#define TIMER_THEAD_PRIO          (configMAX_PRIORITIES-3)              //定时器任务优先级
 //#define BODY_CONTROL_THREAD_PRIO        (configMAX_PRIORITIES-4)

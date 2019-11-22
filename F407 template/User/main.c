@@ -422,7 +422,7 @@ static void AppTaskCreate (void)
 							 "vTaskTask1",     	/* 任务名    */
 							 512,               	/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,              	/* 任务参数  */
-							 2,                 	/* 任务优先级*/
+							 3,                 	/* 任务优先级*/
 							 &xHandleTask1 );  /* 任务句柄  */
 
 
@@ -430,14 +430,14 @@ static void AppTaskCreate (void)
 							 "vTaskTask2",  		/* 任务名    */
 							 512,         		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,        		/* 任务参数  */
-							 3,           		/* 任务优先级*/
+							 4,           		/* 任务优先级*/
 							 &xHandleTask2 ); /* 任务句柄  */
 
 	xTaskCreate( vTaskTask3,     		/* 任务函数  */
 							 "vTaskTask3",   		/* 任务名    */
 							 512,             		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,           		/* 任务参数  */
-							 4,               		/* 任务优先级*/
+							 5,               		/* 任务优先级*/
 							 &xHandleTask3 );  /* 任务句柄  */
 
 
@@ -445,7 +445,7 @@ static void AppTaskCreate (void)
 							 "vTaskTask4",   		/* 任务名    */
 							 512,            		/* 任务栈大小，单位word，也就是4字节 */
 							 NULL,           		/* 任务参数  */
-							 5,              		/* 任务优先级*/
+							 6,              		/* 任务优先级*/
 							 &xHandleTask4 );   /* 任务句柄  */
 							 
 	/*init the Canopen thread*/
@@ -456,7 +456,7 @@ static void AppTaskCreate (void)
 	Init_CO_NODE1();
 	
 	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
-	EPOS2_init();
+//	EPOS2_init();
 }
 
 /*

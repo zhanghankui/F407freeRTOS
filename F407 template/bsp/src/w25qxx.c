@@ -5,10 +5,21 @@
 
 //W25QXX 驱动代码	   
 //STM32F4工程模板-库函数版本
-//淘宝店铺：http://mcudev.taobao.com										  
+	
+/*
+80 8M位/1M字节
+16 16M位/2M字节
+32 32M位/4M字节
+
+
+每页 256字节
+每扇区 16页  4Kb
+每块 128/256页 32/64Kb
+SPI最高支持80MHz，当用快读双倍/四倍指令时，相等于双倍时最高速率160MHz，四倍输出时最高速率320MHz
+*/
 ////////////////////////////////////////////////////////////////////////////////// 	
  
-u16 W25QXX_TYPE=W25Q16;	//默认是W25Q16
+u16 W25QXX_TYPE=0;	//默认是W25Q16
 
 													 
 //初始化SPI FLASH的IO口
@@ -175,12 +186,15 @@ void W25QXX_Write(u8* pBuffer,u32 WriteAddr,u16 NumByteToWrite)
 	u16 secremain;	   
  	u16 i;    
 	u8 * W25QXX_BUF;	  
-   	W25QXX_BUF=W25QXX_BUFFER;	     
+  W25QXX_BUF=W25QXX_BUFFER;	     
  	secpos=WriteAddr/4096;//扇区地址  
 	secoff=WriteAddr%4096;//在扇区内的偏移
 	secremain=4096-secoff;//扇区剩余空间大小   
  	//printf("ad:%X,nb:%X\r\n",WriteAddr,NumByteToWrite);//测试用
- 	if(NumByteToWrite<=secremain)secremain=NumByteToWrite;//不大于4096个字节
+ 	if(NumByteToWrite<=secremain)
+  {
+    secremain=NumByteToWrite;//不大于4096个字节
+ 	}
 	while(1) 
 	{	
 		W25QXX_Read(W25QXX_BUF,secpos*4096,4096);//读出整个扇区的内容
@@ -197,7 +211,11 @@ void W25QXX_Write(u8* pBuffer,u32 WriteAddr,u16 NumByteToWrite)
 			}
 			W25QXX_Write_NoCheck(W25QXX_BUF,secpos*4096,4096);//写入整个扇区  
 
-		}else W25QXX_Write_NoCheck(pBuffer,WriteAddr,secremain);//写已经擦除了的,直接写入扇区剩余区间. 				   
+		}
+    else 
+    {
+      W25QXX_Write_NoCheck(pBuffer,WriteAddr,secremain);//写已经擦除了的,直接写入扇区剩余区间.
+    }
 		if(NumByteToWrite==secremain)break;//写入结束了
 		else//写入未结束
 		{
@@ -225,12 +243,12 @@ void W25QXX_Erase_Chip(void)
 }   
 //擦除一个扇区
 //Dst_Addr:扇区地址 根据实际容量设置
-//擦除一个山区的最少时间:150ms
+//擦除一个扇区的最少时间:150ms
 void W25QXX_Erase_Sector(u32 Dst_Addr)   
 {  
 	//监视falsh擦除情况,测试用   
 	printf("fe:%x\r\n",Dst_Addr);	  
-	Dst_Addr*=4096;
+	Dst_Addr*=4096;//乘2^12（左移12位）将山区编号转换为实际地址
 	W25QXX_Write_Enable();                  //SET WEL 	 
 	W25QXX_Wait_Busy();   
 	W25QXX_CS=0;                            //使能器件   

@@ -492,6 +492,11 @@
               <FileType>1</FileType>
               <FilePath>..\tasks\src\FatFS_thread.c</FilePath>
             </File>
+            <File>
+              <FileName>RWdata_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\tasks\src\RWdata_thread.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

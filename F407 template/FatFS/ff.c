@@ -5525,7 +5525,7 @@ FRESULT f_forward (
 /*-----------------------------------------------------------------------*/
 /* Create an FAT/exFAT volume                                            */
 /*-----------------------------------------------------------------------*/
-
+//work空间提供格式化时使用得缓存
 FRESULT f_mkfs (
 	const TCHAR* path,	/* Logical drive number */
 	BYTE opt,			/* Format option */
