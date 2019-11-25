@@ -65,8 +65,8 @@ void bsp_Init(BSP_Handle handle)
 	show_sdcard_info();	//打印SD卡相关信息
 	
 	//格式化
-	uint8_t work[2048];
-	f_mkfs("1:",FM_FAT32,1024,work,2048);
+//	uint8_t work[2048];
+//	f_mkfs("1:",FM_FAT32,1024,work,2048);
 	/* 挂载文件系统 */
 	result = f_mount(&fs, "1:", 1);	//DEV_MMC 1
 

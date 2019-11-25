@@ -146,7 +146,16 @@ static void vTaskTask1(void *pvParameters)
 				{
 					taskENTER_CRITICAL();   /* 进入临界区 */	
 					
-					if(SD_ReadDisk(buf,0,1)==0)	//读取0扇区的内容
+//					if(SD_ReadDisk(buf,0,1)==0)	//读取0扇区的内容
+          W25QXX_Erase_Sector(0);
+
+					for(sd_size=0;sd_size<512;sd_size++)
+					{
+						buf[sd_size] = sd_size;
+					}
+          W25QXX_Write_NoCheck(buf,0,256);
+
+					W25QXX_Read(buf,0,512);
 					{	
 						printf("SECTOR 0 DATA:\r\n");
 						for(sd_size=0;sd_size<512;sd_size++)printf("%x ",buf[sd_size]);//打印0扇区数据    	   
