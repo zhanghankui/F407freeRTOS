@@ -17,8 +17,8 @@ static uint8_t transfernow = 0;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 static uint16_t InitCurrReAddress(void);
-static uint16_t __EE_Init(void);
-static FLASH_Status EE_Format(void);
+static void __EE_Init(void);
+static void EE_Format(void);
 static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Data);
 static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data);
 static uint16_t EE_FindValidPage(uint8_t Operation);
@@ -26,18 +26,34 @@ static uint16_t EE_FindValidPage(uint8_t Operation);
 uint32_t ReadOneWord(uint32_t addr)
 {
   UINT32_union data;
-  W25QXX_Read(&data.buf,addr,4);
+  W25QXX_Read(data.buf,addr,4);
   return data.value;
 }
 
 uint16_t ReadHalfWord(uint32_t addr)
 {
   UINT16_union data;
-  W25QXX_Read(&data.buf,addr,2);
+  W25QXX_Read(data.buf,addr,2);
   return data.value;
 }
 
+void WriteByte(uint32_t addr,uint8_t data)
+{
+  W25QXX_Write_NoCheck(&data,addr,1);
+}
+void WriteHalfWord(uint32_t addr,uint16_t data)
+{
+  UINT16_union udata;
+  udata.value =  data;  
+  W25QXX_Write_NoCheck(udata.buf,addr,2);
+}
 
+void WriteOneWord(uint32_t addr,uint32_t data)
+{
+  UINT32_union udata;
+  udata.value = data; 
+  W25QXX_Write_NoCheck(udata.buf,addr,4);
+}
 
 
 
@@ -109,14 +125,13 @@ uint16_t InitCurrReAddress(void)
   * @retval - Flash error code: on write Flash error
   *         - FLASH_COMPLETE: on success
   */
-uint16_t __EE_Init(void)
+void __EE_Init(void)
 {
   uint32_t readdata;
 	uint8_t PageStatus0 = 6, PageStatus1 = 6;
 	uint16_t VarIdx = 0;
-	uint16_t EepromStatus = 0, ReadStatus = 0;
+	uint16_t ReadStatus = 0;
 	int16_t x = -1;
-	uint16_t  FlashStatus;
 
 		/* Get Page0 status */
   readdata = ReadOneWord(PAGE0_BASE_ADDRESS);
@@ -124,27 +139,39 @@ uint16_t __EE_Init(void)
   {
     PageStatus0 = ERASED;
   }
-  if(readdata&0x00FF0000 == 0x)
+  else if((readdata&0x000000FF) == 0x000000AA)
+  {
+    PageStatus0 = WAIT_ERASED;    
+  }  
+  else if((readdata&0x0000FF00) == 0x00001100)
+  {
+    PageStatus0 = VALID_PAGE;    
+  }
+  else if((readdata&0x00FF0000) == 0x00EE0000)
+  {
+    PageStatus0 = RECEIVE_DATA;
+  }
+
+  readdata = ReadOneWord(PAGE1_BASE_ADDRESS);
+  if(readdata == 0xFFFFFFFF)
+  {
+    PageStatus1 = ERASED;
+  }
+  else if((readdata&0x000000FF) == 0x000000AA)
+  {
+    PageStatus1 = WAIT_ERASED;    
+  }  
+  else if((readdata&0x0000FF00) == 0x00001100)
+  {
+    PageStatus1 = VALID_PAGE;    
+  }
+  else if((readdata&0x00FF0000) == 0x00EE0000)
+  {
+    PageStatus1 = RECEIVE_DATA;
+  }
+
 
   
-  PageStatus1 = ReadOneWord(PAGE1_BASE_ADDRESS); 
-
-  if()
-
-
-  
-	PageStatus0 = (*(__IO uint16_t*)(PAGE0_BASE_ADDRESS+2));
-	if(PageStatus0 != WAIT_ERASED)
-	{
-		PageStatus0 = (*(__IO uint16_t*)PAGE0_BASE_ADDRESS);
-	}
-	
-	/* Get Page1 status */
-	PageStatus1 = (*(__IO uint16_t*)(PAGE1_BASE_ADDRESS+2));
-	if(PageStatus1 != WAIT_ERASED)
-	{
-		PageStatus1 = (*(__IO uint16_t*)PAGE1_BASE_ADDRESS);
-	}	
 	
 //	/* Get Page0 status */
 //	PageStatus0 = (*(__IO uint16_t*)PAGE0_BASE_ADDRESS);
@@ -175,12 +202,7 @@ uint16_t __EE_Init(void)
 //          return FlashStatus;
 //        }
         /* Mark Page1 as valid */
-        FlashStatus = FLASH_ProgramHalfWord(PAGE1_BASE_ADDRESS, VALID_PAGE);
-        /* If program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        WriteByte(PAGE1_BASE_ADDRESS+2, VALID_PAGE);
       }
       //Page0 erased, Page1 wait erased invalid state -> format EEPROM 
 //      else if(PageStatus1 == WAIT_ERASED) /* Page0 erased, Page1 wait erased */
@@ -190,12 +212,7 @@ uint16_t __EE_Init(void)
       else /* First EEPROM access (Page0&1 are erased) or invalid state -> format EEPROM */
       {
         /* Erase both Page0 and Page1 and set Page0 as valid page */
-        FlashStatus = EE_Format();
-        /* If erase/program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        EE_Format();
       }
       break;
 
@@ -206,7 +223,7 @@ uint16_t __EE_Init(void)
 				transfernow = 1;
         for (VarIdx = 0; VarIdx < NB_OF_VAR; VarIdx++)
         {
-          if (( *(__IO uint16_t*)(PAGE0_BASE_ADDRESS + 6)) == VarIdx)
+          if (( ReadHalfWord(PAGE0_BASE_ADDRESS + 6)) == VarIdx)//读地址，放过已存储的第一个数据
           {
             x = VarIdx;
           }
@@ -215,33 +232,19 @@ uint16_t __EE_Init(void)
             /* Read the last variables' updates */
             ReadStatus = EE_ReadVariable(VarIdx, &DataVar);
             /* In case variable corresponding to the virtual address was found */
-            if (ReadStatus != 0x1)
+            if (ReadStatus != 0x1)//数据找到
             {
               /* Transfer the variable to the Page0 */
-              EepromStatus = EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
-              /* If program operation was failed, a Flash error code is returned */
-              if (EepromStatus != FLASH_COMPLETE)
-              {
-                return EepromStatus;
-              }
+              EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
             }
           }
         }
 				transfernow = 0;
         /* Mark Page0 as valid */
-        FlashStatus = FLASH_ProgramHalfWord(PAGE0_BASE_ADDRESS, VALID_PAGE);
-        /* If program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        WriteByte(PAGE0_BASE_ADDRESS+2, VALID_PAGE);
         /* Erase Page1 */
-        FlashStatus = FLASH_ErasePage(PAGE1_BASE_ADDRESS);
-        /* If erase operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        W25QXX_Erase_Sector(PAGE1);
+        
       }
       else if (PageStatus1 == ERASED) /* Page0 receive, Page1 erased */
       {//不再擦除PAGE1
@@ -253,39 +256,19 @@ uint16_t __EE_Init(void)
 //          return FlashStatus;
 //        }
         /* Mark Page0 as valid */
-        FlashStatus = FLASH_ProgramHalfWord(PAGE0_BASE_ADDRESS, VALID_PAGE);
-        /* If program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        WriteByte(PAGE0_BASE_ADDRESS+2, VALID_PAGE);
       }
       else if(PageStatus1 == WAIT_ERASED) /* Page0 receive, Page1 wait erased */
       {
         /* Erase Page1 */
-        FlashStatus = FLASH_ErasePage(PAGE1_BASE_ADDRESS);
-        /* If erase operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        W25QXX_Erase_Sector(PAGE1);
         /* Mark Page0 as valid */
-        FlashStatus = FLASH_ProgramHalfWord(PAGE0_BASE_ADDRESS, VALID_PAGE);
-        /* If program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }      	
+        WriteByte(PAGE0_BASE_ADDRESS+2, VALID_PAGE);   	
       }      
       else /* Invalid state -> format eeprom */
       {
         /* Erase both Page0 and Page1 and set Page0 as valid page */
-        FlashStatus = EE_Format();
-        /* If erase/program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        EE_Format();
       }
       break;
 
@@ -293,12 +276,7 @@ uint16_t __EE_Init(void)
       if (PageStatus1 == VALID_PAGE) /* Invalid state -> format eeprom */
       {
         /* Erase both Page0 and Page1 and set Page0 as valid page */
-        FlashStatus = EE_Format();
-        /* If erase/program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        EE_Format();
       }
       else if (PageStatus1 == ERASED) /* Page0 valid, Page1 erased */
       {//不再擦除PAGE1
@@ -313,12 +291,7 @@ uint16_t __EE_Init(void)
       else if(PageStatus1 == WAIT_ERASED) /* Page0 valid, Page1 wait erased */
       {
         /* Erase Page1 */
-        FlashStatus = FLASH_ErasePage(PAGE1_BASE_ADDRESS);
-        /* If erase operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }    	
+         W25QXX_Erase_Sector(PAGE1);	
       }        
       else /* Page0 valid, Page1 receive */
       {
@@ -326,7 +299,7 @@ uint16_t __EE_Init(void)
 				transfernow = 1;
         for (VarIdx = 0; VarIdx < NB_OF_VAR; VarIdx++)
         {
-          if ((*(__IO uint8_t*)(PAGE1_BASE_ADDRESS + 6)) == VarIdx)
+          if (ReadHalfWord(PAGE1_BASE_ADDRESS + 6) == VarIdx)
           {
             x = VarIdx;
           }
@@ -338,104 +311,61 @@ uint16_t __EE_Init(void)
             if (ReadStatus != 0x1)
             {
               /* Transfer the variable to the Page1 */
-              EepromStatus = EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
-              /* If program operation was failed, a Flash error code is returned */
-              if (EepromStatus != FLASH_COMPLETE)
-              {
-                return EepromStatus;
-              }
+              EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
             }
           }
         }
 				transfernow = 0;
         /* Mark Page1 as valid */
-        FlashStatus = FLASH_ProgramHalfWord(PAGE1_BASE_ADDRESS, VALID_PAGE);
-        /* If program operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        WriteByte(PAGE1_BASE_ADDRESS+2, VALID_PAGE);
         /* Erase Page0 */
-        FlashStatus = FLASH_ErasePage(PAGE0_BASE_ADDRESS);
-        /* If erase operation was failed, a Flash error code is returned */
-        if (FlashStatus != FLASH_COMPLETE)
-        {
-          return FlashStatus;
-        }
+        W25QXX_Erase_Sector(PAGE0);
       }
       break;
 
       case WAIT_ERASED:
       {
-		if (PageStatus1 == VALID_PAGE) /* Page0 wait erased, Page1 valid */
-		{
-			/* Erase Page0 */
-			FlashStatus = FLASH_ErasePage(PAGE0_BASE_ADDRESS);
-			/* If erase operation was failed, a Flash error code is returned */
-			if (FlashStatus != FLASH_COMPLETE)
-			{
-				return FlashStatus;
-			} 
-		}
-		else if (PageStatus1 == RECEIVE_DATA) /* Page0 wait erased, Page1 receive */
-		{
-			/* Erase Page0 */
-			FlashStatus = FLASH_ErasePage(PAGE0_BASE_ADDRESS);
-			/* If erase operation was failed, a Flash error code is returned */
-			if (FlashStatus != FLASH_COMPLETE)
-			{
-				return FlashStatus;
-			}
-			/* Mark Page1 as valid */
-			FlashStatus = FLASH_ProgramHalfWord(PAGE1_BASE_ADDRESS, VALID_PAGE);
-			/* If program operation was failed, a Flash error code is returned */
-			if (FlashStatus != FLASH_COMPLETE)
-			{
-				return FlashStatus;
-			}    
-		}
-		//Page0 wait erased, Page1 wait erased invalid state -> format EEPROM       
-//		else if(PageStatus1 == WAIT_ERASED) /* Page0 wait erased, Page1 wait erased */
-//		{
-//		
-//		}        
-		else /* Page0 wait erased, Page1 erased */
-		{
-			/* Erase both Page0 and Page1 and set Page0 as valid page */
-			FlashStatus = EE_Format();
-			/* If erase/program operation was failed, a Flash error code is returned */
-			if (FlashStatus != FLASH_COMPLETE)
-			{
-				return FlashStatus;
-			}
-		}
-	  }
+        if (PageStatus1 == VALID_PAGE) /* Page0 wait erased, Page1 valid */
+        {
+          /* Erase Page0 */
+          W25QXX_Erase_Sector(PAGE0); 
+        }
+        else if (PageStatus1 == RECEIVE_DATA) /* Page0 wait erased, Page1 receive */
+        {
+          /* Erase Page0 */
+          W25QXX_Erase_Sector(PAGE0);
+          /* Mark Page1 as valid */
+          WriteByte(PAGE1_BASE_ADDRESS+2, VALID_PAGE);  
+        }
+        //Page0 wait erased, Page1 wait erased invalid state -> format EEPROM       
+        //		else if(PageStatus1 == WAIT_ERASED) /* Page0 wait erased, Page1 wait erased */
+        //		{
+        //		
+        //		}        
+        else /* Page0 wait erased, Page1 erased */
+        {
+          /* Erase both Page0 and Page1 and set Page0 as valid page */
+          EE_Format();
+        }
+      }
       break;
 
 	default:  /* Any other state -> format eeprom */
       /* Erase both Page0 and Page1 and set Page0 as valid page */
-      FlashStatus = EE_Format();
-      /* If erase/program operation was failed, a Flash error code is returned */
-      if (FlashStatus != FLASH_COMPLETE)
-      {
-        return FlashStatus;
-      }
+      EE_Format();
       break;
   }
 
-  return FLASH_COMPLETE;
 }
 
-uint16_t EE_Init(void)
+void EE_Init(void)
 {
-	uint16_t FlashStatus = FLASH_COMPLETE;
 	FLASH_Unlock();
 
-	FlashStatus=__EE_Init();
+	__EE_Init();
 
 	InitCurrReAddress();
 	FLASH_Lock();
-	return(FlashStatus);	
 }
 
 /**
@@ -475,20 +405,20 @@ uint16_t EE_ReadVariable(uint16_t VirtAddress, uint16_t* Data)
 	}
 	else
 	{
-		Address = EEPROM_START_ADDRESS + (uint32_t)((ValidPage+1) * PAGE_SIZE) - 2;
+		Address = EEPROM_START_ADDRESS + (uint32_t)((ValidPage+1) * PAGE_SIZE) - 2;//直接从最屁股找
 	}
 
 		/* Check each active page address starting from end */
 	while (Address > PageStartAddress )//修改
 	{
 		/* Get the current location content to be compared with virtual address */
-		AddressValue = (*(__IO uint16_t*)Address);
+		AddressValue = ReadHalfWord(Address);
 
 		/* Compare the read address with the virtual address */
 		if (AddressValue == VirtAddress)
 		{
 			/* Get content of Address-2 which is variable value */
-			*Data = (*(__IO uint16_t*)(Address - 2));
+			*Data = ReadHalfWord(Address - 2);
 
 			/* In case variable value is read, reset ReadStatus flag */
 			ReadStatus = 0;
@@ -556,33 +486,17 @@ uint16_t EE_WriteVariable(uint16_t VirtAddress, uint16_t Data)
   * @retval Status of the last operation (Flash write or erase) done during
   *         EEPROM formating
   */
-static FLASH_Status EE_Format(void)
+static void EE_Format(void)
 {
-	FLASH_Status FlashStatus = FLASH_COMPLETE;
 
 	/* Erase Page0 */
-	FlashStatus = FLASH_ErasePage(PAGE0_BASE_ADDRESS);
-
-	/* If erase operation was failed, a Flash error code is returned */
-	if (FlashStatus != FLASH_COMPLETE)
-	{
-		return FlashStatus;
-	}
+	W25QXX_Erase_Sector(PAGE0);
 
 	/* Set Page0 as valid page: Write VALID_PAGE at Page0 base address */
-	FlashStatus = FLASH_ProgramHalfWord(PAGE0_BASE_ADDRESS, VALID_PAGE);
-
-	/* If program operation was failed, a Flash error code is returned */
-	if (FlashStatus != FLASH_COMPLETE)
-	{
-		return FlashStatus;
-	}
+	WriteByte(PAGE0_BASE_ADDRESS+2, VALID_PAGE);
 
 	/* Erase Page1 */
-	FlashStatus = FLASH_ErasePage(PAGE1_BASE_ADDRESS);
-
-	/* Return Page1 erase operation status */
-	return FlashStatus;
+	W25QXX_Erase_Sector(PAGE1);
 }
 
 /**
@@ -596,13 +510,49 @@ static FLASH_Status EE_Format(void)
   */
 static uint16_t EE_FindValidPage(uint8_t Operation)
 {
-	uint16_t PageStatus0 = 6, PageStatus1 = 6;
+  uint32_t readdata;
+	uint8_t PageStatus0 = 6, PageStatus1 = 6;
 
-	/* Get Page0 actual status */
-	PageStatus0 = (*(__IO uint16_t*)PAGE0_BASE_ADDRESS);
 
-	/* Get Page1 actual status */
-	PageStatus1 = (*(__IO uint16_t*)PAGE1_BASE_ADDRESS);
+      /* Get Page0 status */
+    readdata = ReadOneWord(PAGE0_BASE_ADDRESS);
+    if(readdata == 0xFFFFFFFF)
+    {
+      PageStatus0 = ERASED;
+    }
+    else if((readdata&0x000000FF) == 0x000000AA)
+    {
+      PageStatus0 = WAIT_ERASED;    
+    }  
+    else if((readdata&0x0000FF00) == 0x00001100)
+    {
+      PageStatus0 = VALID_PAGE;    
+    }
+    else if((readdata&0x00FF0000) == 0x00EE0000)
+    {
+      PageStatus0 = RECEIVE_DATA;
+    }
+    
+    readdata = ReadOneWord(PAGE1_BASE_ADDRESS);
+    if(readdata == 0xFFFFFFFF)
+    {
+      PageStatus1 = ERASED;
+    }
+    else if((readdata&0x000000FF) == 0x000000AA)
+    {
+      PageStatus1 = WAIT_ERASED;    
+    }  
+    else if((readdata&0x0000FF00) == 0x00001100)
+    {
+      PageStatus1 = VALID_PAGE;    
+    }
+    else if((readdata&0x00FF0000) == 0x00EE0000)
+    {
+      PageStatus1 = RECEIVE_DATA;
+    }
+
+
+
 
   /* Write or read operation */
   switch (Operation)
@@ -671,7 +621,7 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
 	FLASH_Status FlashStatus = FLASH_COMPLETE;
 	uint16_t ValidPage = PAGE0;
 //  uint32_t Address = 0x08010000;
-	uint32_t PageEndAddress = 0x080107FF;
+	uint32_t PageEndAddress;
 
 	/* Get valid Page for write operation */
 	ValidPage = EE_FindValidPage(WRITE_IN_VALID_PAGE);
@@ -692,17 +642,12 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
   while (CurReAddress < PageEndAddress)
   {
     /* Verify if Address and Address+1 contents are 0xFFFF */
-    if ((*(__IO uint32_t*)CurReAddress) == 0xFFFFFFFF)
+    if (ReadOneWord(CurReAddress) == 0xFFFFFFFF)
     {
       /* Set variable data and virtual address*/
-      FlashStatus = FLASH_ProgramHalfWord(CurReAddress, Data);
-      /* If program operation was failed, a Flash error code is returned */
-      if (FlashStatus != FLASH_COMPLETE)
-      {
-        return FlashStatus;
-      }
+      WriteHalfWord(CurReAddress, Data);
       /* Set variable virtual address */
-      FlashStatus = FLASH_ProgramHalfWord(CurReAddress + 2, VirtAddress);
+      WriteHalfWord(CurReAddress + 2, VirtAddress);
       /* Return program operation status */
       return FlashStatus;
     }
@@ -760,12 +705,7 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
 	}
 
 	/* Set the new Page status to RECEIVE_DATA status */
-	FlashStatus = FLASH_ProgramHalfWord(NewPageAddress, RECEIVE_DATA);
-	/* If program operation was failed, a Flash error code is returned */
-	if (FlashStatus != FLASH_COMPLETE)
-	{
-		return FlashStatus;
-	}
+	WriteByte(NewPageAddress+1, RECEIVE_DATA);
 	
 	InitCurrReAddress();//refresh initial write address
 	
@@ -788,12 +728,7 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
 			if (ReadStatus != 0x1)
 			{
 				/* Transfer the variable to the new active page */
-				EepromStatus = EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
-				/* If program operation was failed, a Flash error code is returned */
-				if (EepromStatus != FLASH_COMPLETE)
-				{
-					return EepromStatus;
-				}
+				EE_VerifyPageFullWriteVariable(VarIdx, DataVar);
 			}
 		}
 	}
@@ -802,27 +737,17 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
 	//if in power off save data status, will not excute erasepage
 	if(powerdump)
 	{
-		FlashStatus = FLASH_ProgramHalfWord((OldPageAddress+2), WAIT_ERASED);  	
+		WriteByte((OldPageAddress+3), WAIT_ERASED);  	
 	}
 	else
 	{
 		/* Erase the old Page: Set old Page status to ERASED status */
-		FlashStatus = FLASH_ErasePage(OldPageAddress);
-	}
-  
-	/* If erase operation was failed, a Flash error code is returned */
-	if (FlashStatus != FLASH_COMPLETE)
-	{
-		return FlashStatus;
+		W25QXX_Erase_Sector(ValidPage);
 	}
 
+
 	/* Set new Page status to VALID_PAGE status */
-	FlashStatus = FLASH_ProgramHalfWord(NewPageAddress, VALID_PAGE);
-	/* If program operation was failed, a Flash error code is returned */
-	if (FlashStatus != FLASH_COMPLETE)
-	{
-		return FlashStatus;
-	}
+	WriteByte(NewPageAddress+2, VALID_PAGE);
 
 	/* Return last operation flash status */
 	return FlashStatus;

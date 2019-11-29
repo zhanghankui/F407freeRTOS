@@ -35,7 +35,7 @@
 /* Page status definitions */
 #define ERASED                ((uint8_t)0xFF)     /* Page is empty */
 #define RECEIVE_DATA          ((uint8_t)0xEE)     /* Page is marked to receive data */
-#define VALID_PAGE            ((uint8_t)0x00)     /* Page containing valid data */
+#define VALID_PAGE            ((uint8_t)0x11)     /* Page containing valid data */
 #define WAIT_ERASED           ((uint8_t)0xAA)     /* page wait erased*/
 
 
@@ -62,14 +62,14 @@ typedef union
 
 typedef union 
   { 
-    u16 value;
-		u8 buf[2];
+    unsigned short value;
+		unsigned char buf[2];
   }UINT16_union;
 
 typedef union 
   { 
-    u32 value;
-		u8 buf[4];
+    unsigned int value;
+		unsigned char buf[4];
   }UINT32_union;
 
 
@@ -91,7 +91,7 @@ extern uint8_t powerdump;
 extern EEPROMupdate_obj FLAG_EEPROMUPDATE[NB_OF_VAR];
 
 void UpdateEEPROM_Flag(uint16_t Addr);
-uint16_t EE_Init(void);
+void EE_Init(void);
 uint16_t EE_ReadVariable(uint16_t VirtAddress, uint16_t* Data);
 uint16_t  EE_ReturnRead(uint16_t VirtAddress);
 uint16_t EE_WriteVariable(uint16_t VirtAddress, uint16_t Data);
