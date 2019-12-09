@@ -118,6 +118,7 @@ static void vTaskTask1(void *pvParameters)
 	uint8_t pcWriteBuffer[500];
 	uint8_t buf[512];
 	uint32_t sd_size;
+	ADDRnDATA_obj addrndata;
 	while(1)
 	{
 		ucKeyCode = bsp_GetKey();
@@ -147,20 +148,28 @@ static void vTaskTask1(void *pvParameters)
 					taskENTER_CRITICAL();   /* 进入临界区 */	
 					
 //					if(SD_ReadDisk(buf,0,1)==0)	//读取0扇区的内容
-          W25QXX_Erase_Sector(0);
 
-					for(sd_size=0;sd_size<512;sd_size++)
-					{
-						buf[sd_size] = sd_size;
-					}
-          W25QXX_Write_NoCheck(buf,0,256);
+//					for(sd_size=0;sd_size<512;sd_size++)
+//					{
+//						buf[sd_size] = sd_size;
+//					}
+//          W25QXX_Write_NoCheck(buf,0,256);
 
 					W25QXX_Read(buf,0,512);
 					{	
-						printf("SECTOR 0 DATA:\r\n");
+						printf("PAGE0_BASE_ADDRESS DATA:\r\n");
 						for(sd_size=0;sd_size<512;sd_size++)printf("%x ",buf[sd_size]);//打印0扇区数据    	   
 						printf("\r\nDATA ENDED\r\n");
-					}		
+					}
+					
+					W25QXX_Read(buf,PAGE1_BASE_ADDRESS,512);
+					{	
+						printf("PAGE1_BASE_ADDRESS DATA:\r\n");
+						for(sd_size=0;sd_size<512;sd_size++)printf("%x ",buf[sd_size]);//打印16扇区数据    	   
+						printf("\r\nDATA ENDED\r\n");
+					}							
+					
+					
 					
 //					printf("K1键按下，挂起任务vTask2\r\n");
 					taskEXIT_CRITICAL();  	/* 退出临界区 */
@@ -172,16 +181,19 @@ static void vTaskTask1(void *pvParameters)
 				case KEY_DOWN_KWU:
 				{
 					taskENTER_CRITICAL();   /* 进入临界区 */
-					for(sd_size=0;sd_size<512;sd_size++)
-					{
-						buf[sd_size] = sd_size;
-					}
-					SD_WriteDisk(buf,0,1);
+					addrndata.addr = 1;
+					addrndata.data = 100;
+					xQueueSend(xQ_RWdata_MSG,&addrndata,100);
+//					for(sd_size=0;sd_size<512;sd_size++)
+//					{
+//						buf[sd_size] = sd_size;
+//					}
+//					SD_WriteDisk(buf,0,1);//
 //					printf("KWU键按下，将任务vTask2恢复\r\n");
 					taskEXIT_CRITICAL();  	/* 退出临界区 */
 //					vTaskResume(xHandleTask2);
 //					bsp_StartHardTimer(1 ,50000, (void *)TIM_CallBack1);
-			}
+				}
 				break;	
 
 				
@@ -465,6 +477,7 @@ static void AppTaskCreate (void)
 	Init_CO_NODE1();
 	
 	canInit(CAN1,CAN_BAUD_1M);             //初始化CAN1
+	RWdata_init();	
 //	EPOS2_init();
 }
 

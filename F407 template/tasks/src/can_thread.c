@@ -10,7 +10,7 @@
 xQueueHandle xQ_CAN_MSG = NULL;                //存放CAN接收到的数据
 xTaskHandle  xH_CANOpen = NULL;
 
-CO_DATA_STRUCT  CO_D = {NULL,NULL};
+CO_DATA_STRUCT  CO_D = {NULL,NULL,NULL,NULL};
 //canopen数据处理进程
 static void canopen_dataprocess_thread(void *arg)
 {
@@ -32,7 +32,7 @@ static void canopen_dataprocess_thread(void *arg)
 	while(1)
 	{
 		//成功接收到CAN总线数据
-		if(xQueueReceive( xQ_CAN_MSG, &(CAN_Rx_m), (portTickType)100))//如果消息队列为空且第三个参数为0，那么此函数会立即返回。
+		if(xQueueReceive( xQ_CAN_MSG, &(CAN_Rx_m), (portTickType)1000))//如果消息队列为空且第三个参数为0，那么此函数会立即返回。
 		{
 //			printf("thread get a can packege\r\n");
 

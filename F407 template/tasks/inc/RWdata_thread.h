@@ -6,7 +6,9 @@
 
 #include "FreeRTOS.h"
 #include <stdbool.h>
-
+#include "task.h"
+#include "queue.h"
+#include "globalstruct.h"
 
 /* Exported constants --------------------------------------------------------*/
 /* Define the size of the sectors to be used */
@@ -50,7 +52,7 @@
 
 
 /* Variables' number */
-#define NB_OF_VAR             ((uint16_t)8)
+#define NB_OF_VAR             ((uint16_t)16)
 
 
 //----------------整数提取高低位字节
@@ -72,7 +74,14 @@ typedef union
 		unsigned char buf[4];
   }UINT32_union;
 
-
+typedef struct _ADDRnDATA_obj_
+{
+	uint16_t addr;
+	uint16_t data;
+}ADDRnDATA_obj;
+	
+	
+	
 
 typedef struct _EEPROMupdate_obj_
 {
@@ -89,6 +98,8 @@ typedef struct _EEPROMupdate_obj_
 
 extern uint8_t powerdump;
 extern EEPROMupdate_obj FLAG_EEPROMUPDATE[NB_OF_VAR];
+extern xQueueHandle xQ_RWdata_MSG;
+
 
 void UpdateEEPROM_Flag(uint16_t Addr);
 void EE_Init(void);
@@ -96,7 +107,7 @@ uint16_t EE_ReadVariable(uint16_t VirtAddress, uint16_t* Data);
 uint16_t  EE_ReturnRead(uint16_t VirtAddress);
 uint16_t EE_WriteVariable(uint16_t VirtAddress, uint16_t Data);
 
-
+void RWdata_init(void);
 
 
 

@@ -1,6 +1,7 @@
 
 #include "RWdata_thread.h"
 #include "w25qxx.h"
+#include "stdio.h"
 
 //w25qxx双缓存系统
 
@@ -139,15 +140,15 @@ void __EE_Init(void)
   {
     PageStatus0 = ERASED;
   }
-  else if((readdata&0x000000FF) == 0x000000AA)
+  else if((readdata&0xFF000000) == 0xAA000000)
   {
     PageStatus0 = WAIT_ERASED;    
   }  
-  else if((readdata&0x0000FF00) == 0x00001100)
+  else if((readdata&0x00FF0000) == 0x00110000)
   {
     PageStatus0 = VALID_PAGE;    
   }
-  else if((readdata&0x00FF0000) == 0x00EE0000)
+  else if((readdata&0x0000FF00) == 0x0000EE00)
   {
     PageStatus0 = RECEIVE_DATA;
   }
@@ -157,15 +158,15 @@ void __EE_Init(void)
   {
     PageStatus1 = ERASED;
   }
-  else if((readdata&0x000000FF) == 0x000000AA)
+  else if((readdata&0xFF000000) == 0xAA000000)
   {
     PageStatus1 = WAIT_ERASED;    
   }  
-  else if((readdata&0x0000FF00) == 0x00001100)
+  else if((readdata&0x00FF0000) == 0x00110000)
   {
     PageStatus1 = VALID_PAGE;    
   }
-  else if((readdata&0x00FF0000) == 0x00EE0000)
+  else if((readdata&0x0000FF00) == 0x0000EE00)
   {
     PageStatus1 = RECEIVE_DATA;
   }
@@ -293,7 +294,7 @@ void __EE_Init(void)
         /* Erase Page1 */
          W25QXX_Erase_Sector(PAGE1);	
       }        
-      else /* Page0 valid, Page1 receive */
+      else if(PageStatus1 == RECEIVE_DATA) /* Page0 valid, Page1 receive */
       {
         /* Transfer data from Page0 to Page1 */
 				transfernow = 1;
@@ -321,6 +322,11 @@ void __EE_Init(void)
         /* Erase Page0 */
         W25QXX_Erase_Sector(PAGE0);
       }
+			else /* Page0 wait erased, Page1 erased */
+			{
+				/* Erase both Page0 and Page1 and set Page0 as valid page */
+				EE_Format();
+			}			
       break;
 
       case WAIT_ERASED:
@@ -350,7 +356,7 @@ void __EE_Init(void)
       }
       break;
 
-	default:  /* Any other state -> format eeprom */
+			default:  /* Any other state -> format eeprom */
       /* Erase both Page0 and Page1 and set Page0 as valid page */
       EE_Format();
       break;
@@ -360,12 +366,9 @@ void __EE_Init(void)
 
 void EE_Init(void)
 {
-	FLASH_Unlock();
-
 	__EE_Init();
-
+	
 	InitCurrReAddress();
-	FLASH_Lock();
 }
 
 /**
@@ -515,41 +518,42 @@ static uint16_t EE_FindValidPage(uint8_t Operation)
 
 
       /* Get Page0 status */
-    readdata = ReadOneWord(PAGE0_BASE_ADDRESS);
-    if(readdata == 0xFFFFFFFF)
-    {
-      PageStatus0 = ERASED;
-    }
-    else if((readdata&0x000000FF) == 0x000000AA)
-    {
-      PageStatus0 = WAIT_ERASED;    
-    }  
-    else if((readdata&0x0000FF00) == 0x00001100)
-    {
-      PageStatus0 = VALID_PAGE;    
-    }
-    else if((readdata&0x00FF0000) == 0x00EE0000)
-    {
-      PageStatus0 = RECEIVE_DATA;
-    }
-    
-    readdata = ReadOneWord(PAGE1_BASE_ADDRESS);
-    if(readdata == 0xFFFFFFFF)
-    {
-      PageStatus1 = ERASED;
-    }
-    else if((readdata&0x000000FF) == 0x000000AA)
-    {
-      PageStatus1 = WAIT_ERASED;    
-    }  
-    else if((readdata&0x0000FF00) == 0x00001100)
-    {
-      PageStatus1 = VALID_PAGE;    
-    }
-    else if((readdata&0x00FF0000) == 0x00EE0000)
-    {
-      PageStatus1 = RECEIVE_DATA;
-    }
+  readdata = ReadOneWord(PAGE0_BASE_ADDRESS);
+  if(readdata == 0xFFFFFFFF)
+  {
+    PageStatus0 = ERASED;
+  }
+  else if((readdata&0xFF000000) == 0xAA000000)
+  {
+    PageStatus0 = WAIT_ERASED;    
+  }  
+  else if((readdata&0x00FF0000) == 0x00110000)
+  {
+    PageStatus0 = VALID_PAGE;    
+  }
+  else if((readdata&0x0000FF00) == 0x0000EE00)
+  {
+    PageStatus0 = RECEIVE_DATA;
+  }
+
+  readdata = ReadOneWord(PAGE1_BASE_ADDRESS);
+  if(readdata == 0xFFFFFFFF)
+  {
+    PageStatus1 = ERASED;
+  }
+  else if((readdata&0xFF000000) == 0xAA000000)
+  {
+    PageStatus1 = WAIT_ERASED;    
+  }  
+  else if((readdata&0x00FF0000) == 0x00110000)
+  {
+    PageStatus1 = VALID_PAGE;    
+  }
+  else if((readdata&0x0000FF00) == 0x0000EE00)
+  {
+    PageStatus1 = RECEIVE_DATA;
+  }
+
 
 
 
@@ -753,30 +757,55 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
 	return FlashStatus;
 }
 
+//写数据线程，读数据可以直接读，写数据因为可能花费较长时间，所以需要做线程
+
+#define RWdata_THREAD_STACK        512
+
+xQueueHandle xQ_RWdata_MSG = NULL;                //存放要写入的数据
+xTaskHandle  xH_RWdata = NULL;
+
+//EE_WriteVariable(uint16_t VirtAddress, uint16_t Data) 32位
+
+static void RWdata_thread(void *arg)
+{
+	ADDRnDATA_obj addrndata;
+	xQ_RWdata_MSG = xQueueCreate(20,sizeof(ADDRnDATA_obj));          //创建一个能容纳20个数据的队列	
+	
+	if(NULL == xQ_RWdata_MSG)
+	{
+		//创建队列失败
+		while(1)
+		{
+			printf("Creat the RWdata Queue failed! \r\n");
+			vTaskDelay(10000);//1s
+		}		
+	}	
+	while(1)
+	{
+		//成功接收到CAN总线数据
+		if(xQueueReceive( xQ_RWdata_MSG, &(addrndata), (portTickType)1000))//如果消息队列为空且第三个参数为0，那么此函数会立即返回。
+		{
+			EE_WriteVariable(addrndata.addr,addrndata.data);//写入数据
+		}		
+	}		
+}
+
+void RWdata_init(void)
+{
+	xTaskCreate(RWdata_thread, "RWdata", RWdata_THREAD_STACK, NULL,RWdata_THREAD_PRIO, &xH_RWdata);
+	if(NULL == xH_RWdata)
+	{
+		printf("RWdata thread created failed!\r\n");
+	}
+}
+
+
+
+
+
+
 /**
   * @}
   */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
