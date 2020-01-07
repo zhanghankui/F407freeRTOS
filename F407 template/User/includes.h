@@ -67,7 +67,7 @@
 #include "epos2_thread.h"
 #include "systimer.h"
 //#include  "TestSlave.h"
-
+#include "usb_bsp_msc.h"
 /* 在主函数中调用 */
 extern void vSetupSysInfoTest(void);
 

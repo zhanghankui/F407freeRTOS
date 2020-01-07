@@ -75,8 +75,8 @@ int main(void)
 	/* 硬件初始化 */
 	bsp_Init(&BSPobj);
 	BSPHandle = &BSPobj;
-	
-	
+	usbd_OpenMassStorage();
+
 	
 	/* 1. 初始化一个定时器中断，精度高于滴答定时器中断，这样才可以获得准确的系统信息 仅供调试目的，实际项
 		  目中不要使用，因为这个功能比较影响系统实时性。
@@ -181,6 +181,7 @@ static void vTaskTask1(void *pvParameters)
 				case KEY_DOWN_KWU:
 				{
 					taskENTER_CRITICAL();   /* 进入临界区 */
+					//EEPROM写入数据
 					addrndata.addr = 1;
 					addrndata.data = 100;
 					xQueueSend(xQ_RWdata_MSG,&addrndata,100);

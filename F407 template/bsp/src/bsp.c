@@ -44,7 +44,7 @@ void bsp_Init(BSP_Handle handle)
 	*/
 	/* 优先级分组设置为4，可配置0-15级抢占式优先级，0级子优先级，即不存在子优先级。*/
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-
+	bsp_InitDWT();/* 初始DWT */
 
 	//结构体初始化
 	handle->usartdma_fifohandle = 
@@ -60,14 +60,17 @@ void bsp_Init(BSP_Handle handle)
 		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
+
 	W25QXX_Init();//外部存储flash初始化
-	EE_Init();//初始化外部存储flash双缓存
+//	W25QXX_Erase_Chip();
+//	EE_Init();//初始化外部存储flash双缓存
 	SD_Init();//SD卡初始化
 	show_sdcard_info();	//打印SD卡相关信息
 	
 	//格式化
 //	uint8_t work[2048];
 //	f_mkfs("1:",FM_FAT32,1024,work,2048);
+
 	/* 挂载文件系统 */
 	result = f_mount(&fs, "1:", 1);	//DEV_MMC 1
 
@@ -75,7 +78,7 @@ void bsp_Init(BSP_Handle handle)
 	exf_getfree((u8 *)"1:",&total,&free);
 	
  	printf("SD Total Size:%d",total>>10);	
- 	printf("MB\r\n\r\n");		
+ 	printf("MB\r\n");		
  	printf("SD Free Size:%d",free>>10);
  	printf("MB\r\n\r\n");	
 
