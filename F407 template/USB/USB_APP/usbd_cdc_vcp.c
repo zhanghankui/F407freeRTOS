@@ -25,6 +25,34 @@
   ******************************************************************************
   */ 
 
+
+//说明
+/*
+
+uint8_t g_ucRecBuf[128]; 接收的USB串口数据
+uint8_t g_ucRecFlag; 接收到的数据长度
+
+uint8_t  APP_Rx_Buffer []; USB发送数据缓存
+uint32_t APP_Rx_ptr_in; 发送数据写入位置
+APP_RX_DATA_SIZE 最大数据量
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
 #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED 
 #pragma     data_alignment = 4 
 #endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */

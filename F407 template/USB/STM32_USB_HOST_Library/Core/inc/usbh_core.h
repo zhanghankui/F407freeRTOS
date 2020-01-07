@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_core.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   Header file for usbh_core.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -52,8 +52,22 @@
   * @{
   */ 
 
-#define MSC_CLASS                         0x08
-#define HID_CLASS                         0x03
+#define MSC_CLASS                             0x08 /* MSC */
+#define HID_CLASS                             0x03 /* HID */
+
+#define USB_AUDIO                             0x01 /* Audio */
+#define USB_CDCC                              0x02  /* Communications and CDC Control */
+#define USB_HID                               0x03  /* HID (Human Interface Device) */
+#define USB_PRINTER                           0x07  /* Printer */
+#define USB_MSC                               0x08  /* Mass Storage */
+#define USB_HUB                               0x09  /* Hub */
+#define USB_CDCD                              0x0A  /* CDC-Data */
+#define USB_SMARTCARD                         0x0B  /* Smart Card */
+#define USB_VIDEO                             0x0E  /* Video */
+#define USB_AVD                               0x10  /* Audio/Video Devices */
+
+
+
 #define MSC_PROTOCOL                      0x50
 #define CBI_PROTOCOL                      0x01
 
@@ -61,6 +75,7 @@
 #define USBH_MAX_ERROR_COUNT                            2
 #define USBH_DEVICE_ADDRESS_DEFAULT                     0
 #define USBH_DEVICE_ADDRESS                             1
+#define CFG_DESC_MAX_SIZE                               512
 
 
 /**
@@ -85,6 +100,7 @@ typedef enum {
 /* Following states are used for gState */
 typedef enum {
   HOST_IDLE =0,
+  HOST_WAIT_PRT_ENABLED,
   HOST_DEV_ATTACHED,
   HOST_DEV_DISCONNECTED,  
   HOST_DETECT_DEVICE_SPEED,
@@ -94,6 +110,7 @@ typedef enum {
   HOST_CTRL_XFER,
   HOST_USR_INPUT,
   HOST_SUSPENDED,
+  HOST_WAKEUP,
   HOST_ERROR_STATE  
 }HOST_State;  
 
@@ -184,9 +201,9 @@ typedef struct _USBH_Class_cb
   void         (*DeInit)\
     (USB_OTG_CORE_HANDLE *pdev , void *phost);
   USBH_Status  (*Requests)\
-    (USB_OTG_CORE_HANDLE *pdev , void *phost);  
+    (USB_OTG_CORE_HANDLE *pdev ,void *phost);  
   USBH_Status  (*Machine)\
-    (USB_OTG_CORE_HANDLE *pdev , void *phost);     
+    (USB_OTG_CORE_HANDLE *pdev, void *phost);     
   
 } USBH_Class_cb_TypeDef;
 

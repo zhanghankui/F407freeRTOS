@@ -7,6 +7,7 @@
 Module Private Functions and Variables
 
 ---------------------------------------------------------------------------*/
+DWORD get_fattime(void);
 
 static volatile DSTATUS Stat = STA_NOINIT;	/* Disk status */
 
@@ -53,15 +54,15 @@ DSTATUS disk_status (
 /*-----------------------------------------------------------------------*/
 
 DRESULT disk_read (
-                   BYTE drv,			/* Physical drive number (0) */
+                   BYTE pdrv,			/* Physical drive number (0) */
                    BYTE *buff,			/* Pointer to the data buffer to store read data */
                    DWORD sector,		/* Start sector number (LBA) */
-                   BYTE count			/* Sector count (1..255) */
+                   UINT count			/* Sector count (1..255) */
                      )
 {
   BYTE status = USBH_MSC_OK;
   
-  if (drv || !count) return RES_PARERR;
+  if (pdrv || !count) return RES_PARERR;
   if (Stat & STA_NOINIT) return RES_NOTRDY;
   
   
@@ -95,14 +96,14 @@ DRESULT disk_read (
 
 #if _READONLY == 0
 DRESULT disk_write (
-                    BYTE drv,			/* Physical drive number (0) */
+                    BYTE pdrv,			/* Physical drive number (0) */
                     const BYTE *buff,	/* Pointer to the data to be written */
                     DWORD sector,		/* Start sector number (LBA) */
-                    BYTE count			/* Sector count (1..255) */
+                    UINT count			/* Sector count (1..255) */
                       )
 {
   BYTE status = USBH_MSC_OK;
-  if (drv || !count) return RES_PARERR;
+  if (pdrv || !count) return RES_PARERR;
   if (Stat & STA_NOINIT) return RES_NOTRDY;
   if (Stat & STA_PROTECT) return RES_WRPRT;
   
@@ -183,4 +184,15 @@ DRESULT disk_ioctl (
   
   return res;
 }
+
+/**
+  * @brief  Gets Time from RTC 
+  * @param  None
+  * @retval Time in DWORD
+  */
+DWORD get_fattime(void)
+{
+  return 0;
+}
+
 #endif /* _USE_IOCTL != 0 */

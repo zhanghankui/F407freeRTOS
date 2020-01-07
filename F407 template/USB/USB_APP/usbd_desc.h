@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_desc.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    19-March-2012
+  * @version V1.2.0
+  * @date    07-JAN-2020
   * @brief   header file for the usbd_desc.c file
   ******************************************************************************
   * @attention
@@ -33,6 +33,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_req.h"
 
+
+
+
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
@@ -45,14 +48,27 @@
 /** @defgroup USB_DESC_Exported_Defines
   * @{
   */
-#define USB_DEVICE_DESCRIPTOR_TYPE              0x01
-#define USB_CONFIGURATION_DESCRIPTOR_TYPE       0x02
-#define USB_STRING_DESCRIPTOR_TYPE              0x03
-#define USB_INTERFACE_DESCRIPTOR_TYPE           0x04
-#define USB_ENDPOINT_DESCRIPTOR_TYPE            0x05
+//#define USB_DEVICE_DESCRIPTOR_TYPE              0x01
+//#define USB_CONFIGURATION_DESCRIPTOR_TYPE       0x02
+//#define USB_STRING_DESCRIPTOR_TYPE              0x03
+//#define USB_INTERFACE_DESCRIPTOR_TYPE           0x04
+//#define USB_ENDPOINT_DESCRIPTOR_TYPE            0x05
 #define USB_SIZ_DEVICE_DESC                     18
 #define USB_SIZ_STRING_LANGID                   4
 
+#if !defined (USE_STM3210C_EVAL)
+#define         DEVICE_ID1          (0x1FFF7A10)
+#define         DEVICE_ID2          (0x1FFF7A14)
+#define         DEVICE_ID3          (0x1FFF7A18)
+
+#else
+#define         DEVICE_ID1          (0x1FFFF7E8)
+#define         DEVICE_ID2          (0x1FFFF7EA)
+#define         DEVICE_ID3          (0x1FFFF7EC)  
+#endif
+
+
+#define  USB_SIZ_STRING_SERIAL       0x1A
 /**
   * @}
   */ 

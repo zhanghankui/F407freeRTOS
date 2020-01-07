@@ -100,10 +100,12 @@
 ".\objects\usbd_msc_core.o"
 ".\objects\usbd_msc_data.o"
 ".\objects\usbd_msc_scsi.o"
+".\objects\usbd_cdc_core.o"
 ".\objects\usb_bsp.o"
 ".\objects\usbd_desc.o"
 ".\objects\usbd_storage_msd.o"
 ".\objects\usbd_usr.o"
+".\objects\usbd_cdc_vcp.o"
 "C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Lib\ARM\arm_cortexM4lf_math.lib"
 --library_type=microlib --strict --scatter ".\Objects\F407template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

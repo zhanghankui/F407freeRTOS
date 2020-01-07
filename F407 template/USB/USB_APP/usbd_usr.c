@@ -3,6 +3,7 @@
 #include <stdio.h> 
 #include "usbd_msc_core.h"
 #include "usbd_desc.h"
+#include "usbd_cdc_core.h"
 #include "usb_bsp.h"
 //#include <usart.h> 
 //////////////////////////////////////////////////////////////////////////////////	 
@@ -20,7 +21,7 @@ __ALIGN_BEGIN  USB_OTG_CORE_HANDLE  USB_OTG_dev   __ALIGN_END;
 __ALIGN_BEGIN  USB_OTG_CORE_HANDLE  USB_OTG_Core  __ALIGN_END;
 
 
-
+extern void USB_OTG_BSP_DisableInterrupt(void);
 
 
 //表示USB连接状态
@@ -93,7 +94,7 @@ USBD_Usr_cb_TypeDef USR_cb =
 #define USER_INFORMATION1  (uint8_t*)"INFO : double Lun configuration"
 #define USER_INFORMATION2  (uint8_t*)"INFO : microSD is used"
 
-/* 使能U盘设备 ****************************/
+/* 使能U盘设备MSC ****************************/
 void usbd_OpenMassStorage(void)
 {
 	USBD_Init(&USB_OTG_dev,
@@ -104,12 +105,23 @@ void usbd_OpenMassStorage(void)
 	printf("USB ready\r\n\r\n");		//	
 }
 
+
 /* 移除U盘设备 ***************************/
 void usbd_CloseMassStorage(void)
 {
 	DCD_DevDisconnect(&USB_OTG_dev);
 
 	USB_OTG_BSP_DisableInterrupt();	
+}
+
+/* 使能U盘设备CDC ****************************/
+void usbd_OpenCDC(void)
+{
+	USBD_Init(&USB_OTG_dev,
+			USB_OTG_FS_CORE_ID,
+			&USR_desc,
+			&USBD_CDC_cb,
+			&USR_cb);
 }
 
 

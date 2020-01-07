@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_hid_core.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   This file is the HID Layer Handlers for USB Host HID class.
   *
   * @verbatim
@@ -22,7 +22,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -179,7 +179,7 @@ USBH_Class_cb_TypeDef  HID_cb =
 *         The function init the HID class.
 * @param  pdev: Selected device
 * @param  hdev: Selected device property
-* @retval  USBH_Status :Response for USB HID driver intialization
+* @retval  USBH_Status :Response for USB HID driver initialization
 */
 static USBH_Status USBH_HID_InterfaceInit ( USB_OTG_CORE_HANDLE *pdev, 
                                            void *phost)
@@ -194,7 +194,7 @@ static USBH_Status USBH_HID_InterfaceInit ( USB_OTG_CORE_HANDLE *pdev,
   
   if(pphost->device_prop.Itf_Desc[0].bInterfaceSubClass  == HID_BOOT_CODE)
   {
-    /*Decode Bootclass Protocl: Mouse or Keyboard*/
+    /*Decode Bootclass Protocol: Mouse or Keyboard*/
     if(pphost->device_prop.Itf_Desc[0].bInterfaceProtocol == HID_KEYBRD_BOOT_CODE)
     {
       HID_Machine.cb = &HID_KEYBRD_cb;
@@ -265,7 +265,49 @@ static USBH_Status USBH_HID_InterfaceInit ( USB_OTG_CORE_HANDLE *pdev,
   }
   else
   {
-    pphost->usr_cb->DeviceNotSupported();   
+    if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_HUB)
+    {
+      LCD_ErrLog("Hub is not supported.\n");
+    }
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_CDCC)
+    {
+      LCD_ErrLog("Communications and CDC Control device is not supported.\n");
+    }
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_MSC)
+    {
+      LCD_ErrLog("MSC device is not supported.\n");
+    }
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_PRINTER)
+    {
+      LCD_ErrLog("Printer device is not supported.\n");
+    }
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_SMARTCARD)
+    {
+      LCD_ErrLog("Smart Card device is not supported.\n");
+    }
+    
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_VIDEO)
+    {
+      LCD_ErrLog("Video device  is not supported.\n");
+    }
+    
+    
+    else if (pphost->device_prop.Itf_Desc[0].bInterfaceClass == USB_AVD)
+    {
+      LCD_ErrLog("Audio/Video Devices is not supported.\n");
+    }
+    
+    else
+    {
+      LCD_ErrLog ("The attached device is not supported. \n");
+    }
+    
+    pphost->usr_cb->DeviceNotSupported();  
   }
   
   return status;
@@ -522,7 +564,7 @@ static USBH_Status USBH_Get_HID_Descriptor (USB_OTG_CORE_HANDLE *pdev,
 *         Set Idle State. 
 * @param  pdev: Selected device
 * @param  duration: Duration for HID Idle request
-* @param  reportID : Targetted report ID for Set Idle request
+* @param  reportID : Targeted report ID for Set Idle request
 * @retval USBH_Status : Response for USB Set Idle request
 */
 static USBH_Status USBH_Set_Idle (USB_OTG_CORE_HANDLE *pdev,
@@ -550,7 +592,7 @@ static USBH_Status USBH_Set_Idle (USB_OTG_CORE_HANDLE *pdev,
 *         Issues Set Report 
 * @param  pdev: Selected device
 * @param  reportType  : Report type to be sent
-* @param  reportID    : Targetted report ID for Set Report request
+* @param  reportID    : Targeted report ID for Set Report request
 * @param  reportLen   : Length of data report to be send
 * @param  reportBuff  : Report Buffer
 * @retval USBH_Status : Response for USB Set Idle request

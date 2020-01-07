@@ -76,6 +76,31 @@ void USB_OTG_BSP_Init(USB_OTG_CORE_HANDLE *pdev)
 		RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_OTG_FS, ENABLE);
 	}
 }
+
+//USB OTG 中断设置,开启USB FS中断
+//pdev:USB OTG内核结构体指针
+void USB_OTG_BSP_DisableInterrupt(void)
+{ 
+	NVIC_InitTypeDef NVIC_InitStructure;
+
+	/* 先关闭所有和USB相关的中断 */
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = DISABLE;
+
+	NVIC_InitStructure.NVIC_IRQChannel = OTG_FS_IRQn;
+	NVIC_Init(&NVIC_InitStructure);
+
+	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_IRQn;
+	NVIC_Init(&NVIC_InitStructure);
+
+	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_EP1_OUT_IRQn;
+	NVIC_Init(&NVIC_InitStructure);
+
+	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_EP1_IN_IRQn;
+	NVIC_Init(&NVIC_InitStructure);	
+}
+
 //USB OTG 中断设置,开启USB FS中断
 //pdev:USB OTG内核结构体指针
 void USB_OTG_BSP_EnableInterrupt(USB_OTG_CORE_HANDLE *pdev)
@@ -119,29 +144,7 @@ void USB_OTG_BSP_EnableInterrupt(USB_OTG_CORE_HANDLE *pdev)
 		#endif
 	}
 }
-//USB OTG 中断设置,开启USB FS中断
-//pdev:USB OTG内核结构体指针
-void USB_OTG_BSP_DisableInterrupt(void)
-{ 
-	NVIC_InitTypeDef NVIC_InitStructure;
 
-	/* 先关闭所有和USB相关的中断 */
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = DISABLE;
-
-	NVIC_InitStructure.NVIC_IRQChannel = OTG_FS_IRQn;
-	NVIC_Init(&NVIC_InitStructure);
-
-	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_IRQn;
-	NVIC_Init(&NVIC_InitStructure);
-
-	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_EP1_OUT_IRQn;
-	NVIC_Init(&NVIC_InitStructure);
-
-	NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_EP1_IN_IRQn;
-	NVIC_Init(&NVIC_InitStructure);	
-}
 //USB OTG 端口供电设置(本例程未用到)
 //pdev:USB OTG内核结构体指针
 //state:0,断电;1,上电

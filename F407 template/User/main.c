@@ -75,9 +75,11 @@ int main(void)
 	/* 硬件初始化 */
 	bsp_Init(&BSPobj);
 	BSPHandle = &BSPobj;
+#if defined  USBasMSC	
 	usbd_OpenMassStorage();
-
-	
+#elif defined USBasCDC	
+	usbd_OpenCDC();
+#endif	
 	/* 1. 初始化一个定时器中断，精度高于滴答定时器中断，这样才可以获得准确的系统信息 仅供调试目的，实际项
 		  目中不要使用，因为这个功能比较影响系统实时性。
 	   2. 为了正确获取FreeRTOS的调试信息，可以考虑将上面的关闭中断指令__set_PRIMASK(1); 注释掉。 

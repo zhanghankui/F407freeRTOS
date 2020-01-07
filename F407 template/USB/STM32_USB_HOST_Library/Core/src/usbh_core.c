@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    usbh_core.c 
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   This file implements the functions for the core state machine process
   *          the enumeration and the control transfer process
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@
 */
 
 /** @defgroup USBH_CORE 
-  * @brief TThis file handles the basic enumaration when a device is connected 
+  * @brief This file handles the basic enumeration when a device is connected 
   *          to the host.
   * @{
   */ 
@@ -55,15 +55,20 @@
 uint8_t USBH_Disconnected (USB_OTG_CORE_HANDLE *pdev); 
 uint8_t USBH_Connected (USB_OTG_CORE_HANDLE *pdev); 
 uint8_t USBH_SOF (USB_OTG_CORE_HANDLE *pdev); 
+uint8_t USBH_PortEnabled (USB_OTG_CORE_HANDLE *pdev); 
+uint8_t USBH_PortDisabled (USB_OTG_CORE_HANDLE *pdev); 
 
 USBH_HCD_INT_cb_TypeDef USBH_HCD_INT_cb = 
 {
   USBH_SOF,
   USBH_Connected, 
-  USBH_Disconnected,    
+  USBH_Disconnected,
+  USBH_PortEnabled,
+  USBH_PortDisabled
 };
 
 USBH_HCD_INT_cb_TypeDef  *USBH_HCD_INT_fops = &USBH_HCD_INT_cb;
+
 /**
   * @}
   */ 
@@ -88,6 +93,7 @@ USBH_HCD_INT_cb_TypeDef  *USBH_HCD_INT_fops = &USBH_HCD_INT_cb;
 /** @defgroup USBH_CORE_Private_Variables
   * @{
   */ 
+__IO uint32_t suspend_flag = 0;
 /**
   * @}
   */ 
@@ -98,6 +104,9 @@ USBH_HCD_INT_cb_TypeDef  *USBH_HCD_INT_fops = &USBH_HCD_INT_cb;
   */
 static USBH_Status USBH_HandleEnum(USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost);
 USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost);
+
+void USB_OTG_BSP_Resume(USB_OTG_CORE_HANDLE *pdev);                                                                 
+void USB_OTG_BSP_Suspend(USB_OTG_CORE_HANDLE *pdev);
 
 /**
   * @}
@@ -122,6 +131,30 @@ uint8_t USBH_Connected (USB_OTG_CORE_HANDLE *pdev)
 }
 
 /**
+  * @brief  USBH_PortEnabled
+  *         USB Port Enable function. 
+  * @param  selected device
+  * @retval Status
+*/
+uint8_t USBH_PortEnabled (USB_OTG_CORE_HANDLE *pdev)
+{
+  pdev->host.PortEnabled = 1;
+  return 0;
+}
+
+/**
+  * @brief  USBH_PortDisabled
+  *         USB Port Disable function.
+  * @param  selected device
+  * @retval Status
+*/
+uint8_t USBH_PortDisabled (USB_OTG_CORE_HANDLE *pdev)
+{
+  pdev->host.PortEnabled = 0;
+  return 0;
+}
+
+/**
 * @brief  USBH_Disconnected
 *         USB Disconnect callback function from the Interrupt. 
 * @param  selected device
@@ -130,6 +163,13 @@ uint8_t USBH_Connected (USB_OTG_CORE_HANDLE *pdev)
 
 uint8_t USBH_Disconnected (USB_OTG_CORE_HANDLE *pdev)
 {
+  USB_OTG_BSP_DriveVBUS(pdev,0);
+  /* Disable all interrupts. */
+  USB_OTG_WRITE_REG32(&pdev->regs.GREGS->GINTMSK, 0);
+  
+  /* Clear any pending interrupts. */
+  USB_OTG_WRITE_REG32(&pdev->regs.GREGS->GINTSTS, 0xFFFFFFFF);
+  USB_OTG_DisableGlobalInt(pdev);
   pdev->host.ConnSts = 0;
   return 0;  
 }
@@ -219,10 +259,9 @@ USBH_Status USBH_DeInit(USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
 void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
 {
   volatile USBH_Status status = USBH_FAIL;
-  
-  
+
   /* check for Host port events */
-  if ((HCD_IsDeviceConnected(pdev) == 0)&& (phost->gState != HOST_IDLE)) 
+  if (((HCD_IsDeviceConnected(pdev) == 0)|| (HCD_IsPortEnabled(pdev) == 0))&& (phost->gState != HOST_IDLE)) 
   {
     if(phost->gState != HOST_DEV_DISCONNECTED) 
     {
@@ -237,11 +276,27 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
     
     if (HCD_IsDeviceConnected(pdev))  
     {
-      phost->gState = HOST_DEV_ATTACHED;
+      phost->gState = HOST_WAIT_PRT_ENABLED; 
+      
+      /*wait denounce delay */
       USB_OTG_BSP_mDelay(100);
+      
+      /* Apply a port RESET */
+      HCD_ResetPort(pdev);
+      
+      /* User RESET callback*/
+      phost->usr_cb->ResetDevice();
     }
     break;
-   
+    
+  case HOST_WAIT_PRT_ENABLED:
+    if (pdev->host.PortEnabled == 1)
+    { 
+      phost->gState = HOST_DEV_ATTACHED; 
+      USB_OTG_BSP_mDelay(50);
+    }
+    break;
+      
   case HOST_DEV_ATTACHED :
     
     phost->usr_cb->DeviceAttached();
@@ -252,31 +307,29 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
     if ( HCD_ResetPort(pdev) == 0)
     {
       phost->usr_cb->ResetDevice();
-      /*  Wait for USB USBH_ISR_PrtEnDisableChange()  
-      Host is Now ready to start the Enumeration 
-      */
-      
+     
+      /* Host is Now ready to start the Enumeration */
       phost->device_prop.speed = HCD_GetCurrentSpeed(pdev);
       
       phost->gState = HOST_ENUMERATION;
       phost->usr_cb->DeviceSpeedDetected(phost->device_prop.speed);
-        
-      /* Open Control pipes */
-      USBH_Open_Channel (pdev,
-                           phost->Control.hc_num_in,
-                           phost->device_prop.address,
-                           phost->device_prop.speed,
-                           EP_TYPE_CTRL,
-                           phost->Control.ep0size); 
       
       /* Open Control pipes */
       USBH_Open_Channel (pdev,
-                           phost->Control.hc_num_out,
-                           phost->device_prop.address,
-                           phost->device_prop.speed,
-                           EP_TYPE_CTRL,
-                           phost->Control.ep0size);          
-   }
+                         phost->Control.hc_num_in,
+                         phost->device_prop.address,
+                         phost->device_prop.speed,
+                         EP_TYPE_CTRL,
+                         phost->Control.ep0size); 
+      
+      /* Open Control pipes */
+      USBH_Open_Channel (pdev,
+                         phost->Control.hc_num_out,
+                         phost->device_prop.address,
+                         phost->device_prop.speed,
+                         EP_TYPE_CTRL,
+                         phost->Control.ep0size);          
+    }
     break;
     
   case HOST_ENUMERATION:     
@@ -287,8 +340,11 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
       
       /* user callback for end of device basic enumeration */
       phost->usr_cb->EnumerationDone();
-      
-      phost->gState  = HOST_USR_INPUT;    
+#if defined (USB_OTG_FS_LOW_PWR_MGMT_SUPPORT) || defined (USB_OTG_HS_LOW_PWR_MGMT_SUPPORT)
+      phost->gState  = HOST_SUSPENDED;
+#else
+      phost->gState  = HOST_USR_INPUT;
+#endif /* LOW_PWR_MGMT_SUPPORT*/
     }
     break;
     
@@ -305,7 +361,7 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
     break;
     
   case HOST_CLASS_REQUEST:  
-    /* process class standard contol requests state machine */ 
+    /* process class standard control requests state machine */ 
     status = phost->class_cb->Requests(pdev, phost);
     
      if(status == USBH_OK)
@@ -330,12 +386,29 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
     /* process control transfer state machine */
     USBH_HandleControl(pdev, phost);    
     break;
-    
+#if defined (USB_OTG_FS_LOW_PWR_MGMT_SUPPORT) || defined (USB_OTG_HS_LOW_PWR_MGMT_SUPPORT)
   case HOST_SUSPENDED:
+    if (USBH_SetDeviceFeature(pdev, phost, FEATURE_SELECTOR_DEVICE, 0)==USBH_OK)
+    {
+      suspend_flag = 1;
+      USB_OTG_BSP_Suspend(pdev);
+      phost->usr_cb->UserInput();
+      PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
+      /* After wakeup got to HOST_WAKEUP state */
+      phost->gState  = HOST_WAKEUP;
+    }
     break;
-  
+      
+  case HOST_WAKEUP:
+    /* issue  a ClearDeviceFeature request */
+    if (USBH_ClearDeviceFeature(pdev, phost, FEATURE_SELECTOR_DEVICE, 0)==USBH_OK)
+    {
+      phost->gState  = HOST_USR_INPUT;
+    }
+    break;
+#endif /* USE_HOST_MODE */
   case HOST_ERROR_STATE:
-    /* Re-Initilaize Host for new Enumeration */
+    /* Re-Initialize Host for new Enumeration */
     USBH_DeInit(pdev, phost);
     phost->usr_cb->DeInit();
     phost->class_cb->DeInit(pdev, &phost->device_prop);
@@ -346,12 +419,21 @@ void USBH_Process(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
     /* Manage User disconnect operations*/
     phost->usr_cb->DeviceDisconnected();
     
-    /* Re-Initilaize Host for new Enumeration */
+    /* Re-Initialize Host for new Enumeration */
     USBH_DeInit(pdev, phost);
     phost->usr_cb->DeInit();
     phost->class_cb->DeInit(pdev, &phost->device_prop); 
     USBH_DeAllocate_AllChannel(pdev);  
     phost->gState = HOST_IDLE;
+   
+    /* Re-Initialize Host for new Enumeration */
+    HCD_Init(pdev, 
+#ifdef USE_USB_OTG_FS
+            USB_OTG_FS_CORE_ID
+#else
+            USB_OTG_HS_CORE_ID
+#endif
+);
     
     break;
     
@@ -381,7 +463,7 @@ void USBH_ErrorHandle(USBH_HOST *phost, USBH_Status errType)
   else if(errType == USBH_APPLY_DEINIT)
   {
     phost->gState = HOST_ERROR_STATE;  
-    /* user callback for initalization */
+    /* user callback for initialization */
     phost->usr_cb->Init();
   } 
 }
@@ -406,8 +488,6 @@ static USBH_Status USBH_HandleEnum(USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
     {
       phost->Control.ep0size = phost->device_prop.Dev_Desc.bMaxPacketSize;
       
-      /* Issue Reset  */
-      HCD_ResetPort(pdev);
       phost->EnumState = ENUM_GET_FULL_DEV_DESC;
       
       /* modify control channels configuration for MaxPacket size */
@@ -472,7 +552,13 @@ static USBH_Status USBH_HandleEnum(USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
                           phost,
                           USB_CONFIGURATION_DESC_SIZE) == USBH_OK)
     {
-      phost->EnumState = ENUM_GET_FULL_CFG_DESC;
+      /* before getting full config descriptor, check if it does not exceed 
+      buffer size allocated to config descriptor USBH_MAX_DATA_BUFFER
+      in the usbh_conf.h*/
+      if (phost->device_prop.Cfg_Desc.wTotalLength <= USBH_MAX_DATA_BUFFER)
+      {
+        phost->EnumState = ENUM_GET_FULL_CFG_DESC;
+      }
     }
     break;
     
@@ -668,7 +754,7 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
     
     URB_Status = HCD_GetURB_State(pdev , phost->Control.hc_num_in); 
     
-    /* check is DATA packet transfered successfully */
+    /* check is DATA packet transferred successfully */
     if  (URB_Status == URB_DONE)
     { 
       phost->Control.state = CTRL_STATUS_OUT;
@@ -679,6 +765,7 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
     { 
       /* In stall case, return to previous machine state*/
       phost->gState =   phost->gStateBkp;
+      phost->Control.state = CTRL_STALLED;  
     }   
     else if (URB_Status == URB_ERROR)
     {
@@ -700,10 +787,6 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
                       phost->Control.buff, 
                       phost->Control.length , 
                       phost->Control.hc_num_out);
-    
-
-
-
     
     phost->Control.state = CTRL_DATA_OUT_WAIT;
     break;
@@ -771,7 +854,7 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
     {
       /* Control transfers completed, Exit the State Machine */
       phost->gState =   phost->gStateBkp;
-      phost->Control.status = CTRL_STALL;
+      phost->Control.state = CTRL_STALLED;
       status = USBH_NOT_SUPPORTED;
     }
     break;
@@ -833,6 +916,59 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
   return status;
 }
 
+/**
+  * @brief  USB_OTG_BSP_Resume
+  *         Handles the USB Resume from Suspend Mode
+  * @param  pdev: Selected device
+  * @retval Status
+  */
+void USB_OTG_BSP_Resume(USB_OTG_CORE_HANDLE *pdev)                                                                 
+{
+  USB_OTG_HPRT0_TypeDef    hprt0;
+  USB_OTG_PCGCCTL_TypeDef  power;
+  hprt0.d32  = 0;
+  /*  switch-off the clocks */
+  power.d32 = 0;
+  power.b.stoppclk = 1;
+  USB_OTG_MODIFY_REG32(pdev->regs.PCGCCTL,power.d32, 0 );  
+  
+  power.b.gatehclk = 1;
+  USB_OTG_MODIFY_REG32(pdev->regs.PCGCCTL,power.d32, 0);
+  
+  hprt0.d32  = 0;   
+  hprt0.d32  = USB_OTG_ReadHPRT0(pdev);
+  hprt0.b.prtsusp = 0;
+  hprt0.b.prtres = 1;
+  USB_OTG_WRITE_REG32(pdev->regs.HPRT0, hprt0.d32);
+  USB_OTG_BSP_mDelay (20);
+  hprt0.b.prtres = 0;
+  USB_OTG_WRITE_REG32(pdev->regs.HPRT0, hprt0.d32); 
+}
+
+/**
+  * @brief  USB_OTG_BSP_Suspend
+  *         Handles the Enter USB to Suspend Mode
+  * @param  pdev: Selected device
+  * @retval Status
+  */
+void USB_OTG_BSP_Suspend(USB_OTG_CORE_HANDLE *pdev)
+{
+  USB_OTG_HPRT0_TypeDef    hprt0;
+  USB_OTG_PCGCCTL_TypeDef  power;
+  hprt0.d32  = 0;
+  hprt0.d32  = USB_OTG_ReadHPRT0(pdev);
+  hprt0.b.prtsusp = 1; 
+  USB_OTG_WRITE_REG32(pdev->regs.HPRT0, hprt0.d32);
+  
+  /*  switch-off the clocks */
+  power.d32 = 0;
+  power.b.stoppclk = 1;
+  USB_OTG_MODIFY_REG32(pdev->regs.PCGCCTL, 0, power.d32);  
+  
+  power.b.gatehclk = 1;
+  USB_OTG_MODIFY_REG32(pdev->regs.PCGCCTL, 0, power.d32);
+}
+
 
 /**
 * @}
@@ -851,7 +987,3 @@ USBH_Status USBH_HandleControl (USB_OTG_CORE_HANDLE *pdev, USBH_HOST *phost)
 */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
-
-
-

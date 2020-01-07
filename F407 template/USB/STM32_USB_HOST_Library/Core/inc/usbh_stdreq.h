@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_stdreq.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   Header file for usbh_stdreq.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -138,6 +138,15 @@ USBH_Status USBH_Issue_ClrFeature(USB_OTG_CORE_HANDLE *pdev,
 
 USBH_DescHeader_t      *USBH_GetNextDesc (uint8_t   *pbuf, 
                                                   uint16_t  *ptr);
+
+USBH_Status USBH_SetDeviceFeature(USB_OTG_CORE_HANDLE *pdev, 
+                                  USBH_HOST *phost,
+                                  uint8_t FeatureSelector, uint16_t wIndex);
+
+USBH_Status USBH_ClearDeviceFeature(USB_OTG_CORE_HANDLE *pdev, 
+                                    USBH_HOST *phost,
+                                    uint8_t FeatureSelector, uint16_t wIndex);
+
 /**
   * @}
   */ 

@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    usbh_hid_keybd.c 
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   This file is the application layer for USB Host HID Keyboard handling
   *          QWERTY and AZERTY Keyboard are supported as per the selection in 
   *          usbh_hid_keybd.h              
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

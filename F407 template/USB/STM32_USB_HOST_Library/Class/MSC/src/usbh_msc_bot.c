@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_msc_bot.c 
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-March-2012
+  * @version V2.2.0
+  * @date    09-November-2015
   * @brief   This file includes the mass storage related functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -94,6 +94,7 @@ __ALIGN_BEGIN HostCSWPkt_TypeDef USBH_MSC_CSWData __ALIGN_END ;
 
 
 static uint32_t BOTStallErrorCount;   /* Keeps count of STALL Error Cases*/
+static uint8_t xfer_error_count;
 
 /**
 * @}
@@ -134,7 +135,7 @@ void USBH_MSC_Init(USB_OTG_CORE_HANDLE *pdev )
   {      
     USBH_MSC_CBWData.field.CBWSignature = USBH_MSC_BOT_CBW_SIGNATURE;
     USBH_MSC_CBWData.field.CBWTag = USBH_MSC_BOT_CBW_TAG;
-    USBH_MSC_CBWData.field.CBWLUN = 0;  /*Only one LUN is supported*/
+    USBH_MSC_CBWData.field.CBWLUN = 0;
     USBH_MSC_BOTXferParam.CmdStateMachine = CMD_SEND_STATE;  
   }
   
@@ -174,7 +175,7 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
       
       USBH_MSC_BOTXferParam.BOTStateBkp = USBH_MSC_SEND_CBW;
       USBH_MSC_BOTXferParam.BOTState = USBH_MSC_SENT_CBW;
-      
+      xfer_error_count= 0;
       break;
       
     case USBH_MSC_SENT_CBW:
@@ -222,6 +223,22 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
         error_direction = USBH_MSC_DIR_OUT;
         USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOT_ERROR_OUT;
       }
+      else if(URB_Status == URB_ERROR)
+      {
+        xfer_error_count++;
+       
+        if (xfer_error_count < 3)
+        {
+          USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOTXferParam.BOTStateBkp; 
+        }
+        else
+        {
+         /* unrecoverd error */
+         USBH_MSC_BOTXferParam.BOTXferStatus = USBH_MSC_PHASE_ERROR;
+        }
+        
+      }
+      
       break;
       
     case USBH_MSC_BOT_DATAIN_STATE:
@@ -277,7 +294,22 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
         */
         USBH_MSC_BOTXferParam.BOTStateBkp = USBH_MSC_RECEIVE_CSW_STATE;
         
-      }     
+      }
+      
+      else if(URB_Status == URB_ERROR)
+      {
+        xfer_error_count++;
+       
+        if (xfer_error_count < 3)
+        {
+          USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOTXferParam.BOTStateBkp; 
+        }
+        else
+        {
+         /* unrecoverd error */
+         USBH_MSC_BOTXferParam.BOTXferStatus = USBH_MSC_PHASE_ERROR;
+        }   
+      }
       break;   
       
       
@@ -298,6 +330,7 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
           datapointer = datapointer + MSC_Machine.MSBulkOutEpSize;
           
           remainingDataLength = remainingDataLength - MSC_Machine.MSBulkOutEpSize;
+          xfer_error_count=0;
         }
         else if ( remainingDataLength == 0)
         {
@@ -354,6 +387,20 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
         USBH_MSC_BOTXferParam.BOTStateBkp = USBH_MSC_RECEIVE_CSW_STATE;
         
       }
+      else if(URB_Status == URB_ERROR)
+      {
+        xfer_error_count++;
+       
+        if (xfer_error_count < 3)
+        {
+          USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOTXferParam.BOTStateBkp; 
+        }
+        else
+        {
+         /* unrecoverd error */
+         USBH_MSC_BOTXferParam.BOTXferStatus = USBH_MSC_PHASE_ERROR;
+        }
+      }
       break;
       
     case USBH_MSC_RECEIVE_CSW_STATE:
@@ -366,7 +413,7 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
         USBH_MSC_BOTXferParam.pRxTxBuff = USBH_MSC_CSWData.CSWArray;
         USBH_MSC_BOTXferParam.DataLength = USBH_MSC_CSW_MAX_LENGTH;
         
-        for(index = USBH_MSC_CSW_LENGTH; index != 0; index--)
+        for(index = USBH_MSC_CSW_LENGTH-1; index != 0; index--)
         {
           USBH_MSC_CSWData.CSWArray[index] = 0;
         }
@@ -377,7 +424,8 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
                               USBH_MSC_BOTXferParam.pRxTxBuff, 
                               USBH_MSC_CSW_MAX_LENGTH , 
                               MSC_Machine.hc_num_in);
-        USBH_MSC_BOTXferParam.BOTState = USBH_MSC_DECODE_CSW;    
+        USBH_MSC_BOTXferParam.BOTState = USBH_MSC_DECODE_CSW; 
+        xfer_error_count=0;
 
       break;
       
@@ -397,6 +445,21 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
       {
         error_direction = USBH_MSC_DIR_IN;
         USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOT_ERROR_IN;
+      }
+      
+      else if(URB_Status == URB_ERROR)
+      {
+        xfer_error_count++;
+       
+        if (xfer_error_count < 3)
+        {
+          USBH_MSC_BOTXferParam.BOTState  = USBH_MSC_BOTXferParam.BOTStateBkp; 
+        }
+        else
+        {
+          /* unrecovered error */
+         USBH_MSC_BOTXferParam.BOTXferStatus = USBH_MSC_PHASE_ERROR;
+        }
       }
       break;
       
@@ -424,7 +487,7 @@ void USBH_MSC_HandleBOTXfer (USB_OTG_CORE_HANDLE *pdev ,USBH_HOST *phost)
       break;
       
     case USBH_MSC_BOT_ERROR_OUT: 
-      status = USBH_MSC_BOT_Abort(pdev, phost, USBH_MSC_DIR_OUT);
+      status = USBH_MSC_BOT_Abort(pdev,phost, USBH_MSC_DIR_OUT);
       if ( status == USBH_OK)
       { /* Switch Back to the Original State */
         USBH_MSC_BOTXferParam.BOTState = USBH_MSC_BOTXferParam.BOTStateBkp;        
@@ -479,7 +542,7 @@ USBH_Status USBH_MSC_BOT_Abort(USB_OTG_CORE_HANDLE *pdev,
     break;
   }
   
-  BOTStallErrorCount++; /* Check Continous Number of times, STALL has Occured */ 
+  BOTStallErrorCount++; /* Check Continuous Number of times, STALL has Occurred */ 
   if (BOTStallErrorCount > MAX_BULK_STALL_COUNT_LIMIT )
   {
     status = USBH_UNRECOVERED_ERROR;
@@ -511,7 +574,7 @@ uint8_t USBH_MSC_DecodeCSW(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
   
   if(HCD_IsDeviceConnected(pdev))
   {
-    /*Checking if the transfer length is diffrent than 13*/
+    /*Checking if the transfer length is different than 13*/
     dataXferCount = HCD_GetXferCnt(pdev, MSC_Machine.hc_num_in); 
     
     if(dataXferCount != USBH_MSC_CSW_LENGTH)
@@ -593,7 +656,7 @@ uint8_t USBH_MSC_DecodeCSW(USB_OTG_CORE_HANDLE *pdev , USBH_HOST *phost)
       } /* CSW Signature Correct Checking */
       else
       {
-        /* If the CSW Signature is not valid, We sall return the Phase Error to
+        /* If the CSW Signature is not valid, We Sall return the Phase Error to
         Upper Layers for Reset Recovery */
         
         status = USBH_MSC_PHASE_ERROR;

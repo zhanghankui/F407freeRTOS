@@ -1,5 +1,5 @@
 Dependencies for Project 'F407template', Target 'template': (DO NOT MODIFY !)
-F (..\User\main.c)(0x5E0EF41F)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\User\main.c)(0x5E143154)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\User\includes.h)(0x5E0DAA99)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5CEB79E4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
@@ -92,21 +92,21 @@ I (..\CanFestival\inc\nmtMaster.h)(0x5D2F3193)
 I (..\CanFestival\inc\emcy.h)(0x5D2F3193)
 I (..\tasks\inc\epos2_thread.h)(0x5E04661F)
 I (..\tasks\inc\systimer.h)(0x5D2F3194)
-I (..\USB\USB_APP\usb_bsp_msc.h)(0x511D9890)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_usr.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_desc.h)(0x5E0DB1AF)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
+I (..\USB\USB_APP\usb_bsp_msc.h)(0x5E141F96)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_usr.h)(0x5E142382)
+I (..\USB\USB_APP\usbd_desc.h)(0x5E142F96)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
 F (..\User\FreeRTOSConfig.h)(0x5E04661F)()
 F (..\User\includes.h)(0x5E0DAA99)()
 F (..\User\sys.c)(0x5D2F3193)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\sys.o --omf_browse .\objects\sys.crf --depend .\objects\sys.d)
@@ -3100,9 +3100,9 @@ I (..\FatFS\ff.h)(0x5E04661F)
 I (..\FatFS\ffconf.h)(0x5E04661F)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
 I (..\FatFS\diskio.h)(0x5E04661F)
-F (..\USB\STM32_USB_OTG_Driver\src\usb_core.c)(0x4F6AD858)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_core.o --omf_browse .\objects\usb_core.crf --depend .\objects\usb_core.d)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+F (..\USB\STM32_USB_OTG_Driver\src\usb_core.c)(0x56445556)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_core.o --omf_browse .\objects\usb_core.crf --depend .\objects\usb_core.d)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3138,13 +3138,13 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
-F (..\USB\STM32_USB_OTG_Driver\src\usb_dcd.c)(0x4F6AD858)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_dcd.o --omf_browse .\objects\usb_dcd.crf --depend .\objects\usb_dcd.d)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
+F (..\USB\STM32_USB_OTG_Driver\src\usb_dcd.c)(0x56445556)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_dcd.o --omf_browse .\objects\usb_dcd.crf --depend .\objects\usb_dcd.d)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3180,14 +3180,14 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
-F (..\USB\STM32_USB_OTG_Driver\src\usb_dcd_int.c)(0x4F6AD858)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_dcd_int.o --omf_browse .\objects\usb_dcd_int.crf --depend .\objects\usb_dcd_int.d)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
+F (..\USB\STM32_USB_OTG_Driver\src\usb_dcd_int.c)(0x56D03BC1)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_dcd_int.o --omf_browse .\objects\usb_dcd_int.crf --depend .\objects\usb_dcd_int.d)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3223,13 +3223,13 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-F (..\USB\STM32_USB_Device_Library\Core\src\usbd_core.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_core.o --omf_browse .\objects\usbd_core.crf --depend .\objects\usbd_core.d)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Core\src\usbd_core.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_core.o --omf_browse .\objects\usbd_core.crf --depend .\objects\usbd_core.d)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3265,19 +3265,19 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
-F (..\USB\STM32_USB_Device_Library\Core\src\usbd_ioreq.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_ioreq.o --omf_browse .\objects\usbd_ioreq.crf --depend .\objects\usbd_ioreq.d)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Core\src\usbd_ioreq.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_ioreq.o --omf_browse .\objects\usbd_ioreq.crf --depend .\objects\usbd_ioreq.d)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3313,16 +3313,16 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-F (..\USB\STM32_USB_Device_Library\Core\src\usbd_req.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_req.o --omf_browse .\objects\usbd_req.crf --depend .\objects\usbd_req.d)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Core\src\usbd_req.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_req.o --omf_browse .\objects\usbd_req.crf --depend .\objects\usbd_req.d)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3358,19 +3358,19 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_desc.h)(0x5E0DB1AF)
-F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_bot.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_bot.o --omf_browse .\objects\usbd_msc_bot.crf --depend .\objects\usbd_msc_bot.d)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_desc.h)(0x5E142F96)
+F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_bot.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_bot.o --omf_browse .\objects\usbd_msc_bot.crf --depend .\objects\usbd_msc_bot.d)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3406,18 +3406,18 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x4F6AD856)
-F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_core.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_core.o --omf_browse .\objects\usbd_msc_core.crf --depend .\objects\usbd_msc_core.d)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_core.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_core.o --omf_browse .\objects\usbd_msc_core.crf --depend .\objects\usbd_msc_core.d)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3453,19 +3453,19 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_data.c)(0x4F6AD856)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_data.o --omf_browse .\objects\usbd_msc_data.crf --depend .\objects\usbd_msc_data.d)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_data.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_data.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_data.o --omf_browse .\objects\usbd_msc_data.crf --depend .\objects\usbd_msc_data.d)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_data.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3501,12 +3501,12 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_scsi.c)(0x5399BB47)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_scsi.o --omf_browse .\objects\usbd_msc_scsi.crf --depend .\objects\usbd_msc_scsi.d)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+F (..\USB\STM32_USB_Device_Library\Class\msc\src\usbd_msc_scsi.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_msc_scsi.o --omf_browse .\objects\usbd_msc_scsi.crf --depend .\objects\usbd_msc_scsi.d)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_bot.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3542,19 +3542,19 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_data.h)(0x4F6AD856)
-F (..\USB\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c)(0x4F6AD854)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_cdc_core.o --omf_browse .\objects\usbd_cdc_core.crf --depend .\objects\usbd_cdc_core.d)
-I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x4F6AD854)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_scsi.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_data.h)(0x5640A2E0)
+F (..\USB\STM32_USB_Device_Library\Class\cdc\src\usbd_cdc_core.c)(0x5640A2E0)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_cdc_core.o --omf_browse .\objects\usbd_cdc_core.crf --depend .\objects\usbd_cdc_core.d)
+I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3590,17 +3590,17 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\USB_APP\usbd_desc.h)(0x5E0DB1AF)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-F (..\USB\USB_APP\usb_bsp.c)(0x5E0DC08F)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_bsp.o --omf_browse .\objects\usb_bsp.crf --depend .\objects\usb_bsp.d)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_desc.h)(0x5E142F96)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+F (..\USB\USB_APP\usb_bsp.c)(0x5E140052)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usb_bsp.o --omf_browse .\objects\usb_bsp.crf --depend .\objects\usb_bsp.d)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3636,8 +3636,8 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
 I (..\User\sys.h)(0x5D2F3193)
 I (..\bsp\inc\bsp.h)(0x5E0D8881)
 I (..\freeRTOS\include\FreeRTOS.h)(0x5D2F3193)
@@ -3667,11 +3667,11 @@ I (..\bsp\inc\bsp_tim_pwm.h)(0x5D2F3193)
 I (..\tasks\inc\RWdata_thread.h)(0x5E04661F)
 I (..\freeRTOS\include\queue.h)(0x5D2F3193)
 I (..\User\globalstruct.h)(0x5E04661F)
-F (..\USB\USB_APP\usbd_desc.c)(0x55EB9B5D)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_desc.o --omf_browse .\objects\usbd_desc.crf --depend .\objects\usbd_desc.d)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+F (..\USB\USB_APP\usbd_desc.c)(0x5E1437D8)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_desc.o --omf_browse .\objects\usbd_desc.crf --depend .\objects\usbd_desc.d)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3707,17 +3707,19 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usbd_desc.h)(0x5E0DB1AF)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usbd_desc.h)(0x5E142F96)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
 F (..\USB\USB_APP\usbd_storage_msd.c)(0x5E0F1539)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_storage_msd.o --omf_browse .\objects\usbd_storage_msd.crf --depend .\objects\usbd_storage_msd.d)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_mem.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3757,12 +3759,12 @@ I (..\bsp\inc\w25qxx.h)(0x5E04661F)
 I (..\User\sys.h)(0x5D2F3193)
 I (..\bsp\inc\sdio_sdcard.h)(0x5E04661F)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\USB\USB_APP\usbd_usr.c)(0x5E13FA13)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_usr.o --omf_browse .\objects\usbd_usr.crf --depend .\objects\usbd_usr.d)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_usr.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+F (..\USB\USB_APP\usbd_usr.c)(0x5E142114)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_usr.o --omf_browse .\objects\usbd_usr.crf --depend .\objects\usbd_usr.d)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_usr.h)(0x5E142382)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3798,24 +3800,25 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x4F6AD858)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd_int.h)(0x5640A2E0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
-I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_desc.h)(0x5E0DB1AF)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5E0DB7C6)
-F (..\USB\USB_APP\usbd_cdc_vcp.c)(0x5AE16E53)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_cdc_vcp.o --omf_browse .\objects\usbd_cdc_vcp.crf --depend .\objects\usbd_cdc_vcp.d)
+I (..\USB\STM32_USB_Device_Library\Class\msc\inc\usbd_msc_core.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_desc.h)(0x5E142F96)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_req.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_bsp.h)(0x5640A2E0)
+F (..\USB\USB_APP\usbd_cdc_vcp.c)(0x5E1435E6)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I ..\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Project -I ..\system -I ..\freeRTOS\include -I ..\freeRTOS\portable\RVDS\ARM_CM4F -I ..\bsp\inc -I ..\CanFestival\inc -I ..\CanFestival\inc\stm32 -I ..\CanFestival\objdict -I ..\tasks\inc -I ..\FatFS -I ..\USB\USB_APP -I ..\USB\STM32_USB_OTG_Driver\inc -I ..\USB\STM32_USB_Device_Library\Class\msc\inc -I ..\USB\STM32_USB_Device_Library\Class\cdc\inc -I ..\USB\STM32_USB_Device_Library\Core\inc-I.\RTE\_template-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Include-IC:\Users\smilingfrog\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DARM_MATH_CM4 -D__FPU_PRESENT="1" -DHSE_VALUE="8000000"-o .\objects\usbd_cdc_vcp.o --omf_browse .\objects\usbd_cdc_vcp.crf --depend .\objects\usbd_cdc_vcp.d)
 I (..\USB\USB_APP\usbd_cdc_vcp.h)(0x5640A2E0)
-I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x4F6AD854)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x4F6AD856)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x4F6AD856)
-I (..\USB\USB_APP\usbd_conf.h)(0x54044E83)
-I (..\USB\USB_APP\usb_conf.h)(0x5399632B)
+I (..\USB\STM32_USB_Device_Library\Class\cdc\inc\usbd_cdc_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_ioreq.h)(0x5640A2E0)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_def.h)(0x5640A2E0)
+I (..\USB\USB_APP\usbd_conf.h)(0x5E1433FC)
+I (..\USB\USB_APP\usb_conf.h)(0x5E1436F3)
 I (..\system\stm32f4xx.h)(0x5D2F3194)
 I (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D2590B6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -3851,9 +3854,9 @@ I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5D2F3193)
 I (..\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x5D2F3193)
-I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x4F6AD856)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x4F6AD858)
-I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x4F6AD858)
+I (..\USB\STM32_USB_Device_Library\Core\inc\usbd_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_dcd.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_core.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_regs.h)(0x5640A2E0)
+I (..\USB\STM32_USB_OTG_Driver\inc\usb_defines.h)(0x5640A2E0)
 F (C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Lib\ARM\arm_cortexM4lf_math.lib)(0x5D2590B6)()

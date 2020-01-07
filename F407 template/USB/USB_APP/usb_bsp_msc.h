@@ -26,6 +26,7 @@
 
 void usbd_OpenMassStorage(void);
 void usbd_CloseMassStorage(void);
+void usbd_OpenCDC(void);
 
 extern USB_OTG_CORE_HANDLE     USB_OTG_dev;
 
