@@ -30,8 +30,8 @@
 #define __USB_CONF__H__
 #include "stm32f4xx.h"
 
-#define USBasMSC
-//#define USBasCDC
+//#define USBasMSC
+#define USBasCDC
 
 /** @addtogroup USB_OTG_DRIVER
   * @{
