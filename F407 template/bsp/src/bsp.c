@@ -14,7 +14,7 @@
 */	
 #include "bsp.h"
 #include "FatFS_thread.h"
-extern void can_TIM3_Init(void);
+//extern void can_TIM3_Init(void);
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: bsp_Init

@@ -80,17 +80,16 @@ uint16_t InitCurrReAddress(void)
 	/* Get valid Page for write operation */
 	ValidPage = EE_FindValidPage(WRITE_IN_VALID_PAGE);
 
+	/* Get the valid Page start Address */
+	//Address = (uint32_t)(EEPROM_START_ADDRESS + (uint32_t)(ValidPage * PAGE_SIZE));
+	CurReAddress = (uint32_t)(EEPROM_START_ADDRESS + (uint32_t)(ValidPage * PAGE_SIZE)+4);//跳过起始4个字节
+	
 	/* Check if there is no valid page */
 	if (ValidPage == NO_VALID_PAGE)
 	{
-		CurReAddress = (uint32_t)(EEPROM_START_ADDRESS + (uint32_t)(ValidPage * PAGE_SIZE));
 		return  NO_VALID_PAGE;
 	}
   
-	/* Get the valid Page start Address */
-	//Address = (uint32_t)(EEPROM_START_ADDRESS + (uint32_t)(ValidPage * PAGE_SIZE));
-	CurReAddress = (uint32_t)(EEPROM_START_ADDRESS + (uint32_t)(ValidPage * PAGE_SIZE));
-
 	/* Get the valid Page end Address */
 	PageEndAddress = (uint32_t)((EEPROM_START_ADDRESS-2) + (uint32_t)((1 + ValidPage) * PAGE_SIZE));
 
