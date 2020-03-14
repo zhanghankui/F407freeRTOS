@@ -1257,11 +1257,11 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 	{
 		taskENTER_CRITICAL();
 		{
-			const UBaseType_t uxMessagesWaiting = pxQueue->uxMessagesWaiting;
+			const UBaseType_t uxMessagesWaiting = pxQueue->uxMessagesWaiting; //获取有效消息条数
 
 			/* Is there data in the queue now?  To be running the calling task
 			must be the highest priority task wanting to access the queue. */
-			if( uxMessagesWaiting > ( UBaseType_t ) 0 )
+			if( uxMessagesWaiting > ( UBaseType_t ) 0 )//有有效消息
 			{
 				/* Remember the read position in case the queue is only being
 				peeked. */
@@ -1291,7 +1291,7 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 					}
 					#endif /* configUSE_MUTEXES */
 
-					if( listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToSend ) ) == pdFALSE )
+					if( listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToSend ) ) == pdFALSE )//队列中有列表项因等待发送而排队
 					{
 						if( xTaskRemoveFromEventList( &( pxQueue->xTasksWaitingToSend ) ) != pdFALSE )
 						{
@@ -1338,9 +1338,9 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 				taskEXIT_CRITICAL();
 				return pdPASS;
 			}
-			else
+			else //没有有效消息
 			{
-				if( xTicksToWait == ( TickType_t ) 0 )
+				if( xTicksToWait == ( TickType_t ) 0 )//不设置超时，直接返回队列空错误
 				{
 					/* The queue was empty and no block time is specified (or
 					the block time has expired) so leave now. */
@@ -1352,7 +1352,7 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 				{
 					/* The queue was empty and a block time was specified so
 					configure the timeout structure. */
-					vTaskSetTimeOutState( &xTimeOut );
+					vTaskSetTimeOutState( &xTimeOut ); //记录当前系统节拍溢出次数和当前节拍数
 					xEntryTimeSet = pdTRUE;
 				}
 				else
@@ -1362,22 +1362,22 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 				}
 			}
 		}
-		taskEXIT_CRITICAL();
+		taskEXIT_CRITICAL(); 
 
 		/* Interrupts and other tasks can send to and receive from the queue
 		now the critical section has been exited. */
 
-		vTaskSuspendAll();
-		prvLockQueue( pxQueue );
+		vTaskSuspendAll();//挂起调度
+		prvLockQueue( pxQueue );//关读写事务锁
 
 		/* Update the timeout state to see if it has expired yet. */
-		if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )
+		if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )//检查是否超时
 		{
-			if( prvIsQueueEmpty( pxQueue ) != pdFALSE )
+			if( prvIsQueueEmpty( pxQueue ) != pdFALSE )//没有超时且队列空
 			{
 				traceBLOCKING_ON_QUEUE_RECEIVE( pxQueue );
 
-				#if ( configUSE_MUTEXES == 1 )
+				#if ( configUSE_MUTEXES == 1 )//若为互斥信号量需要进行优先级反转
 				{
 					if( pxQueue->uxQueueType == queueQUEUE_IS_MUTEX )
 					{
@@ -1393,9 +1393,13 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 					}
 				}
 				#endif
-
+				//按优先级顺序向等待接收表中插入任务控制块的事件表项，并将当前任务从就绪表移除，挂入延时表，更新最新任务解锁时间。同时会进行一次任务调度，此时此函数不再继续执行。
+				/*字面意思是把当前任务插入队列的“等待接收”的任务列表中
+				它有两步操作：一是把当前任务 TCB 中 xEventListItem 这一项插入 xTasksWaitingToReceive 列表，
+				二是把当前任务放到延迟执行的列表中（也就是从ready状态改为阻塞了）。
+				*/
 				vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToReceive ), xTicksToWait );
-				prvUnlockQueue( pxQueue );
+				prvUnlockQueue( pxQueue );//解锁读写事务锁
 				if( xTaskResumeAll() == pdFALSE )
 				{
 					portYIELD_WITHIN_API();
@@ -1405,24 +1409,24 @@ Queue_t * const pxQueue = ( Queue_t * ) xQueue;
 					mtCOVERAGE_TEST_MARKER();
 				}
 			}
-			else
+			else//没超时队列不空
 			{
 				/* Try again. */
 				prvUnlockQueue( pxQueue );
 				( void ) xTaskResumeAll();
 			}
 		}
-		else
+		else//超时
 		{
 			prvUnlockQueue( pxQueue );
 			( void ) xTaskResumeAll();
 
-			if( prvIsQueueEmpty( pxQueue ) != pdFALSE )
+			if( prvIsQueueEmpty( pxQueue ) != pdFALSE )//队列空
 			{
 				traceQUEUE_RECEIVE_FAILED( pxQueue );
 				return errQUEUE_EMPTY;
 			}
-			else
+			else//队列不空
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
