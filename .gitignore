@@ -2,9 +2,6 @@
 *.o
 *.d
 *.sisc
-*.htm
-*.htm
-*.htm
-*.dep
 *.dep
 *.htm
+
