@@ -313,11 +313,25 @@ static void vTaskTask2(void *pvParameters)
 */
 static void vTaskTask3(void *pvParameters)
 {
+	short x,y,z;  	    
+	short angx,angy,angz;  		
 	while(1)
 	{
-//		taskENTER_CRITICAL();   /* 进入临界区 */
-//		printf("任务vTask3正在运行\r\n");
-//		taskEXIT_CRITICAL();  	/* 退出临界区 */		
+		taskENTER_CRITICAL();   /* 进入临界区 */
+		//得到X,Y,Z轴的加速度值(原始值)
+		ADXL345_Read_Average(&x,&y,&z,10);	//读取X,Y,Z三个方向的加速度值 
+		printf("x值：%d\r\n",x);
+		printf("y值：%d\r\n",y);
+		printf("z值：%d\r\n",z);		
+	//得到角度值,并显示
+		angx=ADXL345_Get_Angle(x,y,z,1);    
+		angy=ADXL345_Get_Angle(x,y,z,2);   
+		angz=ADXL345_Get_Angle(x,y,z,0); 	
+		printf("angx值：%d\r\n",angx);
+		printf("angy值：%d\r\n",angy);
+		printf("angz值：%d\r\n",angz);			
+
+		taskEXIT_CRITICAL();  	/* 退出临界区 */		
 		LED0=!LED0;
 		vTaskDelay(5000);
 	}

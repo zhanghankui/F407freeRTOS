@@ -32,7 +32,7 @@ static void canopen_dataprocess_thread(void *arg)
 	while(1)
 	{
 		//成功接收到CAN总线数据
-		if(xQueueReceive( xQ_CAN_MSG, &(CAN_Rx_m), (portTickType)1000))//如果消息队列为空且第三个参数为0，那么此函数会立即返回。
+		if(xQueueReceive( xQ_CAN_MSG, &(CAN_Rx_m), (portTickType)1000))//第三个参数是如消息队列为空时，等待消息队列有数据的最大等待时间，单位系统时钟节拍
 		{
 //			printf("thread get a can packege\r\n");
 

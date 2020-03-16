@@ -82,7 +82,7 @@
 #include  "bsp_dwt.h"
 //#include "bsp_can.h"
 //#include "bsp_msg.h"
-
+#include "adxl345.h"
 #include "bsp_tim_pwm.h"
 #include "RWdata_thread.h"
 //#include "bsp_cpu_flash.h"

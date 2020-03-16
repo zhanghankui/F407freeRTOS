@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu=Cortex-M4.fp.sp
 ".\objects\main.o"
 ".\objects\sys.o"
 ".\objects\sysinfotest.o"
@@ -12,6 +12,8 @@
 ".\objects\w25qxx.o"
 ".\objects\spi.o"
 ".\objects\bsp_dwt.o"
+".\objects\simiic.o"
+".\objects\adxl345.o"
 ".\objects\can_thread.o"
 ".\objects\usart_thread.o"
 ".\objects\epos2_thread.o"
@@ -106,7 +108,7 @@
 ".\objects\usbd_storage_msd.o"
 ".\objects\usbd_usr.o"
 ".\objects\usbd_cdc_vcp.o"
-"C:\Users\smilingfrog\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\DSP\Lib\ARM\arm_cortexM4lf_math.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\DSP\Lib\ARM\arm_cortexM4lf_math.lib"
 --library_type=microlib --strict --scatter ".\Objects\F407template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
