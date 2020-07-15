@@ -43,7 +43,7 @@ void bsp_Init(BSP_Handle handle)
 	*/
 	/* 优先级分组设置为4，可配置0-15级抢占式优先级，0级子优先级，即不存在子优先级。*/
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-
+	bsp_InitDWT();
 
 	//结构体初始化
 	handle->usartdma_fifohandle = 
@@ -59,6 +59,22 @@ void bsp_Init(BSP_Handle handle)
 		handle->usartdma_fifohandle->buffersize);	
 	bsp_InitKey();		/* 初始化按键变量 */	
 	LED_Init();/* 初始LED指示灯端口 */
+	
+	LCD_Init();
+	
+	POINT_COLOR = BLUE;
+	LCD_ShowString(30,20,200,16,16,"key_up: Up     key1: Down");	
+	LCD_ShowString(30,40,240,16,16,"key0  : Done!  key2: Reserve");
+	LCD_ShowString(30,80,200,16,16,"Task Selected:");
+	LCD_ShowString(10,100,210,16,16,"Position:          PosErr:");
+	LCD_ShowString(30,120,240,16,16,"    Task       State   Count");	
+	POINT_COLOR = RED;
+	LCD_ShowString(30,140,100,16,16,"1.EPOS2_Init");
+	LCD_ShowString(30,160,100,16,16,"2.Move+ Task");
+	LCD_ShowString(30,180,100,16,16,"3.Move- Task");
+	LCD_ShowString(30,200,100,16,16,"4.Back0 Task");
+	LCD_ShowString(30,220,100,16,16,"5.IPM Task");	
+	
 //	SD_Init();//SD卡初始化
 //	show_sdcard_info();	//打印SD卡相关信息
 	
