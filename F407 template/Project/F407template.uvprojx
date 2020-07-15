@@ -447,6 +447,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\src\bsp_tim_pwm.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\src\lcd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
